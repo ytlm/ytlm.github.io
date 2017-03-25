@@ -73,5 +73,3 @@ deploy:
   repo: git@github.com:ytlm/ytlm.github.io.git
   branch: master
 
-skip-render: 
-- README.md
