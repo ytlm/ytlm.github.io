@@ -1,0 +1,9 @@
+
+.deploy_git/
+
+public/
+node_modules/
+themes/next/
+themes/landscape/
+
+db.json

@@ -1,0 +1,4 @@
+##不需要执行 npm init ; 否则会覆盖_config.yml文件
+npm install hexo
+npm install
+npm install hexo-deployer-git
