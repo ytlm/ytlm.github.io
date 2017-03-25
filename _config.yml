@@ -72,4 +72,5 @@ deploy:
   type: git
   repo: git@github.com:ytlm/ytlm.github.io.git
   branch: master
+  message: push by hexo-deploy
 
