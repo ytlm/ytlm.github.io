@@ -1,0 +1,36 @@
+language: node_js
+
+node_js: stable
+
+branchs: 
+    only: 
+        - hexo
+
+before_install: 
+    - npm install hexo-cli -g
+
+install: 
+    - npm install
+
+cache: 
+    directories: 
+        - node_modules
+
+before_script: 
+    - git clone https://github.com/iissnan/hexo-theme-next themes/next
+    - cp themes/config/_config.yml themes/next/_config.yml
+    - cp themes/images/* themes/next/source/images/
+
+script: 
+    - hexo clean
+    - hexo generate
+
+after_success: 
+    - git config --global user.name "ytlm"
+    - git config --global useremail "ytlm1314@gmail.com"
+    - sed -i'' "/^ *repo/s~github\.com${GH_TOKEN}@github.com~" _config.yml
+    - hexo deploy
+
+env: 
+    global: 
+        - GH_REF: github.com/ytlm/ytlm.github.io.git
