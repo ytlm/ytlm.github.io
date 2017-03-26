@@ -20,6 +20,7 @@ before_script:
     - git clone https://github.com/iissnan/hexo-theme-next themes/next
     - cp themes/config/_config.yml themes/next/_config.yml
     - cp themes/images/* themes/next/source/images/
+    - git clone --branch master https://github.com/ytlm/ytlm.github.io public
 
 script: 
     - hexo clean
@@ -34,3 +35,4 @@ after_success:
 env: 
     global: 
         - GH_REF: github.com/ytlm/ytlm.github.io.git
+        - secure: Oky8S1f80yVs3oryjgT/wE2FcYEYuxdjxy0ymQt+z++oSGz6D70LUteOxOgtfB9GN79bJIpVP5ilnOF8Ot4XB0KLCgMuYdOmV8B5SW676euqgi1h/M3rfDPlEc/0QpixpDno+7XMFUVkThmpEE7MfnbBKigifoYxvvajmJWA7wZyLSsW69rurSDcwMni2Ug+UXDWVi/dvpM4BggDON2xgoSLLKFSZQBbMdxFv1G4Siysyn3TY2FmC1SSjSCctGUsUluCnHQaD9FvWJyK0dEatkOPSIlyKfJhR1FvphbWupH9LaFhbR+aW8kyWo/mpP3+7RQPoMTX1tFnyFK09C/f3MCr2ReKAonRLpXLJp4J8K3WPTgPKDZQuma5OgFp4RKxfqheDBAs65I5FlHPzwr/chJAKgPcPYqCVdLhLDmsCOEnjTvTaKmATOwRcpy7LQ6hx8QYuh0ZxsVj0idATJSjGyI/THCQOFQbQ3FyLfgcgdFks6rQOGHTxM9Yoq/rnpGW+wKLnlmFWv02TJqEg3cBqMa373zZpa1G3l8lpRQR09IoTWeL78QelLNnbSY+WfQPA43Z/Jja83SNBLjjeZEby2ej6Bjo/S7B4r+mXN8rMRjmOGvT9gzipZ4GbF+Bx3Iaa6XOaAPuBwa6u+AUtbOK73zVs4dsvrB7W9u+8QvqPK8=
