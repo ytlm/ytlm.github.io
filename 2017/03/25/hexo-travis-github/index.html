@@ -99,7 +99,7 @@
 1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:
 
 (1). yml格式的配置冒号(:)后必须要有一个空格.(2). hexo generate不生效的时候要用hexo clean清空缓存.(3).">
-<meta property="og:updated_time" content="2017-03-27T07:35:11.036Z">
+<meta property="og:updated_time" content="2017-03-27T15:13:28.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo travis github">
 <meta name="twitter:description" content="利用hexo, travis, github联合的方式进行博客的创建并且自动发布. 
@@ -350,6 +350,17 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/25/hexo-travis-github/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/03/25/hexo-travis-github/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -466,6 +477,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -702,28 +720,32 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://ytlm.disqus.com/count.js" async></script>
+    
 
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://ytlm.github.io/2017/03/25/hexo-travis-github/';
+          this.page.identifier = '2017/03/25/hexo-travis-github/';
+          this.page.title = 'hexo travis github';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ytlm.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
   
+
+
+
+
+
+
+
 
 
 
