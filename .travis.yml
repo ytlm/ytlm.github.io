@@ -14,9 +14,7 @@ install:
     - npm install hexo-cli -g
     - npm install
 
-cache: 
-    directories: 
-        - node_modules
+cache: directories: - node_modules
 
 before_script: 
     - git clone https://github.com/iissnan/hexo-theme-next themes/next
@@ -30,9 +28,10 @@ script:
 
 after_success: 
     - cd public
-    - git add ./
+    - git status
+    - git add -all ./
     - git commit -am "Update by hexo, travis"
-    - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" origin master
+    - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 
 env: 
     global: 
