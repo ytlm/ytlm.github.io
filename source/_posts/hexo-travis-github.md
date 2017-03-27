@@ -1,10 +1,11 @@
 ---
 title: hexo travis github
 date: 2017-03-25 22:16:48
-tags: hexo travis github
+tags: [hexo, travis, github]
+categories: 总结
 ---
 
-利用hexo, travis, github联合的方式进行博客的创建并且自动发布
+利用hexo, travis, github联合的方式进行博客的创建并且自动发布. [参考这里](http://lotabout.me/2016/Hexo-Auto-Deploy-to-Github/)
 
 1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.
 2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:

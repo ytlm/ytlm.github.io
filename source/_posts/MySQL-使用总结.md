@@ -24,16 +24,16 @@ DELETE FROM "tableName" WHERE "condition1" AND "condition2" ...
 
 3，改
 ```MySQL
-UPDATE "tableName" SET "key = value" WHERE "condition1" AND "condition2" ... 
+UPDATE "tableName" SET "key = value" WHERE "condition1" AND "condition2" ...
 /* 根据where后面的条件，对表中某些字段数据进行修改。*/
 ```
 
 4，查
 ```MySQL
-SELECT "fields" FROM "tableName" WHERE "condition" 
+SELECT "fields" FROM "tableName" WHERE "condition"
 /* 单表查询，根据条件查询某张表中的某几列数据。where和列(fields)可以省略。 */
 
-SELECT "fields" FROM "table1, table2,..." WHERE "condition1" AND "condition2" ... 
+SELECT "fields" FROM "table1, table2,..." WHERE "condition1" AND "condition2" ...
 /* 多表查询，根据表与表之间的关联关系查询所需要的数据。*/
 ```
 
@@ -57,12 +57,12 @@ ALTER TABLE "tableName" RENAME TO "newTableName"  /* 修改表名称*/
 ```MySQL
 ALTER TABLE "tableName" DROP "columnName" /*删除表中的某个字段 */
 
-ALTER TABLE "tableName" ADD "columnName columnType" FIRST/[AFTER "columnName"] 
+ALTER TABLE "tableName" ADD "columnName columnType" FIRST/[AFTER "columnName"]
 /*在数据表中第一位或者在某个字段之后添加某个字段 */
 
 ALTER TABLE "tableName" MODIFY "columnName" "newColumnType" /* 修改表中某个字段的类型属性 */
 
-ALTER TABLE "tableName" CHANGE "columnName" "columnName newColumnType" 
+ALTER TABLE "tableName" CHANGE "columnName" "columnName newColumnType"
 /* 修改表中的的某个字段名并添加可以添加新的类型，还可以值修改字段类型 */
 
 ALTER TABLE "tableName" RENAME TO "newTableName"  /* 修改表名称*/
@@ -75,7 +75,16 @@ REVOKE "power" ON "databaseName" FROM "user" /* 移除用户user在数据库data
 FLUSH PRIVILEGES /* 在不重启MySQL服务的情况下使得权限操作生效 */
 ```
 
-9，其他
+9, 显示表详细结构
+```MySQL
+SHOW TABLES; 显示所有的表
+
+DESCRIBE table_name; 显示表结构下的所有字段信息 相当于SHOW FIELDS FROM table_name
+
+SHOW FULL FIELDS FROM table_name 显示表结构下的所有字段信息 包含注释
+```
+
+10，其他
 ```MySQL
 GROUP BY "columnName" /* 对某一列查询结果进行分组统计 */
 ORDER BY "columnName"  ASC/DESC /* 对某一列查询结果进行排序操作，升序ASC，降序DESC */
