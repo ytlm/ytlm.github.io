@@ -2,3 +2,7 @@
 npm install hexo
 npm install
 npm install hexo-deployer-git
+
+
+##这样就会跳过此次的ci
+git commmit -m "[ci skip] commit message"
