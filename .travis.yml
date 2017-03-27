@@ -1,3 +1,4 @@
+
 language: node_js
 
 node_js: stable
@@ -7,6 +8,11 @@ branchs:
         - hexo
 
 before_install: 
+    - openssl aes-256-cbc -K $encrypted_c53d3c040872_key -iv $encrypted_c53d3c040872_iv -in ./.travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+    - chmod 600 ~/.ssh/id_rsa
+    - eval $(ssh-agent)
+    - ssh-add ~/.ssh/id_rsa
+    - cp ./.travis/ssh_config ~/.ssh/config
     - git config --global user.name "ytlm"
     - git config --global user.email "ytlm1314@gmail.com"
 
@@ -14,7 +20,9 @@ install:
     - npm install hexo-cli -g
     - npm install
 
-cache: directories: - node_modules
+cache: 
+    directories: 
+        - node_modules
 
 before_script: 
     - git clone https://github.com/iissnan/hexo-theme-next themes/next
@@ -25,19 +33,12 @@ before_script:
 script: 
     - hexo clean
     - hexo generate
-
-after_success: 
-    - cd public
-    - git status
-    - git add -all ./
-    - git commit -am "Update by hexo, travis"
-    - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+    - hexo deploy
 
 env: 
     global: 
         - GH_REF: github.com/ytlm/ytlm.github.io.git
-        - secure: Oky8S1f80yVs3oryjgT/wE2FcYEYuxdjxy0ymQt+z++oSGz6D70LUteOxOgtfB9GN79bJIpVP5ilnOF8Ot4XB0KLCgMuYdOmV8B5SW676euqgi1h/M3rfDPlEc/0QpixpDno+7XMFUVkThmpEE7MfnbBKigifoYxvvajmJWA7wZyLSsW69rurSDcwMni2Ug+UXDWVi/dvpM4BggDON2xgoSLLKFSZQBbMdxFv1G4Siysyn3TY2FmC1SSjSCctGUsUluCnHQaD9FvWJyK0dEatkOPSIlyKfJhR1FvphbWupH9LaFhbR+aW8kyWo/mpP3+7RQPoMTX1tFnyFK09C/f3MCr2ReKAonRLpXLJp4J8K3WPTgPKDZQuma5OgFp4RKxfqheDBAs65I5FlHPzwr/chJAKgPcPYqCVdLhLDmsCOEnjTvTaKmATOwRcpy7LQ6hx8QYuh0ZxsVj0idATJSjGyI/THCQOFQbQ3FyLfgcgdFks6rQOGHTxM9Yoq/rnpGW+wKLnlmFWv02TJqEg3cBqMa373zZpa1G3l8lpRQR09IoTWeL78QelLNnbSY+WfQPA43Z/Jja83SNBLjjeZEby2ej6Bjo/S7B4r+mXN8rMRjmOGvT9gzipZ4GbF+Bx3Iaa6XOaAPuBwa6u+AUtbOK73zVs4dsvrB7W9u+8QvqPK8=
-
+          
 notifications: 
     email: ytlm1314@gmail.com
     on_success: change
