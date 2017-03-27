@@ -70,7 +70,6 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/ytlm/ytlm.github.io
+  repo: git@github.com:ytlm/ytlm.github.io.git
   branch: master
-  message: push by hexo-deploy
 
