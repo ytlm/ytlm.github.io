@@ -66,6 +66,8 @@ pagination_dir: page
 theme: next
 
 
+disqus_shortname: ytlm
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
