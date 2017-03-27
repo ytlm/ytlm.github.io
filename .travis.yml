@@ -27,12 +27,18 @@ script:
     - hexo generate
 
 after_success: 
+    - cd public
     - git config --global user.name "ytlm"
     - git config --global user.email "ytlm1314@gmail.com"
-    - sed -i'' "/^ *repo/s~github\.com${GH_TOKEN}@github.com~" _config.yml
-    - hexo deploy
+    - git commit -am "Update by hexo, travis"
+    - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 
 env: 
     global: 
         - GH_REF: github.com/ytlm/ytlm.github.io.git
         - secure: Oky8S1f80yVs3oryjgT/wE2FcYEYuxdjxy0ymQt+z++oSGz6D70LUteOxOgtfB9GN79bJIpVP5ilnOF8Ot4XB0KLCgMuYdOmV8B5SW676euqgi1h/M3rfDPlEc/0QpixpDno+7XMFUVkThmpEE7MfnbBKigifoYxvvajmJWA7wZyLSsW69rurSDcwMni2Ug+UXDWVi/dvpM4BggDON2xgoSLLKFSZQBbMdxFv1G4Siysyn3TY2FmC1SSjSCctGUsUluCnHQaD9FvWJyK0dEatkOPSIlyKfJhR1FvphbWupH9LaFhbR+aW8kyWo/mpP3+7RQPoMTX1tFnyFK09C/f3MCr2ReKAonRLpXLJp4J8K3WPTgPKDZQuma5OgFp4RKxfqheDBAs65I5FlHPzwr/chJAKgPcPYqCVdLhLDmsCOEnjTvTaKmATOwRcpy7LQ6hx8QYuh0ZxsVj0idATJSjGyI/THCQOFQbQ3FyLfgcgdFks6rQOGHTxM9Yoq/rnpGW+wKLnlmFWv02TJqEg3cBqMa373zZpa1G3l8lpRQR09IoTWeL78QelLNnbSY+WfQPA43Z/Jja83SNBLjjeZEby2ej6Bjo/S7B4r+mXN8rMRjmOGvT9gzipZ4GbF+Bx3Iaa6XOaAPuBwa6u+AUtbOK73zVs4dsvrB7W9u+8QvqPK8=
+
+notifications: 
+    email: ytlm1314@gmail.com
+    on_success: change
+    on_failure: always
