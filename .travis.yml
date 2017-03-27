@@ -33,7 +33,7 @@ before_script:
 script: 
     - hexo clean
     - hexo generate
-    - hexo deploy
+    - hexo deploy --silent
 
 env: 
     global: 
