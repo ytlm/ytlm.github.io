@@ -26,10 +26,10 @@ cache:
         - node_modules
 
 before_script: 
-    - git clone https://github.com/iissnan/hexo-theme-next themes/next
+    - git clone https://github.com/iissnan/hexo-theme-next themes/next --quiet
     - cp themes/config/_config.yml themes/next/_config.yml
     - cp themes/images/* themes/next/source/images/
-    - git clone --branch master https://github.com/ytlm/ytlm.github.io ./.deploy_git
+    - git clone --branch master https://github.com/ytlm/ytlm.github.io ./.deploy_git --quiet
 
 script: 
     - hexo clean
