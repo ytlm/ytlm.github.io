@@ -68,6 +68,21 @@ theme: next
 
 disqus_shortname: ytlm
 
+
+sitemap: 
+    path: sitemap.xml
+
+
+baidusitemap: 
+    path: baidusitemap.xml
+
+
+feed: 
+    type: atom
+    path: atom.xml
+    limit: 20
+
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
