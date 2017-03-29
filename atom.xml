@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>ytlm</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://ytlm.github.io/"/>
+  <updated>2017-03-29T01:54:05.904Z</updated>
+  <id>https://ytlm.github.io/</id>
+  
+  <author>
+    <name>ytl</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://ytlm.github.io/2017/03/29/hello-world/"/>
+    <id>https://ytlm.github.io/2017/03/29/hello-world/</id>
+    <published>2017-03-29T01:54:05.904Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="总结" scheme="https://ytlm.github.io/categories/%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="hexo" scheme="https://ytlm.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo travis github</title>
+    <link href="https://ytlm.github.io/2017/03/25/hexo-travis-github/"/>
+    <id>https://ytlm.github.io/2017/03/25/hexo-travis-github/</id>
+    <published>2017-03-25T14:16:48.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>利用hexo, travis, github联合的方式进行博客的创建并且自动发布. </p>
+<p>1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.<br>2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:</p>
+<blockquote>
+<p>(1). yml格式的配置冒号(:)后必须要有一个空格.<br>(2). hexo generate不生效的时候要用hexo clean清空缓存.<br>(3). hexo deploy失败的时候注意git公私钥的配置和_config.yml中deploy的配置.<br>(4). 选择hexo的主题next,对于next主题的配置可以根据官网说经进行合理的配置.</p>
+</blockquote>
+<p>3,travis的使用</p>
+<blockquote>
+<p>(1). 在(yourself).github.io的git上建立一个hexo分支,<br>       master分支用于页面的显示,<br>       hexo分支用于hexo生成博客和配置,便于同步.<br>(2). travis ci的登陆通过github帐号登陆,然后开启(yourself).github.io的travis;<br>       然后在hexo的分支上创建并提交.travis.yml文件,注意github token的生成和使用<br>(3). 最后就是在hexo的分支上进行写博客和提交到hexo分支上,剩下的发布到master上通过travis自动发布.</p>
+</blockquote>
+<a id="more"></a>
+<p><a href="http://lotabout.me/2016/Hexo-Auto-Deploy-to-Github/" target="_blank" rel="external">参考这里</a><br><a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">还有这里</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;利用hexo, travis, github联合的方式进行博客的创建并且自动发布. &lt;/p&gt;
+&lt;p&gt;1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.&lt;br&gt;2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(1). yml格式的配置冒号(:)后必须要有一个空格.&lt;br&gt;(2). hexo generate不生效的时候要用hexo clean清空缓存.&lt;br&gt;(3). hexo deploy失败的时候注意git公私钥的配置和_config.yml中deploy的配置.&lt;br&gt;(4). 选择hexo的主题next,对于next主题的配置可以根据官网说经进行合理的配置.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;3,travis的使用&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(1). 在(yourself).github.io的git上建立一个hexo分支,&lt;br&gt;       master分支用于页面的显示,&lt;br&gt;       hexo分支用于hexo生成博客和配置,便于同步.&lt;br&gt;(2). travis ci的登陆通过github帐号登陆,然后开启(yourself).github.io的travis;&lt;br&gt;       然后在hexo的分支上创建并提交.travis.yml文件,注意github token的生成和使用&lt;br&gt;(3). 最后就是在hexo的分支上进行写博客和提交到hexo分支上,剩下的发布到master上通过travis自动发布.&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="总结" scheme="https://ytlm.github.io/categories/%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="github" scheme="https://ytlm.github.io/tags/github/"/>
+    
+      <category term="hexo" scheme="https://ytlm.github.io/tags/hexo/"/>
+    
+      <category term="travis" scheme="https://ytlm.github.io/tags/travis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Wamp更改web根目录</title>
+    <link href="https://ytlm.github.io/2016/07/24/Wamp%E6%9B%B4%E6%94%B9web%E6%A0%B9%E7%9B%AE%E5%BD%95/"/>
+    <id>https://ytlm.github.io/2016/07/24/Wamp更改web根目录/</id>
+    <published>2016-07-24T07:44:08.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://blog.csdn.net/xia777xia/article/details/6282346" target="_blank" rel="external">原文链接</a><br>Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。</p>
+<p>比如e:/xx 或者 d:/php等等。</p>
+<p>下面以原来的默认目录为d:/wamp/www改为e:/xx为例。</p>
+<a id="more"></a>
+<p>1,</p>
+<blockquote>
+<p>打开wamp/scripts/config.inc.php<br>第47行，$wwwDir = $c_installDir.’/www’;<br>修改为：$wwwDir = ‘e:/xx’;即可。<br>但这时新问题来了，Apache默认根目录还没改过来！继续看第2步！</p>
+</blockquote>
+<p>2,</p>
+<blockquote>
+<p>修改Apache默认根目录<br>打开wamp/bin/apache/apache2.2.11/conf/httpd.conf,修改DocumentRoot后面双引号中的值为你所要的。<br>比如将DocumentRoot “D:/wamp/www/”<br>改成DocumentRoot “e:/xx/”<br>同时将<directory “d:="" wamp="" www="" “=""><br>改成<directory “e:="" xx="" “=""></directory></directory></p>
+</blockquote>
+<p>3,</p>
+<blockquote>
+<p>重启wampserver即可生效。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/xia777xia/article/details/6282346&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。&lt;/p&gt;
+&lt;p&gt;比如e:/xx 或者 d:/php等等。&lt;/p&gt;
+&lt;p&gt;下面以原来的默认目录为d:/wamp/www改为e:/xx为例。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件" scheme="https://ytlm.github.io/categories/%E8%BD%AF%E4%BB%B6/"/>
+    
+    
+      <category term="Wamp" scheme="https://ytlm.github.io/tags/Wamp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WampServer-localhost-图标不显示解决办法</title>
+    <link href="https://ytlm.github.io/2016/07/24/Wamp-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>https://ytlm.github.io/2016/07/24/Wamp-localhost-图标不显示解决办法/</id>
+    <published>2016-07-24T07:28:29.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>在用WampServer学习PHP的时候碰到，打开localhost的时候文件图标不显示，解决办法如下</p>
+<a id="more"></a>
+<p><a href="http://blog.warmcolor.net/2011/11/03/wampserver-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="原文链接" target="_blank" rel="external">原文链接</a></p>
+<p>1，在安装目录中找到<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\wamp\bin\apache\Apache2.2.17\conf\extra\httpd-autoindex.conf</div></pre></td></tr></table></figure></p>
+<p>2，打开进行修改,将以下<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Alias /icons/ “C:/Dev/Projets/WampServer2-64b/install_files_wampserver2/bin/apache/Apache2.2.17/icons/”</div><div class="line"><span class="tag">&lt;<span class="name">Directory</span> “<span class="attr">C:</span>/<span class="attr">Dev</span>/<span class="attr">Projets</span>/<span class="attr">WampServer2-</span> <span class="attr">64b</span>/<span class="attr">install_files_wampserver2</span>/<span class="attr">bin</span>/<span class="attr">apache</span>/<span class="attr">Apache2.2.17</span>/<span class="attr">icons</span>”\&gt;</span></div><div class="line">	Options Indexes MultiViews</div><div class="line">	AllowOverride None</div><div class="line">	Order allow,deny</div><div class="line">	Allow from all</div><div class="line"><span class="tag">&lt;/<span class="name">Directory</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>修改为<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Alias /icons/ “icons/”</div><div class="line"><span class="tag">&lt;<span class="name">Directory</span> “<span class="attr">icons</span>”\&gt;</span></div><div class="line">	Options Indexes MultiViews</div><div class="line">	AllowOverride None</div><div class="line">	Order allow,deny</div><div class="line">	Allow from all</div><div class="line"><span class="tag">&lt;/<span class="name">Directory</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>3，上面用的相对目录,</p>
+<blockquote>
+<p>因为在 httpd.conf 里面设置了<br><code>ServerRoot “D:/wamp/bin/apache/apache2.2.17”</code><br>或者用绝对目录也行.<br><code>\wamp\bin\apache\Apache2.2.17\icons</code></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在用WampServer学习PHP的时候碰到，打开localhost的时候文件图标不显示，解决办法如下&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件" scheme="https://ytlm.github.io/categories/%E8%BD%AF%E4%BB%B6/"/>
+    
+    
+      <category term="Wamp" scheme="https://ytlm.github.io/tags/Wamp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TCP/IP 各层的作用</title>
+    <link href="https://ytlm.github.io/2016/07/24/TCP-IP-%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
+    <id>https://ytlm.github.io/2016/07/24/TCP-IP-各层的作用/</id>
+    <published>2016-07-24T07:21:53.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>计算机网络中的TCP/IP协议学习，纪录每层的作用</p>
+<a id="more"></a>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><blockquote>
+<p>1，负责接收IP数据报添加头部和尾部然后通过网络发送，或者从网络上接收物理数据帧，抽出ip数据报交给IP层。传输有地址的帧以及错误检测。<br>2，流量控制，有基于反馈的流控制盒基于速率的流控制。<br>3，错误检测和纠正</p>
+</blockquote>
+<h2 id="网络层（IP）"><a href="#网络层（IP）" class="headerlink" title="网络层（IP）"></a>网络层（IP）</h2><blockquote>
+<p>1，负责相邻计算机之间的通信。<br>2，处理来自传输层分组发送的请求；然后对数据进行分组装入IP数据报，并填充包头，之后选择合适的路径然后发送。<br>3，处理输入数据报；检查合法性，然后寻址发送。<br>4，处理路径，流控，拥塞等问题。</p>
+</blockquote>
+<h2 id="传输层（TCP）"><a href="#传输层（TCP）" class="headerlink" title="传输层（TCP）"></a>传输层（TCP）</h2><blockquote>
+<p>1，负责点到点的传输。<br>2，格式化信息流。<br>3，提供可靠传输。规定接收端必须发挥确认，如果分组丢失必须重传。</p>
+</blockquote>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><blockquote>
+<p>1，提供端到端的传输。<br>2，向用户提供一些常用的应用程序，如email,ftp,telnet,smtp,pop3,dns等等</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;计算机网络中的TCP/IP协议学习，纪录每层的作用&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="TCP/IP" scheme="https://ytlm.github.io/tags/TCP-IP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sublime Text 3 常用插件以及主题</title>
+    <link href="https://ytlm.github.io/2016/07/24/Sublime-Text-3-%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6%E4%BB%A5%E5%8F%8A%E4%B8%BB%E9%A2%98/"/>
+    <id>https://ytlm.github.io/2016/07/24/Sublime-Text-3-常用插件以及主题/</id>
+    <published>2016-07-24T07:18:36.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>Sublime Text 3 一个好用的编辑器，下面是一些常用的插件以及主题</p>
+<a id="more"></a>
+<h3 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h3><blockquote>
+<ul>
+<li><a href="https://packagecontrol.io/installation#st3" target="_blank" rel="external">Package Control</a></li>
+</ul>
+</blockquote>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><blockquote>
+<ul>
+<li>Emmet 轻松书写html/css代码</li>
+<li>ConvertToUTF8  文件编码转换</li>
+<li>ColorPicker 一个取色器改变颜色</li>
+<li>DocBlockr 块注释</li>
+<li>All Autocomplete 自动补全</li>
+<li>Markdown Preview markdown预览</li>
+</ul>
+</blockquote>
+<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><blockquote>
+<ul>
+<li>Soda Theme</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Sublime Text 3 一个好用的编辑器，下面是一些常用的插件以及主题&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="https://ytlm.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Sublime-Text-3" scheme="https://ytlm.github.io/tags/Sublime-Text-3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL 使用总结</title>
+    <link href="https://ytlm.github.io/2016/07/24/MySQL-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
+    <id>https://ytlm.github.io/2016/07/24/MySQL-使用总结/</id>
+    <published>2016-07-24T07:14:56.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>下面是在学习MySQL的时候一些命令的纪录</p>
+<a id="more"></a>
+<p>1，增<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">INSERT INTO &quot;tableName(列1,列2,...)&quot; VALUES(值1,值2,...)</div><div class="line">/* 1,列和值需要意义对应。</div><div class="line">   2，列可以省略，省略时值应该和数据表中的值顺序保持一致。</div><div class="line">*/</div></pre></td></tr></table></figure></p>
+<p>2，删<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DELETE FROM &quot;tableName&quot; WHERE &quot;condition1&quot; AND &quot;condition2&quot; ...</div><div class="line">/* 在执行删除语句的时候一定要写好where后面的条件。 */</div></pre></td></tr></table></figure></p>
+<p>3，改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">UPDATE &quot;tableName&quot; SET &quot;key = value&quot; WHERE &quot;condition1&quot; AND &quot;condition2&quot; ...</div><div class="line">/* 根据where后面的条件，对表中某些字段数据进行修改。*/</div></pre></td></tr></table></figure></p>
+<p>4，查<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SELECT &quot;fields&quot; FROM &quot;tableName&quot; WHERE &quot;condition&quot;</div><div class="line">/* 单表查询，根据条件查询某张表中的某几列数据。where和列(fields)可以省略。 */</div><div class="line"></div><div class="line">SELECT &quot;fields&quot; FROM &quot;table1, table2,...&quot; WHERE &quot;condition1&quot; AND &quot;condition2&quot; ...</div><div class="line">/* 多表查询，根据表与表之间的关联关系查询所需要的数据。*/</div></pre></td></tr></table></figure></p>
+<p>5，数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CREATE DATABASE &quot;databaseName&quot; /* 创建数据库 */</div><div class="line"></div><div class="line">DROP DATABASE &quot;databaseName&quot; /* 删除数据库 */</div></pre></td></tr></table></figure></p>
+<p>6，数据表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name (columnName columnType) /* 创建数据表，column_type为列类型及属性 */</div><div class="line"></div><div class="line">DROP TABLE &quot;tableName&quot; /* 删除数据表 */</div><div class="line"></div><div class="line">ALTER TABLE &quot;tableName&quot; RENAME TO &quot;newTableName&quot;  /* 修改表名称*/</div></pre></td></tr></table></figure></p>
+<p>7，ALTER<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE &quot;tableName&quot; DROP &quot;columnName&quot; /*删除表中的某个字段 */</div><div class="line"></div><div class="line">ALTER TABLE &quot;tableName&quot; ADD &quot;columnName columnType&quot; FIRST/[AFTER &quot;columnName&quot;]</div><div class="line">/*在数据表中第一位或者在某个字段之后添加某个字段 */</div><div class="line"></div><div class="line">ALTER TABLE &quot;tableName&quot; MODIFY &quot;columnName&quot; &quot;newColumnType&quot; /* 修改表中某个字段的类型属性 */</div><div class="line"></div><div class="line">ALTER TABLE &quot;tableName&quot; CHANGE &quot;columnName&quot; &quot;columnName newColumnType&quot;</div><div class="line">/* 修改表中的的某个字段名并添加可以添加新的类型，还可以值修改字段类型 */</div><div class="line"></div><div class="line">ALTER TABLE &quot;tableName&quot; RENAME TO &quot;newTableName&quot;  /* 修改表名称*/</div></pre></td></tr></table></figure></p>
+<p>8，权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GRANT &quot;power&quot; ON &quot;databaseName&quot; TO &quot;user&quot; /* 给用户user添加数据库databaseName对应的权限power*/</div><div class="line">REVOKE &quot;power&quot; ON &quot;databaseName&quot; FROM &quot;user&quot; /* 移除用户user在数据库databaseName上的权限power */</div><div class="line">FLUSH PRIVILEGES /* 在不重启MySQL服务的情况下使得权限操作生效 */</div></pre></td></tr></table></figure></p>
+<p>9, 显示表详细结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SHOW TABLES; 显示所有的表</div><div class="line"></div><div class="line">DESCRIBE table_name; 显示表结构下的所有字段信息 相当于SHOW FIELDS FROM table_name</div><div class="line"></div><div class="line">SHOW FULL FIELDS FROM table_name 显示表结构下的所有字段信息 包含注释</div></pre></td></tr></table></figure></p>
+<p>10，其他<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">GROUP BY &quot;columnName&quot; /* 对某一列查询结果进行分组统计 */</div><div class="line">ORDER BY &quot;columnName&quot;  ASC/DESC /* 对某一列查询结果进行排序操作，升序ASC，降序DESC */</div><div class="line">SUM(&quot;columnName&quot;) /* 对某一分组进行统计 */</div><div class="line">COUNT(&quot;columnName&quot;) /* 对某一分组进行计数 */</div><div class="line">AVG(&quot;columnName&quot;) /* 对某一分组进行求平均值操作 */</div><div class="line">.......................等等函数</div></pre></td></tr></table></figure></p>
+<p><strong><em>后续在学习中会继续进行补充，谢谢！</em></strong></p>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下面是在学习MySQL的时候一些命令的纪录&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="MySQL" scheme="https://ytlm.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>javascript 显示当前系统时间</title>
+    <link href="https://ytlm.github.io/2016/07/24/javascript-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
+    <id>https://ytlm.github.io/2016/07/24/javascript-显示当前系统时间/</id>
+    <published>2016-07-24T07:00:15.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习js时候的一些简单的纪录，用js实现显示当前系统时间</p>
+<blockquote>
+<p>详细代码如下</p>
+</blockquote>
+<a id="more"></a>
+<p>js实现<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">	<span class="keyword">var</span> now = <span class="string">"现在时间是： "</span>;</div><div class="line"></div><div class="line">	now += date.getFullYear() + <span class="string">" 年 "</span>;</div><div class="line">	now += (date.getMonth()+<span class="number">1</span>)+ <span class="string">" 月 "</span>;</div><div class="line">	now += date.getDate()     + <span class="string">" 日 "</span>;</div><div class="line">	now += date.getHours()    + <span class="string">" 时 "</span>;</div><div class="line">	now += date.getMinutes()  + <span class="string">" 分 "</span>;</div><div class="line">	now += date.getSeconds()  + <span class="string">" 秒 "</span>;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> week = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"日"</span>, <span class="string">"一"</span>, <span class="string">"二"</span>, <span class="string">"三"</span>, <span class="string">"四"</span>, <span class="string">"五"</span>, <span class="string">"六"</span>);</div><div class="line">	<span class="keyword">var</span> weekIndex = date.getDay();</div><div class="line"></div><div class="line">	now += <span class="string">" 星期"</span> + week[weekIndex];</div><div class="line"></div><div class="line">	$(<span class="string">"#time"</span>).html(now);</div><div class="line">&#125;, <span class="number">1000</span>);</div></pre></td></tr></table></figure></p>
+<p>html代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"time"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>结果截图</p>
+<p><img src="/images/jstime.png" alt="显示时间样式"></p>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习js时候的一些简单的纪录，用js实现显示当前系统时间&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;详细代码如下&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="javascript" scheme="https://ytlm.github.io/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git 命令学习</title>
+    <link href="https://ytlm.github.io/2016/07/24/git-%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://ytlm.github.io/2016/07/24/git-命令学习/</id>
+    <published>2016-07-24T06:52:07.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>下面是一些在平时学习git时经常需要用的一些命令<br><a id="more"></a></p>
+<ul>
+<li><p>git stash</p>
+<blockquote>
+<p>把当前未提交的改动「复制」到另一个地方暂存起来，待要恢复的时候执行 git stash pop</p>
+</blockquote>
+</li>
+<li><p>git commit –amend</p>
+<blockquote>
+<p>提交之后发现漏掉了某些文件,选择重新add后提交再次提交是不合理的，应该先add后执行git commit –amend</p>
+</blockquote>
+</li>
+<li><p>git reset <strong>filename</strong></p>
+<blockquote>
+<p>意外地把一个不需要的文件也 add 了，git reset <strong>filename</strong> 把这个文件重staging area位置移除出来，并且不会丢失任何数据</p>
+</blockquote>
+</li>
+<li><p>git checkout <strong>filename</strong></p>
+<blockquote>
+<p>快速扔掉该文件所有的变更，回到没有修改之前的状态</p>
+</blockquote>
+</li>
+<li><p>git checkout -b xxx</p>
+<blockquote>
+<p>创建并且checkout到一个新的分支上</p>
+</blockquote>
+</li>
+</ul>
+<p><strong><em>未完待续，后续使用到 git 其他相关都会慢慢积累到这里</em></strong></p>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下面是一些在平时学习git时经常需要用的一些命令&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="git" scheme="https://ytlm.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git 忽略一个目录</title>
+    <link href="https://ytlm.github.io/2016/07/24/git-%E5%BF%BD%E7%95%A5%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/"/>
+    <id>https://ytlm.github.io/2016/07/24/git-忽略一个目录/</id>
+    <published>2016-07-24T06:45:09.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://segmentfault.com/q/1010000000608238" title="原文链接" target="_blank" rel="external">原文链接</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached **dir** //首先删除已经跟踪并添加过的目录</div><div class="line">echo **dir/** &gt;&gt; .gitignore //添加忽略文件，并向忽略文件中添加需要忽略的目录</div><div class="line">git add .gitignore //让git跟踪忽略文件</div><div class="line">git commit -m &apos;ignore **dir** forever&apos; //提交忽略文件</div></pre></td></tr></table></figure></p>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://segmentfault.com/q/1010000000608238&quot; title=&quot;原文链接&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;&lt;figure class=&quot;highlight pl
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="git" scheme="https://ytlm.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git diff 命令详解</title>
+    <link href="https://ytlm.github.io/2016/07/24/git-diff-%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://ytlm.github.io/2016/07/24/git-diff-命令详解/</id>
+    <published>2016-07-24T06:40:44.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://www.cnblogs.com/wish123/p/3963224.html" title="原文链接" target="_blank" rel="external">原文链接</a><br>    diff里面a表示前面那个变量，b表示第二个变量</p>
+<blockquote>
+<p>HEAD     commit版本<br>Index     staged版本</p>
+</blockquote>
+<a id="more"></a>
+<p>a、查看尚未暂存的文件更新了哪些部分，不加参数直接输入</p>
+<blockquote>
+<p>git diff<br>此命令比较的是工作目录(Working tree)和暂存区域快照(index)之间的差异<br>也就是修改之后还没有暂存起来的变化内容。</p>
+</blockquote>
+<p>b、查看已经暂存起来的文件(staged)和上次提交时的快照之间(HEAD)的差异</p>
+<blockquote>
+<p>git diff –cached<br>    git diff –staged<br>显示的是下一次commit时会提交到HEAD的内容(不带-a情况下)</p>
+</blockquote>
+<p>c、显示工作版本(Working tree)和HEAD的差别</p>
+<blockquote>
+<p>git diff HEAD</p>
+</blockquote>
+<p>d、直接将两个分支上最新的提交做diff</p>
+<blockquote>
+<p>git diff topic master 或 git diff topic..master</p>
+</blockquote>
+<p>e、输出自topic和master分别开发以来，master分支上的changed</p>
+<blockquote>
+<p>git diff topic…master</p>
+</blockquote>
+<p>f、查看简单的diff结果，可以加上–stat参数</p>
+<blockquote>
+<p>git diff –stat</p>
+</blockquote>
+<p>g、查看当前目录和另外一个分支的差别</p>
+<blockquote>
+<p>git diff test<br>显示当前目录和另一个叫’test’分支的差别<br>git diff HEAD – ./lib<br>显示当前目录下的lib目录和上次提交之间的差别（更准确的说是在当前分支下）</p>
+</blockquote>
+<p>h、比较上次提交commit和上上次提交</p>
+<blockquote>
+<p>git diff HEAD^ HEAD</p>
+</blockquote>
+<p>i、比较两个历史版本之间的差异</p>
+<blockquote>
+<p>git diff SHA1 SHA2</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/wish123/p/3963224.html&quot; title=&quot;原文链接&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;    diff里面a表示前面那个变量，b表示第二个变量&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;HEAD     commit版本&lt;br&gt;Index     staged版本&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="git" scheme="https://ytlm.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>static和extern，定义和声明</title>
+    <link href="https://ytlm.github.io/2016/07/23/static%E5%92%8Cextern%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E/"/>
+    <id>https://ytlm.github.io/2016/07/23/static和extern，定义和声明/</id>
+    <published>2016-07-23T15:04:48.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>总结一下关于声明和定义的区别，以及static和extern的异同<br><a id="more"></a></p>
+<p><strong><em>声明和定义</em></strong></p>
+<blockquote>
+<p>1,广义角度声明包含定义，定义是声明的一个特例。<br>2,定义是会简历存储空间的，而声明则不会，int a;声明a的同时，也定义了a，建立了存储空间；extern b;只是声明了b，并不是定义b，表示b是在其它文件中定义的。</p>
+</blockquote>
+<p><strong><em>static和extern</em></strong><br><strong><em>static</em></strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:center">存储位置</th>
+<th style="text-align:right">作用范围</th>
+<th style="text-align:right">赋值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全局变量</td>
+<td style="text-align:center">静态存储区</td>
+<td style="text-align:right">从定义位置到文件结束，<br>且能够被其它文件引用。</td>
+<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空</td>
+</tr>
+<tr>
+<td>静态全局变量</td>
+<td style="text-align:center">静态存储区</td>
+<td style="text-align:right">从定义位置到文件结束，<br>且不能够被其它文件引用，<br>限定于定义的文件内。</td>
+<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空</td>
+</tr>
+<tr>
+<td>局部变量</td>
+<td style="text-align:center">非静态存储区</td>
+<td style="text-align:right">从定义位置到函数执行结束。</td>
+<td style="text-align:right">若被赋值则为赋值<br>若没有则为随机数</td>
+</tr>
+<tr>
+<td>静态局部变量</td>
+<td style="text-align:center">静态存储区</td>
+<td style="text-align:right">从定义位置到文件结束。</td>
+<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空<br>且只被赋值一次，以后再用到还是上次的值</td>
+</tr>
+<tr>
+<td>静态函数</td>
+<td style="text-align:center">栈区</td>
+<td style="text-align:right">定义所在文件内。</td>
+<td style="text-align:right">-</td>
+</tr>
+<tr>
+<td>非静态函数</td>
+<td style="text-align:center">栈区</td>
+<td style="text-align:right">可以被出定义所在文件外的<br>其它文件调用。</td>
+<td style="text-align:right">-</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>extern</em></strong><br>extern 只在头文件中声明<br>static 只在源文件中定义</p>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;总结一下关于声明和定义的区别，以及static和extern的异同&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="C语言" scheme="https://ytlm.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C语言编译过程</title>
+    <link href="https://ytlm.github.io/2016/07/23/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
+    <id>https://ytlm.github.io/2016/07/23/C语言编译过程/</id>
+    <published>2016-07-23T14:20:38.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。<br>详细过程如下</p>
+<a id="more"></a>
+<p>1，编译预处理（gcc -E main.c -o main.i）</p>
+<blockquote>
+<ul>
+<li>文件包含复制 将源文件中一”#include”格式包含的文件复制到编译的源文件中</li>
+<li>宏定义替换 用实际的值替换用”#define”定义的字符串<blockquote>
+<p>__DATE__:当前源程序的创建日期。<br>__FILE__:当前源程序的文件名称(包括盘符和路径)。<br>__LINE__:当前被编译代码的行号。<br>__STDC__:返回编译器是否位标准C,若其值为1表示符合标准C，否则不是标准C.<br>__TIME__:当前源程序的创建时间。　</p>
+</blockquote>
+</li>
+<li>决定编译代码 根据”#if”条件决定需要编译的实际代码</li>
+<li>删除注释 行注释和块注释</li>
+</ul>
+</blockquote>
+<p>2，编译（gcc -S main.i -o main.s）</p>
+<blockquote>
+<ul>
+<li>对预处理过后的文件进行一系列的词法分析，语法分析，语义分析以及进行相关的优化，生成相应的汇编代码文件</li>
+</ul>
+</blockquote>
+<p>3，汇编（gcc -c main.c -o main.o）</p>
+<blockquote>
+<ul>
+<li>将编译过的汇编代码翻译成目标机器指令的过程</li>
+</ul>
+</blockquote>
+<p>4，链接（ld）</p>
+<blockquote>
+<ul>
+<li>将不同部分的代码和数据收集和组合成为一个单一文件的过程，将相关目标指令文件链接，使其成为一个整体可以被OS执行</li>
+<li>连接器ld将各个目标文件组装在一起，解决符号依赖，库依赖关系，并生成可执行文件</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。&lt;br&gt;详细过程如下&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="C语言" scheme="https://ytlm.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C程序在内存中的布局</title>
+    <link href="https://ytlm.github.io/2016/07/23/C%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80/"/>
+    <id>https://ytlm.github.io/2016/07/23/C程序在内存中的布局/</id>
+    <published>2016-07-23T11:47:06.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong> C程序在内存中的布局大致如下图所示 </strong><br><img src="/images/memory.png" alt="内存布局"></p>
+<p><em>从上到下依次是栈空间，堆空间，bbs段，data段，文本段</em></p>
+<a id="more"></a>
+<h3 id="栈（stack）"><a href="#栈（stack）" class="headerlink" title="栈（stack）"></a>栈（stack）</h3><p>1，地址空间由高向低减少，先分配高地址。<br>2，由编译器自动分配释放，主要存放函数参数，局部变量的值。<br>3，C语言函数参数进栈的顺序是从右向左（主要是为了支持可变长参数形式）。</p>
+<h3 id="堆（head）"><a href="#堆（head）" class="headerlink" title="堆（head）"></a>堆（head）</h3><p>1，主要用于动态分配内存，malloc等函数，由free释放。</p>
+<h3 id="静态存储区包括bbs段和data段"><a href="#静态存储区包括bbs段和data段" class="headerlink" title="静态存储区包括bbs段和data段"></a>静态存储区包括bbs段和data段</h3><h4 id="bbs（bbs）"><a href="#bbs（bbs）" class="headerlink" title="bbs（bbs）"></a>bbs（bbs）</h4><p>1，存放一些未初始化的全局变量。</p>
+<h4 id="data（data）"><a href="#data（data）" class="headerlink" title="data（data）"></a>data（data）</h4><p>1，存放一些已经初始化的全局变量，静态变量和常量。</p>
+<h4 id="text（text）"><a href="#text（text）" class="headerlink" title="text（text）"></a>text（text）</h4><p>1，存放程序执行代码的区域，区域大小在运行的时候就已经确定了。<br>2，内存区域只读的，也可能包含一些只读的常数变量，字符串常量等。</p>
+<p><em>一个非常清晰的程序图</em><br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//main.c</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>;<span class="comment">//全局初始化区</span></div><div class="line"><span class="keyword">char</span> *p1;<span class="comment">//全局未初始化区</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">static</span> <span class="keyword">int</span> c = <span class="number">0</span>;<span class="comment">//全局（静态）初始化区</span></div><div class="line">  <span class="keyword">int</span> b;<span class="comment">//栈区</span></div><div class="line">  <span class="keyword">char</span> s1[] = <span class="string">"abc"</span>;<span class="comment">//"abc\0"在常量区，s1栈区</span></div><div class="line">  <span class="keyword">char</span> s2[] = <span class="string">"abc"</span>;<span class="comment">//"abc\0"在常量区，s2栈区</span></div><div class="line"><span class="comment">//s1和s2是不想等的</span></div><div class="line">  <span class="keyword">char</span> *p2;<span class="comment">//栈区</span></div><div class="line">  <span class="keyword">char</span> *p3 = <span class="string">"123456"</span>;<span class="comment">//"123456\0"在常量区，p3在栈区</span></div><div class="line">  <span class="keyword">char</span> *p4 = <span class="string">"123456"</span>;<span class="comment">//"123456\0"在常量区，p4在栈区</span></div><div class="line"><span class="comment">//p3和p4是一样的，都只想同一个位置"123456\0"所在位置</span></div><div class="line">  p1 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>);</div><div class="line">  p2 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">20</span>);<span class="comment">//分配得来的10和20字节的区域在堆区</span></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt; C程序在内存中的布局大致如下图所示 &lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;/images/memory.png&quot; alt=&quot;内存布局&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;从上到下依次是栈空间，堆空间，bbs段，data段，文本段&lt;/em&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="C语言" scheme="https://ytlm.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="内存" scheme="https://ytlm.github.io/tags/%E5%86%85%E5%AD%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在TP框架下使用AJAX验证登陆后台</title>
+    <link href="https://ytlm.github.io/2016/07/23/%E5%9C%A8TP%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8AJAX%E9%AA%8C%E8%AF%81%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0/"/>
+    <id>https://ytlm.github.io/2016/07/23/在TP框架下使用AJAX验证登陆后台/</id>
+    <published>2016-07-23T11:34:34.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="在TP框架下使用AJAX验证登陆后台"><a href="#在TP框架下使用AJAX验证登陆后台" class="headerlink" title="在TP框架下使用AJAX验证登陆后台"></a>在TP框架下使用AJAX验证登陆后台</h3><blockquote>
+<p>主要分为前台页面，js，后台php的实现，代码如下</p>
+</blockquote>
+<a id="more"></a>
+<h5 id="前台页面"><a href="#前台页面" class="headerlink" title="前台页面"></a><em>前台页面</em></h5><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"><span class="keyword">var</span> handleUrl = <span class="string">'&#123;:U("Home/Login/handle", "", "")&#125;'</span>;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"login"</span>&gt;</span><span class="tag">&lt;<span class="name">table</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span>  <span class="tag">&lt;<span class="name">th</span>&gt;</span>帐号:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"username"</span> <span class="attr">name</span>=<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>验证码:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"code"</span> <span class="attr">name</span>=<span class="string">"code"</span>/&gt;</span> <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;:U('Home/Login/verify', '', '')&#125;"</span> <span class="attr">id</span>=<span class="string">"code"</span> <span class="attr">onclick</span>=<span class="string">"javascript:change_code()"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">class</span>=<span class="string">'reset'</span> <span class="attr">value</span>=<span class="string">"重置"</span> /&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"登录"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">"2"</span> &gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"errM"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="JS"><a href="#JS" class="headerlink" title="JS"></a><em>JS</em></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">  var username = $(&quot;input[name=&apos;username&apos;]&quot;);</div><div class="line">  var password = $(&quot;input[name=&apos;password&apos;]&quot;);</div><div class="line">  var code = $(&quot;input[name=&apos;code&apos;]&quot;);</div><div class="line">  $(&quot;input[type=&apos;submit&apos;]&quot;).click(function()&#123;</div><div class="line">      event.preventDefault();//取消默认提交表单</div><div class="line">      $.post(</div><div class="line">            handleUrl,</div><div class="line">            &#123;username:username.val(), password:password.val(), code:code.val()&#125;,</div><div class="line">            function(data)&#123;</div><div class="line">                if(data.status == 1)&#123;</div><div class="line">                    window.location.href = data.url;</div><div class="line">                &#125;</div><div class="line">                $(&quot;#errM&quot;).html(data.info);</div><div class="line">            &#125;, &quot;json&quot;);&#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h5 id="TP后台实现"><a href="#TP后台实现" class="headerlink" title="TP后台实现"></a><em>TP后台实现</em></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public function handle()&#123;</div><div class="line">	if(!IS_AJAX) $this-&gt;error(&quot;页面不存在。。。&quot;);</div><div class="line">	$code     = I(&apos;code&apos;);</div><div class="line">    $username = I(&apos;username&apos;);</div><div class="line">    $pwd      = I(&apos;password&apos;, &apos;&apos;, &apos;md5&apos;);</div><div class="line">    $data = array(); </div><div class="line">    if ( !$this-&gt;checkCode($code) ) &#123;</div><div class="line">    	//检查验证码是否正确</div><div class="line">        $data[&apos;info&apos;]   = &quot;验证码错误,请检查重试。。。&quot;;</div><div class="line">        $data[&apos;status&apos;] = 0;</div><div class="line">        $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">    &#125; else &#123;</div><div class="line">        //验证码正确</div><div class="line">        $arrUser[&apos;username&apos;] = $username;</div><div class="line">        $User = M(&apos;user&apos;)-&gt;where($arrUser)-&gt;find();</div><div class="line">        if( !$User ) &#123;</div><div class="line">            //检查用户是否存在</div><div class="line">            $data[&apos;info&apos;]   = &quot;用户不存在，请检查重试。。。&quot;;</div><div class="line">            $data[&apos;status&apos;] = 0;</div><div class="line">            $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">        &#125; else &#123;</div><div class="line">            //用户存在检查密码是否正确</div><div class="line">            if( $pwd != $User[&apos;password&apos;]) &#123;</div><div class="line">                $data[&apos;info&apos;]   = &quot;密码错误，请检查重试。。。&quot;;</div><div class="line">                $data[&apos;status&apos;] = 0;</div><div class="line">                $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">            &#125; else &#123;</div><div class="line">                //登陆通过，把相关内容写入session</div><div class="line">                session(&apos;uid&apos;,      $User[&apos;userid&apos;]);</div><div class="line">                session(&apos;username&apos;, $User[&apos;username&apos;]);</div><div class="line">                session(&apos;role&apos;,     $User[&apos;role&apos;]);</div><div class="line">                $data[&apos;info&apos;]   = &quot;登陆成功,正在跳转。。。&quot;;</div><div class="line">                $data[&apos;status&apos;] = 1;</div><div class="line">                $data[&apos;url&apos;]    = U(&apos;Home/Index/index&apos;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    $this-&gt;ajaxReturn($data, &apos;json&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;在TP框架下使用AJAX验证登陆后台&quot;&gt;&lt;a href=&quot;#在TP框架下使用AJAX验证登陆后台&quot; class=&quot;headerlink&quot; title=&quot;在TP框架下使用AJAX验证登陆后台&quot;&gt;&lt;/a&gt;在TP框架下使用AJAX验证登陆后台&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;主要分为前台页面，js，后台php的实现，代码如下&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="ThinkPHP" scheme="https://ytlm.github.io/tags/ThinkPHP/"/>
+    
+      <category term="Jquery" scheme="https://ytlm.github.io/tags/Jquery/"/>
+    
+      <category term="AJAX" scheme="https://ytlm.github.io/tags/AJAX/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FIRST</title>
+    <link href="https://ytlm.github.io/2016/06/04/FIRST/"/>
+    <id>https://ytlm.github.io/2016/06/04/FIRST/</id>
+    <published>2016-06-04T15:16:53.000Z</published>
+    <updated>2017-03-29T01:54:05.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>  我的第一个私人博客，之前也一直想要有一个私人的博客，想租个vps和域名，可是没有money，自己维护也很麻烦就一直搁置了。</p>
+<p>  最近借助github平台和hexo工具实现了这个小小的愿望，终于有了一个自己的blog，哈哈哈。。。</p>
+<p>  下面是大致的安装过程。</p>
+<a id="more"></a>
+<p><strong>大致过程如下</strong></p>
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><blockquote>
+<ul>
+<li>首先在github上创建自己的账号，然后创建一个以自己名字命名的仓库，可以自己搜索怎么建立。</li>
+</ul>
+</blockquote>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><blockquote>
+<ul>
+<li>首先安装node.js，因为hexo是基于node.js开发的一个静态博客框架</li>
+<li>安装hexo，安装的过程中可能需要更换npm源</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g</div></pre></td></tr></table></figure>
+<h2 id="初始化自己的blog"><a href="#初始化自己的blog" class="headerlink" title="初始化自己的blog"></a>初始化自己的blog</h2><blockquote>
+<ul>
+<li>创建一个文件夹作为自己以后blog的根目录</li>
+<li>进入该blog目录，进行初始化配置</li>
+<li>配置根目录下的__config.yml文件</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mkdir blog</div><div class="line"><span class="built_in">cd</span> blog</div><div class="line">hexo init</div><div class="line">hexo install</div><div class="line">hexo new <span class="string">"newAticle"</span> //创建新的文章，执行完之后会在sources/_post/目录下会有newAticle.md文件，打开进行编辑</div><div class="line">hexo clean //清除本地缓存</div><div class="line">hexo generate //生成网站</div><div class="line">hexo serve //开启本地服务，可以在http://localhost:4000/中进行本地预览</div><div class="line">hexo deploy //部署到github上</div></pre></td></tr></table></figure>
+<p><strong><em>以后每次添加新文章就按照 / hexo clean / hexo new “” / hexo generate / hexo deploy / 的顺序就可以添加新文章</em></strong></p>
+<h2 id="选择hexo主题，next"><a href="#选择hexo主题，next" class="headerlink" title="选择hexo主题，next"></a>选择hexo主题，next</h2><blockquote>
+<ul>
+<li>安装next主题</li>
+<li>启用next主题,根目录下配置文件_config.yml配置theme: next</li>
+<li>优化配置next主题,在next主题文件目录下的配置文件_config.yml</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  我的第一个私人博客，之前也一直想要有一个私人的博客，想租个vps和域名，可是没有money，自己维护也很麻烦就一直搁置了。&lt;/p&gt;
+&lt;p&gt;  最近借助github平台和hexo工具实现了这个小小的愿望，终于有了一个自己的blog，哈哈哈。。。&lt;/p&gt;
+&lt;p&gt;  下面是大致的安装过程。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="https://ytlm.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="github" scheme="https://ytlm.github.io/tags/github/"/>
+    
+      <category term="hexo" scheme="https://ytlm.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>
