@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>ytlm</title>
-  
+  <subtitle>stay hungry, stay foolish.</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlm.github.io/"/>
-  <updated>2017-03-29T07:52:26.632Z</updated>
+  <updated>2017-03-30T05:36:30.381Z</updated>
   <id>https://ytlm.github.io/</id>
   
   <author>
@@ -16,43 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://ytlm.github.io/2017/03/29/hello-world/"/>
-    <id>https://ytlm.github.io/2017/03/29/hello-world/</id>
-    <published>2017-03-29T07:52:26.632Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="总结" scheme="https://ytlm.github.io/categories/%E6%80%BB%E7%BB%93/"/>
-    
-    
-      <category term="hexo" scheme="https://ytlm.github.io/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
     <title>hexo travis github</title>
-    <link href="https://ytlm.github.io/2017/03/25/hexo-travis-github/"/>
-    <id>https://ytlm.github.io/2017/03/25/hexo-travis-github/</id>
+    <link href="https://ytlm.github.io/2017/03/hexo-travis-github/"/>
+    <id>https://ytlm.github.io/2017/03/hexo-travis-github/</id>
     <published>2017-03-25T14:16:48.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>利用hexo, travis, github联合的方式进行博客的创建并且自动发布. </p>
 <p>1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.<br>2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:</p>
@@ -94,10 +62,10 @@
   
   <entry>
     <title>Wamp更改web根目录</title>
-    <link href="https://ytlm.github.io/2016/07/24/Wamp%E6%9B%B4%E6%94%B9web%E6%A0%B9%E7%9B%AE%E5%BD%95/"/>
-    <id>https://ytlm.github.io/2016/07/24/Wamp更改web根目录/</id>
+    <link href="https://ytlm.github.io/2016/07/Wamp%E6%9B%B4%E6%94%B9web%E6%A0%B9%E7%9B%AE%E5%BD%95/"/>
+    <id>https://ytlm.github.io/2016/07/Wamp更改web根目录/</id>
     <published>2016-07-24T07:44:08.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://blog.csdn.net/xia777xia/article/details/6282346" target="_blank" rel="external">原文链接</a><br>Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。</p>
 <p>比如e:/xx 或者 d:/php等等。</p>
@@ -138,10 +106,10 @@
   
   <entry>
     <title>WampServer-localhost-图标不显示解决办法</title>
-    <link href="https://ytlm.github.io/2016/07/24/Wamp-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
-    <id>https://ytlm.github.io/2016/07/24/Wamp-localhost-图标不显示解决办法/</id>
+    <link href="https://ytlm.github.io/2016/07/Wamp-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>https://ytlm.github.io/2016/07/Wamp-localhost-图标不显示解决办法/</id>
     <published>2016-07-24T07:28:29.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>在用WampServer学习PHP的时候碰到，打开localhost的时候文件图标不显示，解决办法如下</p>
 <a id="more"></a>
@@ -174,10 +142,10 @@
   
   <entry>
     <title>TCP/IP 各层的作用</title>
-    <link href="https://ytlm.github.io/2016/07/24/TCP-IP-%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
-    <id>https://ytlm.github.io/2016/07/24/TCP-IP-各层的作用/</id>
+    <link href="https://ytlm.github.io/2016/07/TCP-IP-%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
+    <id>https://ytlm.github.io/2016/07/TCP-IP-各层的作用/</id>
     <published>2016-07-24T07:21:53.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>计算机网络中的TCP/IP协议学习，纪录每层的作用</p>
 <a id="more"></a>
@@ -213,59 +181,11 @@
   </entry>
   
   <entry>
-    <title>Sublime Text 3 常用插件以及主题</title>
-    <link href="https://ytlm.github.io/2016/07/24/Sublime-Text-3-%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6%E4%BB%A5%E5%8F%8A%E4%B8%BB%E9%A2%98/"/>
-    <id>https://ytlm.github.io/2016/07/24/Sublime-Text-3-常用插件以及主题/</id>
-    <published>2016-07-24T07:18:36.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
-    
-    <content type="html"><![CDATA[<p>Sublime Text 3 一个好用的编辑器，下面是一些常用的插件以及主题</p>
-<a id="more"></a>
-<h3 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h3><blockquote>
-<ul>
-<li><a href="https://packagecontrol.io/installation#st3" target="_blank" rel="external">Package Control</a></li>
-</ul>
-</blockquote>
-<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><blockquote>
-<ul>
-<li>Emmet 轻松书写html/css代码</li>
-<li>ConvertToUTF8  文件编码转换</li>
-<li>ColorPicker 一个取色器改变颜色</li>
-<li>DocBlockr 块注释</li>
-<li>All Autocomplete 自动补全</li>
-<li>Markdown Preview markdown预览</li>
-</ul>
-</blockquote>
-<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><blockquote>
-<ul>
-<li>Soda Theme</li>
-</ul>
-</blockquote>
-<hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Sublime Text 3 一个好用的编辑器，下面是一些常用的插件以及主题&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="https://ytlm.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Sublime-Text-3" scheme="https://ytlm.github.io/tags/Sublime-Text-3/"/>
-    
-  </entry>
-  
-  <entry>
     <title>MySQL 使用总结</title>
-    <link href="https://ytlm.github.io/2016/07/24/MySQL-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
-    <id>https://ytlm.github.io/2016/07/24/MySQL-使用总结/</id>
+    <link href="https://ytlm.github.io/2016/07/MySQL-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
+    <id>https://ytlm.github.io/2016/07/MySQL-使用总结/</id>
     <published>2016-07-24T07:14:56.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>下面是在学习MySQL的时候一些命令的纪录</p>
 <a id="more"></a>
@@ -301,10 +221,10 @@
   
   <entry>
     <title>javascript 显示当前系统时间</title>
-    <link href="https://ytlm.github.io/2016/07/24/javascript-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
-    <id>https://ytlm.github.io/2016/07/24/javascript-显示当前系统时间/</id>
+    <link href="https://ytlm.github.io/2016/07/javascript-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
+    <id>https://ytlm.github.io/2016/07/javascript-显示当前系统时间/</id>
     <published>2016-07-24T07:00:15.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>学习js时候的一些简单的纪录，用js实现显示当前系统时间</p>
 <blockquote>
@@ -339,13 +259,13 @@
   
   <entry>
     <title>git 命令学习</title>
-    <link href="https://ytlm.github.io/2016/07/24/git-%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://ytlm.github.io/2016/07/24/git-命令学习/</id>
+    <link href="https://ytlm.github.io/2016/07/git-%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://ytlm.github.io/2016/07/git-命令学习/</id>
     <published>2016-07-24T06:52:07.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>下面是一些在平时学习git时经常需要用的一些命令<br><a id="more"></a></p>
-<ul>
+<ol>
 <li><p>git stash</p>
 <blockquote>
 <p>把当前未提交的改动「复制」到另一个地方暂存起来，待要恢复的时候执行 git stash pop</p>
@@ -371,7 +291,20 @@
 <p>创建并且checkout到一个新的分支上</p>
 </blockquote>
 </li>
-</ul>
+<li><p>忽略一个目录</p>
+<blockquote>
+<p>git rm -r –cached <strong>dir</strong> //首先删除已经跟踪并添加过的目录<br>echo <strong>dir/</strong> &gt;&gt; .gitignore //添加忽略文件，并向忽略文件中添加需要忽略的目录<br>git add .gitignore //让git跟踪忽略文件<br>git commit -m ‘ignore <strong>dir</strong> forever’ //提交忽略文件</p>
+</blockquote>
+</li>
+<li><p>git diff <strong>a</strong> <strong>b</strong> <a href="http://www.cnblogs.com/wish123/p/3963224.html" title="原文链接" target="_blank" rel="external">原文链接</a></p>
+<blockquote>
+<p>(1). git diff (不加任何参数)</p>
+<blockquote>
+<p>此命令比较的是工作目录(Working tree)和暂存区域快照(index)之间的差异<br>也就是修改之后还没有暂存起来的变化内容。<br>(2). git diff SHA1 SHA2<br>比较两个历史版本之间的差异</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
 <p><strong><em>未完待续，后续使用到 git 其他相关都会慢慢积累到这里</em></strong></p>
 <hr>
 <blockquote>
@@ -393,108 +326,11 @@
   </entry>
   
   <entry>
-    <title>git 忽略一个目录</title>
-    <link href="https://ytlm.github.io/2016/07/24/git-%E5%BF%BD%E7%95%A5%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95/"/>
-    <id>https://ytlm.github.io/2016/07/24/git-忽略一个目录/</id>
-    <published>2016-07-24T06:45:09.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://segmentfault.com/q/1010000000608238" title="原文链接" target="_blank" rel="external">原文链接</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git rm -r --cached **dir** //首先删除已经跟踪并添加过的目录</div><div class="line">echo **dir/** &gt;&gt; .gitignore //添加忽略文件，并向忽略文件中添加需要忽略的目录</div><div class="line">git add .gitignore //让git跟踪忽略文件</div><div class="line">git commit -m &apos;ignore **dir** forever&apos; //提交忽略文件</div></pre></td></tr></table></figure></p>
-<hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://segmentfault.com/q/1010000000608238&quot; title=&quot;原文链接&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;&lt;figure class=&quot;highlight pl
-    
-    </summary>
-    
-      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="git" scheme="https://ytlm.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git diff 命令详解</title>
-    <link href="https://ytlm.github.io/2016/07/24/git-diff-%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://ytlm.github.io/2016/07/24/git-diff-命令详解/</id>
-    <published>2016-07-24T06:40:44.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="http://www.cnblogs.com/wish123/p/3963224.html" title="原文链接" target="_blank" rel="external">原文链接</a><br>    diff里面a表示前面那个变量，b表示第二个变量</p>
-<blockquote>
-<p>HEAD     commit版本<br>Index     staged版本</p>
-</blockquote>
-<a id="more"></a>
-<p>a、查看尚未暂存的文件更新了哪些部分，不加参数直接输入</p>
-<blockquote>
-<p>git diff<br>此命令比较的是工作目录(Working tree)和暂存区域快照(index)之间的差异<br>也就是修改之后还没有暂存起来的变化内容。</p>
-</blockquote>
-<p>b、查看已经暂存起来的文件(staged)和上次提交时的快照之间(HEAD)的差异</p>
-<blockquote>
-<p>git diff –cached<br>    git diff –staged<br>显示的是下一次commit时会提交到HEAD的内容(不带-a情况下)</p>
-</blockquote>
-<p>c、显示工作版本(Working tree)和HEAD的差别</p>
-<blockquote>
-<p>git diff HEAD</p>
-</blockquote>
-<p>d、直接将两个分支上最新的提交做diff</p>
-<blockquote>
-<p>git diff topic master 或 git diff topic..master</p>
-</blockquote>
-<p>e、输出自topic和master分别开发以来，master分支上的changed</p>
-<blockquote>
-<p>git diff topic…master</p>
-</blockquote>
-<p>f、查看简单的diff结果，可以加上–stat参数</p>
-<blockquote>
-<p>git diff –stat</p>
-</blockquote>
-<p>g、查看当前目录和另外一个分支的差别</p>
-<blockquote>
-<p>git diff test<br>显示当前目录和另一个叫’test’分支的差别<br>git diff HEAD – ./lib<br>显示当前目录下的lib目录和上次提交之间的差别（更准确的说是在当前分支下）</p>
-</blockquote>
-<p>h、比较上次提交commit和上上次提交</p>
-<blockquote>
-<p>git diff HEAD^ HEAD</p>
-</blockquote>
-<p>i、比较两个历史版本之间的差异</p>
-<blockquote>
-<p>git diff SHA1 SHA2</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/wish123/p/3963224.html&quot; title=&quot;原文链接&quot;&gt;原文链接&lt;/a&gt;&lt;br&gt;    diff里面a表示前面那个变量，b表示第二个变量&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;HEAD     commit版本&lt;br&gt;Index     staged版本&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="git" scheme="https://ytlm.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>static和extern，定义和声明</title>
-    <link href="https://ytlm.github.io/2016/07/23/static%E5%92%8Cextern%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E/"/>
-    <id>https://ytlm.github.io/2016/07/23/static和extern，定义和声明/</id>
+    <link href="https://ytlm.github.io/2016/07/static%E5%92%8Cextern%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E/"/>
+    <id>https://ytlm.github.io/2016/07/static和extern，定义和声明/</id>
     <published>2016-07-23T15:04:48.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>总结一下关于声明和定义的区别，以及static和extern的异同<br><a id="more"></a></p>
 <p><strong><em>声明和定义</em></strong></p>
@@ -566,16 +402,16 @@
       <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="C语言" scheme="https://ytlm.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
+      <category term="C" scheme="https://ytlm.github.io/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>C语言编译过程</title>
-    <link href="https://ytlm.github.io/2016/07/23/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
-    <id>https://ytlm.github.io/2016/07/23/C语言编译过程/</id>
+    <link href="https://ytlm.github.io/2016/07/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
+    <id>https://ytlm.github.io/2016/07/C语言编译过程/</id>
     <published>2016-07-23T14:20:38.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。<br>详细过程如下</p>
 <a id="more"></a>
@@ -631,10 +467,10 @@
   
   <entry>
     <title>C程序在内存中的布局</title>
-    <link href="https://ytlm.github.io/2016/07/23/C%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80/"/>
-    <id>https://ytlm.github.io/2016/07/23/C程序在内存中的布局/</id>
+    <link href="https://ytlm.github.io/2016/07/C%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80/"/>
+    <id>https://ytlm.github.io/2016/07/C程序在内存中的布局/</id>
     <published>2016-07-23T11:47:06.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p><strong> C程序在内存中的布局大致如下图所示 </strong><br><img src="/images/memory.png" alt="内存布局"></p>
 <p><em>从上到下依次是栈空间，堆空间，bbs段，data段，文本段</em></p>
@@ -669,10 +505,10 @@
   
   <entry>
     <title>在TP框架下使用AJAX验证登陆后台</title>
-    <link href="https://ytlm.github.io/2016/07/23/%E5%9C%A8TP%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8AJAX%E9%AA%8C%E8%AF%81%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0/"/>
-    <id>https://ytlm.github.io/2016/07/23/在TP框架下使用AJAX验证登陆后台/</id>
+    <link href="https://ytlm.github.io/2016/07/%E5%9C%A8TP%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8AJAX%E9%AA%8C%E8%AF%81%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0/"/>
+    <id>https://ytlm.github.io/2016/07/在TP框架下使用AJAX验证登陆后台/</id>
     <published>2016-07-23T11:34:34.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<h3 id="在TP框架下使用AJAX验证登陆后台"><a href="#在TP框架下使用AJAX验证登陆后台" class="headerlink" title="在TP框架下使用AJAX验证登陆后台"></a>在TP框架下使用AJAX验证登陆后台</h3><blockquote>
 <p>主要分为前台页面，js，后台php的实现，代码如下</p>
@@ -708,10 +544,10 @@
   
   <entry>
     <title>FIRST</title>
-    <link href="https://ytlm.github.io/2016/06/04/FIRST/"/>
-    <id>https://ytlm.github.io/2016/06/04/FIRST/</id>
+    <link href="https://ytlm.github.io/2016/06/FIRST/"/>
+    <id>https://ytlm.github.io/2016/06/FIRST/</id>
     <published>2016-06-04T15:16:53.000Z</published>
-    <updated>2017-03-29T07:52:26.632Z</updated>
+    <updated>2017-03-30T05:36:30.381Z</updated>
     
     <content type="html"><![CDATA[<p>  我的第一个私人博客，之前也一直想要有一个私人的博客，想租个vps和域名，可是没有money，自己维护也很麻烦就一直搁置了。</p>
 <p>  最近借助github平台和hexo工具实现了这个小小的愿望，终于有了一个自己的blog，哈哈哈。。。</p>

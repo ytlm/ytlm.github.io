@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C," />
 
 
 
@@ -113,12 +113,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="ytlm">
-<meta property="og:url" content="https://ytlm.github.io/tags/Wamp/index.html">
+<meta name="description" content="总结一下关于声明和定义的区别，以及static和extern的异同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="static和extern，定义和声明">
+<meta property="og:url" content="https://ytlm.github.io/2016/07/static和extern，定义和声明/index.html">
 <meta property="og:site_name" content="ytlm">
+<meta property="og:description" content="总结一下关于声明和定义的区别，以及static和extern的异同">
+<meta property="og:updated_time" content="2017-03-30T05:36:30.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ytlm">
+<meta name="twitter:title" content="static和extern，定义和声明">
+<meta name="twitter:description" content="总结一下关于声明和定义的区别，以及static和extern的异同">
 
 
 
@@ -146,13 +150,13 @@
 
 
 
-  <link rel="canonical" href="https://ytlm.github.io/tags/Wamp/"/>
+  <link rel="canonical" href="https://ytlm.github.io/2016/07/static和extern，定义和声明/"/>
 
 
 
 
 
-  <title> Tag: Wamp | ytlm </title>
+  <title> static和extern，定义和声明 | ytlm </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -177,7 +181,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,74 +285,251 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Wamp
-        <small>Tag</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/Wamp更改web根目录/" itemprop="url">
-              
-                <span itemprop="name">Wamp更改web根目录</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-24T15:44:08+08:00"
-              content="2016-07-24" >
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/Wamp-localhost-图标不显示解决办法/" itemprop="url">
-              
-                <span itemprop="name">WampServer-localhost-图标不显示解决办法</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-24T15:28:29+08:00"
-              content="2016-07-24" >
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2016/07/static和extern，定义和声明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ytlm">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ytlm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                static和extern，定义和声明
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-23T23:04:48+08:00">
+                2016-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/static和extern，定义和声明/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/07/static和extern，定义和声明/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结一下关于声明和定义的区别，以及static和extern的异同<br><a id="more"></a></p>
+<p><strong><em>声明和定义</em></strong></p>
+<blockquote>
+<p>1,广义角度声明包含定义，定义是声明的一个特例。<br>2,定义是会简历存储空间的，而声明则不会，int a;声明a的同时，也定义了a，建立了存储空间；extern b;只是声明了b，并不是定义b，表示b是在其它文件中定义的。</p>
+</blockquote>
+<p><strong><em>static和extern</em></strong><br><strong><em>static</em></strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:center">存储位置</th>
+<th style="text-align:right">作用范围</th>
+<th style="text-align:right">赋值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全局变量</td>
+<td style="text-align:center">静态存储区</td>
+<td style="text-align:right">从定义位置到文件结束，<br>且能够被其它文件引用。</td>
+<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空</td>
+</tr>
+<tr>
+<td>静态全局变量</td>
+<td style="text-align:center">静态存储区</td>
+<td style="text-align:right">从定义位置到文件结束，<br>且不能够被其它文件引用，<br>限定于定义的文件内。</td>
+<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空</td>
+</tr>
+<tr>
+<td>局部变量</td>
+<td style="text-align:center">非静态存储区</td>
+<td style="text-align:right">从定义位置到函数执行结束。</td>
+<td style="text-align:right">若被赋值则为赋值<br>若没有则为随机数</td>
+</tr>
+<tr>
+<td>静态局部变量</td>
+<td style="text-align:center">静态存储区</td>
+<td style="text-align:right">从定义位置到文件结束。</td>
+<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空<br>且只被赋值一次，以后再用到还是上次的值</td>
+</tr>
+<tr>
+<td>静态函数</td>
+<td style="text-align:center">栈区</td>
+<td style="text-align:right">定义所在文件内。</td>
+<td style="text-align:right">-</td>
+</tr>
+<tr>
+<td>非静态函数</td>
+<td style="text-align:center">栈区</td>
+<td style="text-align:right">可以被出定义所在文件外的<br>其它文件调用。</td>
+<td style="text-align:right">-</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>extern</em></strong><br>extern 只在头文件中声明<br>static 只在源文件中定义</p>
+<hr>
+<blockquote>
+<p>如有疑问欢迎批评指正，谢谢！</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/C语言编译过程/" rel="next" title="C语言编译过程">
+                <i class="fa fa-chevron-left"></i> C语言编译过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/git-命令学习/" rel="prev" title="git 命令学习">
+                git 命令学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -356,6 +537,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -572,6 +764,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
@@ -589,6 +785,18 @@
       <script id="dsq-count-scr" src="https://ytlm.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://ytlm.github.io/2016/07/static和extern，定义和声明/';
+          this.page.identifier = '2016/07/static和extern，定义和声明/';
+          this.page.title = 'static和extern，定义和声明';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ytlm.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
