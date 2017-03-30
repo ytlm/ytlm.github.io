@@ -1,8 +1,12 @@
 ---
 title: 在TP框架下使用AJAX验证登陆后台
 date: 2016-07-23 19:34:34
-tags: [ThinkPHP, Jquery, AJAX]
-categories: 学习
+tags: 
+    - ThinkPHP
+    - Jquery
+    - AJAX
+categories: 
+    - 学习
 ---
 
 ### 在TP框架下使用AJAX验证登陆后台 ###

@@ -1,8 +1,10 @@
 ---
 title: Wamp更改web根目录
 date: 2016-07-24 15:44:08
-tags: [Wamp]
-categories: 软件
+tags: 
+    - Wamp
+categories: 
+    - 软件
 ---
 
 [原文链接](http://blog.csdn.net/xia777xia/article/details/6282346)

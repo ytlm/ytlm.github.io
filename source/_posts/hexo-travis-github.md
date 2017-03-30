@@ -1,8 +1,12 @@
 ---
 title: hexo travis github
 date: 2017-03-25 22:16:48
-tags: [hexo, travis, github]
-categories: 总结
+tags: 
+    - hexo
+    - travis
+    - github
+categories: 
+    - 总结
 ---
 
 利用hexo, travis, github联合的方式进行博客的创建并且自动发布. 

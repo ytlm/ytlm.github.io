@@ -71,8 +71,8 @@ menu_icons:
 
 # Schemes
 #scheme: Muse
-#scheme: Mist
-scheme: Pisces
+scheme: Mist
+#scheme: Pisces
 
 
 # ---------------------------------------------------------------
@@ -93,33 +93,33 @@ font:
   global:
     # external: true will load this font family from host.
     external: true
-    family: Lato
+    family: Source Code Pro
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6)
   # Fallback to `global` font settings.
   headings:
     external: true
-    family:
+    family: Source Code Pro
 
   # Font settings for posts
   # Fallback to `global` font settings.
   posts:
     external: true
-    family:
+    family: Source Code Pro
 
   # Font settings for Logo
   # Fallback to `global` font settings.
   # The `size` option use `px` as unit
   logo:
     external: true
-    family:
+    family: Source Code Pro
     size:
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family:
-    size:
+    family: Source Code Pro
+    size: 14px
 
 
 
@@ -547,6 +547,6 @@ version: 5.1.0
 
 author: ytlm
 
-description: Talk Is Cheap, Show Me The Code!
+description: stay hungry, stay foolish.
 
 language: en

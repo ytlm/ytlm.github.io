@@ -1,8 +1,10 @@
 ---
 title: TCP/IP 各层的作用
 date: 2016-07-24 15:21:53
-tags: [TCP/IP]
-categories: 学习
+tags: 
+    - TCP/IP
+categories: 
+    - 学习
 ---
 计算机网络中的TCP/IP协议学习，纪录每层的作用
 

@@ -1,8 +1,10 @@
 ---
 title: static和extern，定义和声明
 date: 2016-07-23 23:04:48
-tags: [C语言]
-categories: 学习
+tags: 
+    - C
+categories: 
+    - 学习
 ---
 
 总结一下关于声明和定义的区别，以及static和extern的异同

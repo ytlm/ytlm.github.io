@@ -1,8 +1,11 @@
 ---
 title: FIRST
 date: 2016-06-04 23:16:53
-tags: [github, hexo]
-categories: 随笔
+tags: 
+    - github
+    - hexo
+categories: 
+    - 随笔
 ---
   我的第一个私人博客，之前也一直想要有一个私人的博客，想租个vps和域名，可是没有money，自己维护也很麻烦就一直搁置了。
 
