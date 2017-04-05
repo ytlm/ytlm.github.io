@@ -39,7 +39,7 @@ html代码
 ```
 结果截图
 
-![显示时间样式](/images/jstime.png)
+![显示时间样式](http://onl0zwdvm.bkt.clouddn.com/jstime.png)
 
 ---
 

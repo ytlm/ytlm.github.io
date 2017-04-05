@@ -2,14 +2,13 @@
 title: C程序在内存中的布局
 date: 2016-07-23 19:47:06
 tags: 
-    - C语言
-    - 内存
+    - C
 categories:
     - 学习
 ---
 
 ** C程序在内存中的布局大致如下图所示 **
-![内存布局](/images/memory.png)
+![内存布局](http://onl0zwdvm.bkt.clouddn.com/memory.png!blog)
 
 *从上到下依次是栈空间，堆空间，bbs段，data段，文本段*
 
