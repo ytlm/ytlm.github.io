@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C语言," />
+  <meta name="keywords" content="nginx,https," />
 
 
 
@@ -113,16 +113,22 @@
 
 
 
-<meta name="description" content="大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。详细过程如下">
+<meta name="description" content="nginx的主要功能1，正向代理2，反向代理3，负载均衡4，WEB服务器
+
+通常用nginx主要做反向代理，负载均衡配合反向代理可以做到很多事情；nginx做WEB服务器可以实现动静文件分离；nginx有很多可选的模块，可以对nginx的功能进行扩展；openresty是一个基于nginx与lua的高性能平台，用lua进行扩展；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言编译过程">
-<meta property="og:url" content="https://ytlm.github.io/2016/07/C语言编译过程/index.html">
+<meta property="og:title" content="nginx基于tcp的转发,适用于HTTPS">
+<meta property="og:url" content="https://ytlm.github.io/2017/04/nginx基于tcp的转发-适用于HTTPS/index.html">
 <meta property="og:site_name" content="ytlm">
-<meta property="og:description" content="大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。详细过程如下">
+<meta property="og:description" content="nginx的主要功能1，正向代理2，反向代理3，负载均衡4，WEB服务器
+
+通常用nginx主要做反向代理，负载均衡配合反向代理可以做到很多事情；nginx做WEB服务器可以实现动静文件分离；nginx有很多可选的模块，可以对nginx的功能进行扩展；openresty是一个基于nginx与lua的高性能平台，用lua进行扩展；">
 <meta property="og:updated_time" content="2017-04-05T02:13:06.697Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言编译过程">
-<meta name="twitter:description" content="大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。详细过程如下">
+<meta name="twitter:title" content="nginx基于tcp的转发,适用于HTTPS">
+<meta name="twitter:description" content="nginx的主要功能1，正向代理2，反向代理3，负载均衡4，WEB服务器
+
+通常用nginx主要做反向代理，负载均衡配合反向代理可以做到很多事情；nginx做WEB服务器可以实现动静文件分离；nginx有很多可选的模块，可以对nginx的功能进行扩展；openresty是一个基于nginx与lua的高性能平台，用lua进行扩展；">
 
 
 
@@ -150,13 +156,13 @@
 
 
 
-  <link rel="canonical" href="https://ytlm.github.io/2016/07/C语言编译过程/"/>
+  <link rel="canonical" href="https://ytlm.github.io/2017/04/nginx基于tcp的转发-适用于HTTPS/"/>
 
 
 
 
 
-  <title> C语言编译过程 | ytlm </title>
+  <title> nginx基于tcp的转发,适用于HTTPS | ytlm </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -295,7 +301,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2016/07/C语言编译过程/">
+    <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2017/04/nginx基于tcp的转发-适用于HTTPS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ytlm">
@@ -316,7 +322,7 @@
             
             
               
-                C语言编译过程
+                nginx基于tcp的转发,适用于HTTPS
               
             
           </h1>
@@ -331,8 +337,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-23T22:20:38+08:00">
-                2016-07-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-05T09:52:22+08:00">
+                2017-04-05
               </time>
             
 
@@ -372,9 +378,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/07/C语言编译过程/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/nginx基于tcp的转发-适用于HTTPS/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/C语言编译过程/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/nginx基于tcp的转发-适用于HTTPS/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,43 +406,23 @@
       
 
       
-        <p>大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。<br>详细过程如下</p>
+        <h2 id="nginx的主要功能"><a href="#nginx的主要功能" class="headerlink" title="nginx的主要功能"></a>nginx的主要功能</h2><p>1，正向代理<br>2，反向代理<br>3，负载均衡<br>4，WEB服务器</p>
+<blockquote>
+<p>通常用nginx主要做反向代理，负载均衡配合反向代理可以做到很多事情；<br>nginx做WEB服务器可以实现动静文件分离；<br>nginx有很多可选的模块，可以对nginx的功能进行扩展；<br>openresty是一个基于nginx与lua的高性能平台，用lua进行扩展；</p>
+</blockquote>
 <a id="more"></a>
-<p>1，编译预处理（gcc -E main.c -o main.i）</p>
+<h2 id="ssl简单介绍"><a href="#ssl简单介绍" class="headerlink" title="ssl简单介绍"></a>ssl简单介绍</h2><p>1，主要的作用是为了互联网安全；<br>2，SSL是介于HTTP和TCP之间的一个可选层，对于TCP/IP协议来说；<br>3，SSL与TLS之间的关系是TLS(Transport Layer Security)继承并增强了SSL(Secure Socket Layer)协议；</p>
 <blockquote>
-<ul>
-<li>文件包含复制 将源文件中一”#include”格式包含的文件复制到编译的源文件中</li>
-<li>宏定义替换 用实际的值替换用”#define”定义的字符串<blockquote>
-<p>__DATE__:当前源程序的创建日期。<br>__FILE__:当前源程序的文件名称(包括盘符和路径)。<br>__LINE__:当前被编译代码的行号。<br>__STDC__:返回编译器是否位标准C,若其值为1表示符合标准C，否则不是标准C.<br>__TIME__:当前源程序的创建时间。　</p>
+<p>具体的协议交互过程就不再这里展开了，详见参考连接；<br>这里主要说下客户端在SSL协商初期发送的Client Hello请求，其中有个扩展选项，里面有个server name这个可用于转发。</p>
 </blockquote>
-</li>
-<li>决定编译代码 根据”#if”条件决定需要编译的实际代码</li>
-<li>删除注释 行注释和块注释</li>
-</ul>
+<h2 id="配置nginx转发tcp"><a href="#配置nginx转发tcp" class="headerlink" title="配置nginx转发tcp"></a>配置nginx转发tcp</h2><p>1，版本，nginx version: nginx/1.11.12；我测试用的是这个版本。<br>2，编译，配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure  --with-stream  --with-stream_ssl_preread_module --with-stream_ssl_module</div></pre></td></tr></table></figure></p>
+<p>最主要的使用这几个模块，有需要可以添加其它的模块；然后编译安装make &amp;&amp; make install。<br>3，配置，具体配置命令参考<a href="https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html" target="_blank" rel="external">pread module</a>和<a href="https://nginx.org/en/docs/stream/ngx_stream_core_module.html" target="_blank" rel="external">stream module</a>，启动的时候指定下面的配置文件</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">user</span>  root;</div><div class="line"><span class="attribute">worker_processes</span>  auto;</div><div class="line"><span class="attribute">error_log</span>  logs/error.log;</div><div class="line"><span class="attribute">pid</span>        logs/nginx.pid;</div><div class="line"><span class="attribute">worker_rlimit_core</span>   <span class="number">2G</span>;</div><div class="line"><span class="attribute">worker_rlimit_nofile</span> <span class="number">65535</span>;</div><div class="line"><span class="section">events</span> &#123;</div><div class="line">    <span class="attribute">worker_connections</span>  <span class="number">81920</span>;</div><div class="line">&#125;</div><div class="line"><span class="section">stream</span> &#123;</div><div class="line">    <span class="attribute">log_format</span>  main  <span class="string">'<span class="variable">$remote_addr</span> - [<span class="variable">$time_local</span>] <span class="variable">$connection</span> '</span></div><div class="line">                      <span class="string">'<span class="variable">$status</span> <span class="variable">$proxy_protocol_addr</span> <span class="variable">$server_addr</span> '</span>;</div><div class="line">    <span class="attribute">access_log</span>  logs/access.log  main;</div><div class="line">    <span class="attribute">resolver</span> <span class="number">114.114.114.114</span>;</div><div class="line">    <span class="attribute">resolver_timeout</span> <span class="number">60s</span>;</div><div class="line">    <span class="attribute">variables_hash_bucket_size</span> <span class="number">512</span>;</div><div class="line">    <span class="section">server</span> &#123;</div><div class="line">        <span class="attribute">listen</span>       <span class="number">443</span>;</div><div class="line">        <span class="attribute">ssl_preread</span> <span class="literal">on</span>;</div><div class="line">        <span class="attribute">proxy_pass</span> <span class="variable">$ssl_preread_server_name</span>:<span class="number">443</span>;</div><div class="line">        <span class="comment">#大致看了一下源码，这里为什么需要配置端口也没有研究明白，求解释？</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>4，目前测试基本上都是可以的，在日志中会有一些错误，不会影响正常服务，还再研究中。</p>
+<h2 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h2><blockquote>
+<p><a href="https://nginx.org/en/docs/" target="_blank" rel="external">https://nginx.org/en/docs/</a><br><a href="https://github.com/openresty/lua-nginx-module" target="_blank" rel="external">https://github.com/openresty/lua-nginx-module</a><br><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html</a><br><a href="http://www.wosign.com/faq/faq2016-0309-04.htm" target="_blank" rel="external">http://www.wosign.com/faq/faq2016-0309-04.htm</a><br><a href="https://segmentfault.com/a/1190000002554673" target="_blank" rel="external">https://segmentfault.com/a/1190000002554673</a></p>
 </blockquote>
-<p>2，编译（gcc -S main.i -o main.s）</p>
-<blockquote>
-<ul>
-<li>对预处理过后的文件进行一系列的词法分析，语法分析，语义分析以及进行相关的优化，生成相应的汇编代码文件</li>
-</ul>
-</blockquote>
-<p>3，汇编（gcc -c main.c -o main.o）</p>
-<blockquote>
-<ul>
-<li>将编译过的汇编代码翻译成目标机器指令的过程</li>
-</ul>
-</blockquote>
-<p>4，链接（ld）</p>
-<blockquote>
-<ul>
-<li>将不同部分的代码和数据收集和组合成为一个单一文件的过程，将相关目标指令文件链接，使其成为一个整体可以被OS执行</li>
-<li>连接器ld将各个目标文件组装在一起，解决符号依赖，库依赖关系，并生成可执行文件</li>
-</ul>
-</blockquote>
-<hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em>如有问题欢迎批评指正，谢谢。</em></strong></p>
 
       
     </div>
@@ -466,7 +452,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C语言/" rel="tag"># C语言</a>
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+            <a href="/tags/https/" rel="tag"># https</a>
           
         </div>
       
@@ -479,8 +467,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/C程序在内存中的布局/" rel="next" title="C程序在内存中的布局">
-                <i class="fa fa-chevron-left"></i> C程序在内存中的布局
+              <a href="/2017/03/hexo-travis-github/" rel="next" title="hexo travis github">
+                <i class="fa fa-chevron-left"></i> hexo travis github
               </a>
             
           </div>
@@ -488,10 +476,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/static和extern，定义和声明/" rel="prev" title="static和extern，定义和声明">
-                static和extern，定义和声明 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -545,8 +529,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/head.png"
@@ -635,6 +628,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx的主要功能"><span class="nav-number">1.</span> <span class="nav-text">nginx的主要功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl简单介绍"><span class="nav-number">2.</span> <span class="nav-text">ssl简单介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置nginx转发tcp"><span class="nav-number">3.</span> <span class="nav-text">配置nginx转发tcp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考连接"><span class="nav-number">4.</span> <span class="nav-text">参考连接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -771,9 +780,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://ytlm.github.io/2016/07/C语言编译过程/';
-          this.page.identifier = '2016/07/C语言编译过程/';
-          this.page.title = 'C语言编译过程';
+          this.page.url = 'https://ytlm.github.io/2017/04/nginx基于tcp的转发-适用于HTTPS/';
+          this.page.identifier = '2017/04/nginx基于tcp的转发-适用于HTTPS/';
+          this.page.title = 'nginx基于tcp的转发,适用于HTTPS';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://ytlm.disqus.com/embed.js';
