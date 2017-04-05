@@ -123,7 +123,7 @@
 <meta property="og:description" content="nginx的主要功能1，正向代理2，反向代理3，负载均衡4，WEB服务器
 
 通常用nginx主要做反向代理，负载均衡配合反向代理可以做到很多事情；nginx做WEB服务器可以实现动静文件分离；nginx有很多可选的模块，可以对nginx的功能进行扩展；openresty是一个基于nginx与lua的高性能平台，用lua进行扩展；">
-<meta property="og:updated_time" content="2017-04-05T02:13:06.697Z">
+<meta property="og:updated_time" content="2017-04-05T02:48:00.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx基于tcp的转发,适用于HTTPS">
 <meta name="twitter:description" content="nginx的主要功能1，正向代理2，反向代理3，负载均衡4，WEB服务器
@@ -415,14 +415,14 @@
 <blockquote>
 <p>具体的协议交互过程就不再这里展开了，详见参考连接；<br>这里主要说下客户端在SSL协商初期发送的Client Hello请求，其中有个扩展选项，里面有个server name这个可用于转发。</p>
 </blockquote>
-<h2 id="配置nginx转发tcp"><a href="#配置nginx转发tcp" class="headerlink" title="配置nginx转发tcp"></a>配置nginx转发tcp</h2><p>1，版本，nginx version: nginx/1.11.12；我测试用的是这个版本。<br>2，编译，配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure  --with-stream  --with-stream_ssl_preread_module --with-stream_ssl_module</div></pre></td></tr></table></figure></p>
-<p>最主要的使用这几个模块，有需要可以添加其它的模块；然后编译安装make &amp;&amp; make install。<br>3，配置，具体配置命令参考<a href="https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html" target="_blank" rel="external">pread module</a>和<a href="https://nginx.org/en/docs/stream/ngx_stream_core_module.html" target="_blank" rel="external">stream module</a>，启动的时候指定下面的配置文件</p>
+<h2 id="配置nginx转发tcp"><a href="#配置nginx转发tcp" class="headerlink" title="配置nginx转发tcp"></a>配置nginx转发tcp</h2><p>1，版本，nginx version: nginx/1.11.12；我测试用的是这个版本。<br>2，编译，配置<code>./configure  --with-stream  --with-stream_ssl_preread_module --with-stream_ssl_module</code>最主要的使用这几个模块，有需要可以添加其它的模块；然后编译安装make &amp;&amp; make install。<br>3，配置，具体配置命令参考<a href="https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html" target="_blank" rel="external">pread module</a>和<a href="https://nginx.org/en/docs/stream/ngx_stream_core_module.html" target="_blank" rel="external">stream module</a>，启动的时候指定下面的配置文件</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">user</span>  root;</div><div class="line"><span class="attribute">worker_processes</span>  auto;</div><div class="line"><span class="attribute">error_log</span>  logs/error.log;</div><div class="line"><span class="attribute">pid</span>        logs/nginx.pid;</div><div class="line"><span class="attribute">worker_rlimit_core</span>   <span class="number">2G</span>;</div><div class="line"><span class="attribute">worker_rlimit_nofile</span> <span class="number">65535</span>;</div><div class="line"><span class="section">events</span> &#123;</div><div class="line">    <span class="attribute">worker_connections</span>  <span class="number">81920</span>;</div><div class="line">&#125;</div><div class="line"><span class="section">stream</span> &#123;</div><div class="line">    <span class="attribute">log_format</span>  main  <span class="string">'<span class="variable">$remote_addr</span> - [<span class="variable">$time_local</span>] <span class="variable">$connection</span> '</span></div><div class="line">                      <span class="string">'<span class="variable">$status</span> <span class="variable">$proxy_protocol_addr</span> <span class="variable">$server_addr</span> '</span>;</div><div class="line">    <span class="attribute">access_log</span>  logs/access.log  main;</div><div class="line">    <span class="attribute">resolver</span> <span class="number">114.114.114.114</span>;</div><div class="line">    <span class="attribute">resolver_timeout</span> <span class="number">60s</span>;</div><div class="line">    <span class="attribute">variables_hash_bucket_size</span> <span class="number">512</span>;</div><div class="line">    <span class="section">server</span> &#123;</div><div class="line">        <span class="attribute">listen</span>       <span class="number">443</span>;</div><div class="line">        <span class="attribute">ssl_preread</span> <span class="literal">on</span>;</div><div class="line">        <span class="attribute">proxy_pass</span> <span class="variable">$ssl_preread_server_name</span>:<span class="number">443</span>;</div><div class="line">        <span class="comment">#大致看了一下源码，这里为什么需要配置端口也没有研究明白，求解释？</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>4，目前测试基本上都是可以的，在日志中会有一些错误，不会影响正常服务，还再研究中。</p>
 <h2 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h2><blockquote>
 <p><a href="https://nginx.org/en/docs/" target="_blank" rel="external">https://nginx.org/en/docs/</a><br><a href="https://github.com/openresty/lua-nginx-module" target="_blank" rel="external">https://github.com/openresty/lua-nginx-module</a><br><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html</a><br><a href="http://www.wosign.com/faq/faq2016-0309-04.htm" target="_blank" rel="external">http://www.wosign.com/faq/faq2016-0309-04.htm</a><br><a href="https://segmentfault.com/a/1190000002554673" target="_blank" rel="external">https://segmentfault.com/a/1190000002554673</a></p>
 </blockquote>
-<p><strong><em>如有问题欢迎批评指正，谢谢。</em></strong></p>
+<hr>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 
       
     </div>
@@ -576,7 +576,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

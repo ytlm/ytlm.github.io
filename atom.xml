@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlm.github.io/"/>
-  <updated>2017-04-05T02:13:06.697Z</updated>
+  <updated>2017-04-05T02:48:00.633Z</updated>
   <id>https://ytlm.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://ytlm.github.io/2017/04/nginx%E5%9F%BA%E4%BA%8Etcp%E7%9A%84%E8%BD%AC%E5%8F%91-%E9%80%82%E7%94%A8%E4%BA%8EHTTPS/"/>
     <id>https://ytlm.github.io/2017/04/nginx基于tcp的转发-适用于HTTPS/</id>
     <published>2017-04-05T01:52:22.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<h2 id="nginx的主要功能"><a href="#nginx的主要功能" class="headerlink" title="nginx的主要功能"></a>nginx的主要功能</h2><p>1，正向代理<br>2，反向代理<br>3，负载均衡<br>4，WEB服务器</p>
 <blockquote>
@@ -31,14 +31,14 @@
 <blockquote>
 <p>具体的协议交互过程就不再这里展开了，详见参考连接；<br>这里主要说下客户端在SSL协商初期发送的Client Hello请求，其中有个扩展选项，里面有个server name这个可用于转发。</p>
 </blockquote>
-<h2 id="配置nginx转发tcp"><a href="#配置nginx转发tcp" class="headerlink" title="配置nginx转发tcp"></a>配置nginx转发tcp</h2><p>1，版本，nginx version: nginx/1.11.12；我测试用的是这个版本。<br>2，编译，配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure  --with-stream  --with-stream_ssl_preread_module --with-stream_ssl_module</div></pre></td></tr></table></figure></p>
-<p>最主要的使用这几个模块，有需要可以添加其它的模块；然后编译安装make &amp;&amp; make install。<br>3，配置，具体配置命令参考<a href="https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html" target="_blank" rel="external">pread module</a>和<a href="https://nginx.org/en/docs/stream/ngx_stream_core_module.html" target="_blank" rel="external">stream module</a>，启动的时候指定下面的配置文件</p>
+<h2 id="配置nginx转发tcp"><a href="#配置nginx转发tcp" class="headerlink" title="配置nginx转发tcp"></a>配置nginx转发tcp</h2><p>1，版本，nginx version: nginx/1.11.12；我测试用的是这个版本。<br>2，编译，配置<code>./configure  --with-stream  --with-stream_ssl_preread_module --with-stream_ssl_module</code>最主要的使用这几个模块，有需要可以添加其它的模块；然后编译安装make &amp;&amp; make install。<br>3，配置，具体配置命令参考<a href="https://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html" target="_blank" rel="external">pread module</a>和<a href="https://nginx.org/en/docs/stream/ngx_stream_core_module.html" target="_blank" rel="external">stream module</a>，启动的时候指定下面的配置文件</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">user</span>  root;</div><div class="line"><span class="attribute">worker_processes</span>  auto;</div><div class="line"><span class="attribute">error_log</span>  logs/error.log;</div><div class="line"><span class="attribute">pid</span>        logs/nginx.pid;</div><div class="line"><span class="attribute">worker_rlimit_core</span>   <span class="number">2G</span>;</div><div class="line"><span class="attribute">worker_rlimit_nofile</span> <span class="number">65535</span>;</div><div class="line"><span class="section">events</span> &#123;</div><div class="line">    <span class="attribute">worker_connections</span>  <span class="number">81920</span>;</div><div class="line">&#125;</div><div class="line"><span class="section">stream</span> &#123;</div><div class="line">    <span class="attribute">log_format</span>  main  <span class="string">'<span class="variable">$remote_addr</span> - [<span class="variable">$time_local</span>] <span class="variable">$connection</span> '</span></div><div class="line">                      <span class="string">'<span class="variable">$status</span> <span class="variable">$proxy_protocol_addr</span> <span class="variable">$server_addr</span> '</span>;</div><div class="line">    <span class="attribute">access_log</span>  logs/access.log  main;</div><div class="line">    <span class="attribute">resolver</span> <span class="number">114.114.114.114</span>;</div><div class="line">    <span class="attribute">resolver_timeout</span> <span class="number">60s</span>;</div><div class="line">    <span class="attribute">variables_hash_bucket_size</span> <span class="number">512</span>;</div><div class="line">    <span class="section">server</span> &#123;</div><div class="line">        <span class="attribute">listen</span>       <span class="number">443</span>;</div><div class="line">        <span class="attribute">ssl_preread</span> <span class="literal">on</span>;</div><div class="line">        <span class="attribute">proxy_pass</span> <span class="variable">$ssl_preread_server_name</span>:<span class="number">443</span>;</div><div class="line">        <span class="comment">#大致看了一下源码，这里为什么需要配置端口也没有研究明白，求解释？</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>4，目前测试基本上都是可以的，在日志中会有一些错误，不会影响正常服务，还再研究中。</p>
 <h2 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h2><blockquote>
 <p><a href="https://nginx.org/en/docs/" target="_blank" rel="external">https://nginx.org/en/docs/</a><br><a href="https://github.com/openresty/lua-nginx-module" target="_blank" rel="external">https://github.com/openresty/lua-nginx-module</a><br><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html</a><br><a href="http://www.wosign.com/faq/faq2016-0309-04.htm" target="_blank" rel="external">http://www.wosign.com/faq/faq2016-0309-04.htm</a><br><a href="https://segmentfault.com/a/1190000002554673" target="_blank" rel="external">https://segmentfault.com/a/1190000002554673</a></p>
 </blockquote>
-<p><strong><em>如有问题欢迎批评指正，谢谢。</em></strong></p>
+<hr>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -64,9 +64,9 @@
     <link href="https://ytlm.github.io/2017/03/hexo-travis-github/"/>
     <id>https://ytlm.github.io/2017/03/hexo-travis-github/</id>
     <published>2017-03-25T14:16:48.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
-    <content type="html"><![CDATA[<p>利用hexo, travis, github联合的方式进行博客的创建并且自动发布. </p>
+    <content type="html"><![CDATA[<p>利用hexo, travis, github联合的方式进行博客的创建并且自动发布.</p>
 <p>1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.<br>2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:</p>
 <blockquote>
 <p>(1). yml格式的配置冒号(:)后必须要有一个空格.<br>(2). hexo generate不生效的时候要用hexo clean清空缓存.<br>(3). hexo deploy失败的时候注意git公私钥的配置和_config.yml中deploy的配置.<br>(4). 选择hexo的主题next,对于next主题的配置可以根据官网说经进行合理的配置.</p>
@@ -77,11 +77,13 @@
 </blockquote>
 <a id="more"></a>
 <p><a href="http://lotabout.me/2016/Hexo-Auto-Deploy-to-Github/" target="_blank" rel="external">参考这里</a><br><a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">还有这里</a></p>
+<hr>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;利用hexo, travis, github联合的方式进行博客的创建并且自动发布. &lt;/p&gt;
+      &lt;p&gt;利用hexo, travis, github联合的方式进行博客的创建并且自动发布.&lt;/p&gt;
 &lt;p&gt;1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.&lt;br&gt;2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;(1). yml格式的配置冒号(:)后必须要有一个空格.&lt;br&gt;(2). hexo generate不生效的时候要用hexo clean清空缓存.&lt;br&gt;(3). hexo deploy失败的时候注意git公私钥的配置和_config.yml中deploy的配置.&lt;br&gt;(4). 选择hexo的主题next,对于next主题的配置可以根据官网说经进行合理的配置.&lt;/p&gt;
@@ -109,7 +111,7 @@
     <link href="https://ytlm.github.io/2016/07/Wamp%E6%9B%B4%E6%94%B9web%E6%A0%B9%E7%9B%AE%E5%BD%95/"/>
     <id>https://ytlm.github.io/2016/07/Wamp更改web根目录/</id>
     <published>2016-07-24T07:44:08.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://blog.csdn.net/xia777xia/article/details/6282346" target="_blank" rel="external">原文链接</a><br>Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。</p>
 <p>比如e:/xx 或者 d:/php等等。</p>
@@ -128,9 +130,7 @@
 <p>重启wampserver即可生效。</p>
 </blockquote>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -153,7 +153,7 @@
     <link href="https://ytlm.github.io/2016/07/Wamp-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>https://ytlm.github.io/2016/07/Wamp-localhost-图标不显示解决办法/</id>
     <published>2016-07-24T07:28:29.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p>在用WampServer学习PHP的时候碰到，打开localhost的时候文件图标不显示，解决办法如下</p>
 <a id="more"></a>
@@ -166,9 +166,7 @@
 <p>因为在 httpd.conf 里面设置了<br><code>ServerRoot “D:/wamp/bin/apache/apache2.2.17”</code><br>或者用绝对目录也行.<br><code>\wamp\bin\apache\Apache2.2.17\icons</code></p>
 </blockquote>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -189,7 +187,7 @@
     <link href="https://ytlm.github.io/2016/07/TCP-IP-%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
     <id>https://ytlm.github.io/2016/07/TCP-IP-各层的作用/</id>
     <published>2016-07-24T07:21:53.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p>计算机网络中的TCP/IP协议学习，纪录每层的作用</p>
 <a id="more"></a>
@@ -206,9 +204,7 @@
 <p>1，提供端到端的传输。<br>2，向用户提供一些常用的应用程序，如email,ftp,telnet,smtp,pop3,dns等等</p>
 </blockquote>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -229,7 +225,7 @@
     <link href="https://ytlm.github.io/2016/07/MySQL-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
     <id>https://ytlm.github.io/2016/07/MySQL-使用总结/</id>
     <published>2016-07-24T07:14:56.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p>下面是在学习MySQL的时候一些命令的纪录</p>
 <a id="more"></a>
@@ -245,9 +241,7 @@
 <p>10，其他<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">GROUP BY &quot;columnName&quot; /* 对某一列查询结果进行分组统计 */</div><div class="line">ORDER BY &quot;columnName&quot;  ASC/DESC /* 对某一列查询结果进行排序操作，升序ASC，降序DESC */</div><div class="line">SUM(&quot;columnName&quot;) /* 对某一分组进行统计 */</div><div class="line">COUNT(&quot;columnName&quot;) /* 对某一分组进行计数 */</div><div class="line">AVG(&quot;columnName&quot;) /* 对某一分组进行求平均值操作 */</div><div class="line">.......................等等函数</div></pre></td></tr></table></figure></p>
 <p><strong><em>后续在学习中会继续进行补充，谢谢！</em></strong></p>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -268,7 +262,7 @@
     <link href="https://ytlm.github.io/2016/07/javascript-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
     <id>https://ytlm.github.io/2016/07/javascript-显示当前系统时间/</id>
     <published>2016-07-24T07:00:15.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p>学习js时候的一些简单的纪录，用js实现显示当前系统时间</p>
 <blockquote>
@@ -280,9 +274,7 @@
 <p>结果截图</p>
 <p><img src="http://onl0zwdvm.bkt.clouddn.com/jstime.png" alt="显示时间样式"></p>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -306,7 +298,7 @@
     <link href="https://ytlm.github.io/2016/07/git-%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>https://ytlm.github.io/2016/07/git-命令学习/</id>
     <published>2016-07-24T06:52:07.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p>下面是一些在平时学习git时经常需要用的一些命令<br><a id="more"></a></p>
 <ol>
@@ -351,9 +343,7 @@
 </ol>
 <p><strong><em>未完待续，后续使用到 git 其他相关都会慢慢积累到这里</em></strong></p>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -374,7 +364,7 @@
     <link href="https://ytlm.github.io/2016/07/static%E5%92%8Cextern%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E/"/>
     <id>https://ytlm.github.io/2016/07/static和extern，定义和声明/</id>
     <published>2016-07-23T15:04:48.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p>总结一下关于声明和定义的区别，以及static和extern的异同<br><a id="more"></a></p>
 <p><strong><em>声明和定义</em></strong></p>
@@ -432,9 +422,7 @@
 </table>
 <p><strong><em>extern</em></strong><br>extern 只在头文件中声明<br>static 只在源文件中定义</p>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -455,7 +443,7 @@
     <link href="https://ytlm.github.io/2016/07/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
     <id>https://ytlm.github.io/2016/07/C语言编译过程/</id>
     <published>2016-07-23T14:20:38.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p>大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。<br>详细过程如下</p>
 <a id="more"></a>
@@ -491,9 +479,7 @@
 </ul>
 </blockquote>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -505,7 +491,7 @@
       <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="C语言" scheme="https://ytlm.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
+      <category term="C" scheme="https://ytlm.github.io/tags/C/"/>
     
   </entry>
   
@@ -514,7 +500,7 @@
     <link href="https://ytlm.github.io/2016/07/C%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80/"/>
     <id>https://ytlm.github.io/2016/07/C程序在内存中的布局/</id>
     <published>2016-07-23T11:47:06.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p><strong> C程序在内存中的布局大致如下图所示 </strong><br><img src="http://onl0zwdvm.bkt.clouddn.com/memory.png!blog" alt="内存布局"></p>
 <p><em>从上到下依次是栈空间，堆空间，bbs段，data段，文本段</em></p>
@@ -526,9 +512,7 @@
 <h4 id="text（text）"><a href="#text（text）" class="headerlink" title="text（text）"></a>text（text）</h4><p>1，存放程序执行代码的区域，区域大小在运行的时候就已经确定了。<br>2，内存区域只读的，也可能包含一些只读的常数变量，字符串常量等。</p>
 <p><em>一个非常清晰的程序图</em><br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//main.c</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>;<span class="comment">//全局初始化区</span></div><div class="line"><span class="keyword">char</span> *p1;<span class="comment">//全局未初始化区</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">static</span> <span class="keyword">int</span> c = <span class="number">0</span>;<span class="comment">//全局（静态）初始化区</span></div><div class="line">  <span class="keyword">int</span> b;<span class="comment">//栈区</span></div><div class="line">  <span class="keyword">char</span> s1[] = <span class="string">"abc"</span>;<span class="comment">//"abc\0"在常量区，s1栈区</span></div><div class="line">  <span class="keyword">char</span> s2[] = <span class="string">"abc"</span>;<span class="comment">//"abc\0"在常量区，s2栈区</span></div><div class="line"><span class="comment">//s1和s2是不想等的</span></div><div class="line">  <span class="keyword">char</span> *p2;<span class="comment">//栈区</span></div><div class="line">  <span class="keyword">char</span> *p3 = <span class="string">"123456"</span>;<span class="comment">//"123456\0"在常量区，p3在栈区</span></div><div class="line">  <span class="keyword">char</span> *p4 = <span class="string">"123456"</span>;<span class="comment">//"123456\0"在常量区，p4在栈区</span></div><div class="line"><span class="comment">//p3和p4是一样的，都只想同一个位置"123456\0"所在位置</span></div><div class="line">  p1 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>);</div><div class="line">  p2 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">20</span>);<span class="comment">//分配得来的10和20字节的区域在堆区</span></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -550,7 +534,7 @@
     <link href="https://ytlm.github.io/2016/07/%E5%9C%A8TP%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8AJAX%E9%AA%8C%E8%AF%81%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0/"/>
     <id>https://ytlm.github.io/2016/07/在TP框架下使用AJAX验证登陆后台/</id>
     <published>2016-07-23T11:34:34.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<h3 id="在TP框架下使用AJAX验证登陆后台"><a href="#在TP框架下使用AJAX验证登陆后台" class="headerlink" title="在TP框架下使用AJAX验证登陆后台"></a>在TP框架下使用AJAX验证登陆后台</h3><blockquote>
 <p>主要分为前台页面，js，后台php的实现，代码如下</p>
@@ -560,9 +544,7 @@
 <h5 id="JS"><a href="#JS" class="headerlink" title="JS"></a><em>JS</em></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">  var username = $(&quot;input[name=&apos;username&apos;]&quot;);</div><div class="line">  var password = $(&quot;input[name=&apos;password&apos;]&quot;);</div><div class="line">  var code = $(&quot;input[name=&apos;code&apos;]&quot;);</div><div class="line">  $(&quot;input[type=&apos;submit&apos;]&quot;).click(function()&#123;</div><div class="line">      event.preventDefault();//取消默认提交表单</div><div class="line">      $.post(</div><div class="line">            handleUrl,</div><div class="line">            &#123;username:username.val(), password:password.val(), code:code.val()&#125;,</div><div class="line">            function(data)&#123;</div><div class="line">                if(data.status == 1)&#123;</div><div class="line">                    window.location.href = data.url;</div><div class="line">                &#125;</div><div class="line">                $(&quot;#errM&quot;).html(data.info);</div><div class="line">            &#125;, &quot;json&quot;);&#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h5 id="TP后台实现"><a href="#TP后台实现" class="headerlink" title="TP后台实现"></a><em>TP后台实现</em></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public function handle()&#123;</div><div class="line">	if(!IS_AJAX) $this-&gt;error(&quot;页面不存在。。。&quot;);</div><div class="line">	$code     = I(&apos;code&apos;);</div><div class="line">    $username = I(&apos;username&apos;);</div><div class="line">    $pwd      = I(&apos;password&apos;, &apos;&apos;, &apos;md5&apos;);</div><div class="line">    $data = array(); </div><div class="line">    if ( !$this-&gt;checkCode($code) ) &#123;</div><div class="line">    	//检查验证码是否正确</div><div class="line">        $data[&apos;info&apos;]   = &quot;验证码错误,请检查重试。。。&quot;;</div><div class="line">        $data[&apos;status&apos;] = 0;</div><div class="line">        $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">    &#125; else &#123;</div><div class="line">        //验证码正确</div><div class="line">        $arrUser[&apos;username&apos;] = $username;</div><div class="line">        $User = M(&apos;user&apos;)-&gt;where($arrUser)-&gt;find();</div><div class="line">        if( !$User ) &#123;</div><div class="line">            //检查用户是否存在</div><div class="line">            $data[&apos;info&apos;]   = &quot;用户不存在，请检查重试。。。&quot;;</div><div class="line">            $data[&apos;status&apos;] = 0;</div><div class="line">            $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">        &#125; else &#123;</div><div class="line">            //用户存在检查密码是否正确</div><div class="line">            if( $pwd != $User[&apos;password&apos;]) &#123;</div><div class="line">                $data[&apos;info&apos;]   = &quot;密码错误，请检查重试。。。&quot;;</div><div class="line">                $data[&apos;status&apos;] = 0;</div><div class="line">                $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">            &#125; else &#123;</div><div class="line">                //登陆通过，把相关内容写入session</div><div class="line">                session(&apos;uid&apos;,      $User[&apos;userid&apos;]);</div><div class="line">                session(&apos;username&apos;, $User[&apos;username&apos;]);</div><div class="line">                session(&apos;role&apos;,     $User[&apos;role&apos;]);</div><div class="line">                $data[&apos;info&apos;]   = &quot;登陆成功,正在跳转。。。&quot;;</div><div class="line">                $data[&apos;status&apos;] = 1;</div><div class="line">                $data[&apos;url&apos;]    = U(&apos;Home/Index/index&apos;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    $this-&gt;ajaxReturn($data, &apos;json&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">
@@ -589,7 +571,7 @@
     <link href="https://ytlm.github.io/2016/06/FIRST/"/>
     <id>https://ytlm.github.io/2016/06/FIRST/</id>
     <published>2016-06-04T15:16:53.000Z</published>
-    <updated>2017-04-05T02:13:06.697Z</updated>
+    <updated>2017-04-05T02:48:00.633Z</updated>
     
     <content type="html"><![CDATA[<p>  我的第一个私人博客，之前也一直想要有一个私人的博客，想租个vps和域名，可是没有money，自己维护也很麻烦就一直搁置了。</p>
 <p>  最近借助github平台和hexo工具实现了这个小小的愿望，终于有了一个自己的blog，哈哈哈。。。</p>
@@ -626,9 +608,7 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
     
     <summary type="html">

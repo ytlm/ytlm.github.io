@@ -122,7 +122,7 @@
 <meta property="og:description" content="C程序在内存中的布局大致如下图所示 
 从上到下依次是栈空间，堆空间，bbs段，data段，文本段">
 <meta property="og:image" content="http://onl0zwdvm.bkt.clouddn.com/memory.png!blog">
-<meta property="og:updated_time" content="2017-04-05T02:13:06.697Z">
+<meta property="og:updated_time" content="2017-04-05T02:48:00.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C程序在内存中的布局">
 <meta name="twitter:description" content="C程序在内存中的布局大致如下图所示 
@@ -415,9 +415,7 @@
 <h4 id="text（text）"><a href="#text（text）" class="headerlink" title="text（text）"></a>text（text）</h4><p>1，存放程序执行代码的区域，区域大小在运行的时候就已经确定了。<br>2，内存区域只读的，也可能包含一些只读的常数变量，字符串常量等。</p>
 <p><em>一个非常清晰的程序图</em><br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//main.c</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>;<span class="comment">//全局初始化区</span></div><div class="line"><span class="keyword">char</span> *p1;<span class="comment">//全局未初始化区</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">static</span> <span class="keyword">int</span> c = <span class="number">0</span>;<span class="comment">//全局（静态）初始化区</span></div><div class="line">  <span class="keyword">int</span> b;<span class="comment">//栈区</span></div><div class="line">  <span class="keyword">char</span> s1[] = <span class="string">"abc"</span>;<span class="comment">//"abc\0"在常量区，s1栈区</span></div><div class="line">  <span class="keyword">char</span> s2[] = <span class="string">"abc"</span>;<span class="comment">//"abc\0"在常量区，s2栈区</span></div><div class="line"><span class="comment">//s1和s2是不想等的</span></div><div class="line">  <span class="keyword">char</span> *p2;<span class="comment">//栈区</span></div><div class="line">  <span class="keyword">char</span> *p3 = <span class="string">"123456"</span>;<span class="comment">//"123456\0"在常量区，p3在栈区</span></div><div class="line">  <span class="keyword">char</span> *p4 = <span class="string">"123456"</span>;<span class="comment">//"123456\0"在常量区，p4在栈区</span></div><div class="line"><span class="comment">//p3和p4是一样的，都只想同一个位置"123456\0"所在位置</span></div><div class="line">  p1 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>);</div><div class="line">  p2 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">20</span>);<span class="comment">//分配得来的10和20字节的区域在堆区</span></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <hr>
-<blockquote>
-<p>如有疑问欢迎批评指正，谢谢！</p>
-</blockquote>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 
       
     </div>
@@ -573,7 +571,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
