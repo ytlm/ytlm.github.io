@@ -10,7 +10,7 @@ categories:
 ---
 
 ### 在TP框架下使用AJAX验证登陆后台 ###
->主要分为前台页面，js，后台php的实现，代码如下
+> 主要分为前台页面，js，后台php的实现，代码如下
 
 <!--more-->
 
@@ -92,6 +92,7 @@ public function handle(){
     $this->ajaxReturn($data, 'json');
 }
 ```
+
 ---
 
->如有疑问欢迎批评指正，谢谢！
+*** 如有疑问欢迎批评指正，谢谢！ ***

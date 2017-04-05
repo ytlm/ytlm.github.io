@@ -40,11 +40,11 @@ Alias /icons/ “icons/”
 ```
 
 3，上面用的相对目录,
->因为在 httpd.conf 里面设置了
+> 因为在 httpd.conf 里面设置了
 ` ServerRoot “D:/wamp/bin/apache/apache2.2.17” `
 或者用绝对目录也行.
 ` \wamp\bin\apache\Apache2.2.17\icons `
 
 ---
 
->如有疑问欢迎批评指正，谢谢！
+*** 如有疑问欢迎批评指正，谢谢！ ***
