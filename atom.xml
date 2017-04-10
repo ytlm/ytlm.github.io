@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlm.github.io/"/>
-  <updated>2017-04-05T02:48:00.633Z</updated>
+  <updated>2017-04-10T01:31:31.203Z</updated>
   <id>https://ytlm.github.io/</id>
   
   <author>
@@ -16,11 +16,58 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>ISO的OSI七层网络协议模型</title>
+    <link href="https://ytlm.github.io/2017/04/ISO%E7%9A%84OSI%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A8%A1%E5%9E%8B/"/>
+    <id>https://ytlm.github.io/2017/04/ISO的OSI七层网络协议模型/</id>
+    <published>2017-04-10T01:01:17.000Z</published>
+    <updated>2017-04-10T01:31:31.203Z</updated>
+    
+    <content type="html"><![CDATA[<p>在网络的大环境中扮演者重要的角色的是网络协议，在这里简单的介绍一下关于ISO七层网络协议模型，当然还有TCP/IP四层网络协议，这里不再赘述。<br><a id="more"></a></p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在互联网中有千千万万的主机，也有千千万万应用程序，如果不同的主机不同的应用程序不遵守一个规则，就没法交流，那么也就不能称之为互联网了，这时候网络协议的重要性就体现出来了，我们都遵循同样的协议，这样主机和应用程序之间的交流就没有问题了。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>在网络协议实现的过程中将不同的功能抽象出来，单独实现，只需要提供接口为其它的功能提供服务，具体实现是对其它的服务透明的；这样的好处是每一个服务实现起来只完成特定的功能，实现起来简单；另外在维护的过程中如果出错也更容易定位并发现问题，所以ISO在定制网络协议的时候定义了OSI(Open System Interconnection)协议模型，该模型共分七层，从下至上一次是: 1,物理层; 2,数据链路层; 3,网络层; 4,传输层; 5,会话层; 6,表示层; 7,应用层。下面简单的介绍每层完成的功能。</p>
+<h3 id="1，物理层-Physical-Layer"><a href="#1，物理层-Physical-Layer" class="headerlink" title="1，物理层(Physical Layer)"></a>1，物理层(Physical Layer)</h3><p>为数据链路层提供了一个数据传输的物理媒体，在其上传送比特流，该层数据的单位是比特(bit)。另外该层规定了激活，维持，关闭通信端点之间的机械特性，电气特性，功能特性以及过程特性。</p>
+<h3 id="2，数据链路层-Data-Link-Layer"><a href="#2，数据链路层-Data-Link-Layer" class="headerlink" title="2，数据链路层(Data Link Layer)"></a>2，数据链路层(Data Link Layer)</h3><p>该层在不可靠的物理介质上提供可靠的传输，负责在网络节点之间的线路上通过检测，流量控制和重发等手段，无差错的传送数据，该层数据的单位是帧(frame)，所以每一帧数据必须同时带有同步，地址，差错控制以及流量控制等控制信息；总结起来是: 物理寻址，数据成帧，流量控制，数据检错，重发等。</p>
+<h3 id="3，网络层-Network-Layer"><a href="#3，网络层-Network-Layer" class="headerlink" title="3，网络层(Network Layer)"></a>3，网络层(Network Layer)</h3><p>为了将数据从源端系统发送到目的端系统，网络层的主要任务是完成网络寻址，对子网间的数据包进行路由选择，使得分组数据包，该层数据的单位是数据包(packet)， 能够准确无误的按照地址找到目的地，并将数据交付给上层协议；另外还可以实现拥塞控制，网际互连等功能。</p>
+<h3 id="4，传输层-Transport-Layer"><a href="#4，传输层-Transport-Layer" class="headerlink" title="4，传输层(Transport Layer)"></a>4，传输层(Transport Layer)</h3><p>该层是端到端的一个层次，主要负责将上层数据分段并提供端到端的，可靠的或不可靠的传输，传输的单位是报文(segment)，该层是网络协议分层中最关键的一层，还要处理端到端的差错控制和流量控制问题。</p>
+<h3 id="5，会话层-Session-Layer"><a href="#5，会话层-Session-Layer" class="headerlink" title="5，会话层(Session Layer)"></a>5，会话层(Session Layer)</h3><p>该层主要对传输的报文提供同步管理的服务，在两个不同的主机的互相通信的应用进程之间进行会话的管理，例如确定是半双工还是全双工等；此外还利用在数据中添加校验点来实现数据的同步。</p>
+<h3 id="6，表示层-Presentation-Layer"><a href="#6，表示层-Presentation-Layer" class="headerlink" title="6，表示层(Presentation Layer)"></a>6，表示层(Presentation Layer)</h3><p>该层主要的作用是把数据进行转换，保证一个主机的应用程序数据可以被另一个主机的一个应用程序所理解，即把不同计算机中内部的不同表示形式转换成网络通信协议中的标准形式。主要包括数据的加密(解密)，压缩(还原)，格式转换等。</p>
+<h3 id="7，应用层-Application-Layer"><a href="#7，应用层-Application-Layer" class="headerlink" title="7，应用层(Application Layer)"></a>7，应用层(Application Layer)</h3><p>该层直接面向用户，主要任务是为操作系统和用户之间提供应用接口。</p>
+<h2 id="数据传输过程"><a href="#数据传输过程" class="headerlink" title="数据传输过程"></a>数据传输过程</h2><h3 id="发送数据"><a href="#发送数据" class="headerlink" title="发送数据"></a>发送数据</h3><ul>
+<li>在OSI参考模型中，当一台主机需要传送数据(DATA)时，数据首先通过应用层的接口进入应用层，在应用层数据被加上应用层报头(Application Header, AH)，形成应用层协议数据单元(Protocol Data Unit, PDU)，然后提交到下一层，表示层；</li>
+<li>表示层并不关心上层(应用层)的数据格式，而是把整个应用层提交的过来的数据进行整体的封装，添加报文头部(Presentation Header, PH)，然后提交到下一层，会话层；</li>
+<li>同样的，会话层，传输层，网络层，数据链路层都分别把上层提交过来的数据加上自己的报头，分别是: 会话层报头(Session Header, SH)，传输层报头(Transport Header, TH), 网络层报头(Network Header, NH),数据链路层报头(Data link Header, DH), 然后提交到下一层。<blockquote>
+<p>其中数据链路层还会加上数据链路层报尾(Data link Termination, DT)最终形成一帧数据，在物理层上进行传送。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="接收数据"><a href="#接收数据" class="headerlink" title="接收数据"></a>接收数据</h3><ul>
+<li>当一帧数据通过物理层传送到目标主机的物理层上时，该主机的物理层把它递交给上层, 数据链路层。数据链路层负责去掉数据的帧头部(DH)和尾部(DT), 同时进行数据校验，如果需要的话会发送反馈给源端主机，如果校验没有出错，则递交到上层，网络层。</li>
+<li>同样的，网络层，传输层，会话层，表示层，应用层也要做相应的动作，并执行对应层的功能，最终原始数据递交到目标主机的具体的应用程序中。</li>
+</ul>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>当然对于不同的设备，它工作在不同的协议层面上，比如路由器是工作在网络层，交换机是工作在数据链路层，集线器是工作在物理层等等。同时在数据的传输过程中不像这里说的那么简单，这里只是简答的介绍，实际上远比这里介绍的复杂，有兴趣的可以查阅相关资料进行详细的了解，相信会有很大的收获的。</p>
+<hr>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在网络的大环境中扮演者重要的角色的是网络协议，在这里简单的介绍一下关于ISO七层网络协议模型，当然还有TCP/IP四层网络协议，这里不再赘述。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="网络协议" scheme="https://ytlm.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>nginx基于tcp的转发,适用于HTTPS</title>
     <link href="https://ytlm.github.io/2017/04/nginx%E5%9F%BA%E4%BA%8Etcp%E7%9A%84%E8%BD%AC%E5%8F%91-%E9%80%82%E7%94%A8%E4%BA%8EHTTPS/"/>
     <id>https://ytlm.github.io/2017/04/nginx基于tcp的转发-适用于HTTPS/</id>
     <published>2017-04-05T01:52:22.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<h2 id="nginx的主要功能"><a href="#nginx的主要功能" class="headerlink" title="nginx的主要功能"></a>nginx的主要功能</h2><p>1，正向代理<br>2，反向代理<br>3，负载均衡<br>4，WEB服务器</p>
 <blockquote>
@@ -64,7 +111,7 @@
     <link href="https://ytlm.github.io/2017/03/hexo-travis-github/"/>
     <id>https://ytlm.github.io/2017/03/hexo-travis-github/</id>
     <published>2017-03-25T14:16:48.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>利用hexo, travis, github联合的方式进行博客的创建并且自动发布.</p>
 <p>1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.<br>2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:</p>
@@ -111,7 +158,7 @@
     <link href="https://ytlm.github.io/2016/07/Wamp%E6%9B%B4%E6%94%B9web%E6%A0%B9%E7%9B%AE%E5%BD%95/"/>
     <id>https://ytlm.github.io/2016/07/Wamp更改web根目录/</id>
     <published>2016-07-24T07:44:08.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://blog.csdn.net/xia777xia/article/details/6282346" target="_blank" rel="external">原文链接</a><br>Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。</p>
 <p>比如e:/xx 或者 d:/php等等。</p>
@@ -153,7 +200,7 @@
     <link href="https://ytlm.github.io/2016/07/Wamp-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>https://ytlm.github.io/2016/07/Wamp-localhost-图标不显示解决办法/</id>
     <published>2016-07-24T07:28:29.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>在用WampServer学习PHP的时候碰到，打开localhost的时候文件图标不显示，解决办法如下</p>
 <a id="more"></a>
@@ -187,17 +234,17 @@
     <link href="https://ytlm.github.io/2016/07/TCP-IP-%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
     <id>https://ytlm.github.io/2016/07/TCP-IP-各层的作用/</id>
     <published>2016-07-24T07:21:53.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>计算机网络中的TCP/IP协议学习，纪录每层的作用</p>
 <a id="more"></a>
 <h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><blockquote>
 <p>1，负责接收IP数据报添加头部和尾部然后通过网络发送，或者从网络上接收物理数据帧，抽出ip数据报交给IP层。传输有地址的帧以及错误检测。<br>2，流量控制，有基于反馈的流控制盒基于速率的流控制。<br>3，错误检测和纠正</p>
 </blockquote>
-<h2 id="网络层（IP）"><a href="#网络层（IP）" class="headerlink" title="网络层（IP）"></a>网络层（IP）</h2><blockquote>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><blockquote>
 <p>1，负责相邻计算机之间的通信。<br>2，处理来自传输层分组发送的请求；然后对数据进行分组装入IP数据报，并填充包头，之后选择合适的路径然后发送。<br>3，处理输入数据报；检查合法性，然后寻址发送。<br>4，处理路径，流控，拥塞等问题。</p>
 </blockquote>
-<h2 id="传输层（TCP）"><a href="#传输层（TCP）" class="headerlink" title="传输层（TCP）"></a>传输层（TCP）</h2><blockquote>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><blockquote>
 <p>1，负责点到点的传输。<br>2，格式化信息流。<br>3，提供可靠传输。规定接收端必须发挥确认，如果分组丢失必须重传。</p>
 </blockquote>
 <h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><blockquote>
@@ -216,7 +263,7 @@
       <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="TCP/IP" scheme="https://ytlm.github.io/tags/TCP-IP/"/>
+      <category term="网络协议" scheme="https://ytlm.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
     
   </entry>
   
@@ -225,7 +272,7 @@
     <link href="https://ytlm.github.io/2016/07/MySQL-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
     <id>https://ytlm.github.io/2016/07/MySQL-使用总结/</id>
     <published>2016-07-24T07:14:56.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>下面是在学习MySQL的时候一些命令的纪录</p>
 <a id="more"></a>
@@ -262,7 +309,7 @@
     <link href="https://ytlm.github.io/2016/07/javascript-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
     <id>https://ytlm.github.io/2016/07/javascript-显示当前系统时间/</id>
     <published>2016-07-24T07:00:15.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>学习js时候的一些简单的纪录，用js实现显示当前系统时间</p>
 <blockquote>
@@ -298,7 +345,7 @@
     <link href="https://ytlm.github.io/2016/07/git-%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>https://ytlm.github.io/2016/07/git-命令学习/</id>
     <published>2016-07-24T06:52:07.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>下面是一些在平时学习git时经常需要用的一些命令<br><a id="more"></a></p>
 <ol>
@@ -364,7 +411,7 @@
     <link href="https://ytlm.github.io/2016/07/static%E5%92%8Cextern%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E/"/>
     <id>https://ytlm.github.io/2016/07/static和extern，定义和声明/</id>
     <published>2016-07-23T15:04:48.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>总结一下关于声明和定义的区别，以及static和extern的异同<br><a id="more"></a></p>
 <p><strong><em>声明和定义</em></strong></p>
@@ -443,7 +490,7 @@
     <link href="https://ytlm.github.io/2016/07/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
     <id>https://ytlm.github.io/2016/07/C语言编译过程/</id>
     <published>2016-07-23T14:20:38.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。<br>详细过程如下</p>
 <a id="more"></a>
@@ -500,7 +547,7 @@
     <link href="https://ytlm.github.io/2016/07/C%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80/"/>
     <id>https://ytlm.github.io/2016/07/C程序在内存中的布局/</id>
     <published>2016-07-23T11:47:06.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p><strong> C程序在内存中的布局大致如下图所示 </strong><br><img src="http://onl0zwdvm.bkt.clouddn.com/memory.png!blog" alt="内存布局"></p>
 <p><em>从上到下依次是栈空间，堆空间，bbs段，data段，文本段</em></p>
@@ -534,7 +581,7 @@
     <link href="https://ytlm.github.io/2016/07/%E5%9C%A8TP%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8AJAX%E9%AA%8C%E8%AF%81%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0/"/>
     <id>https://ytlm.github.io/2016/07/在TP框架下使用AJAX验证登陆后台/</id>
     <published>2016-07-23T11:34:34.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<h3 id="在TP框架下使用AJAX验证登陆后台"><a href="#在TP框架下使用AJAX验证登陆后台" class="headerlink" title="在TP框架下使用AJAX验证登陆后台"></a>在TP框架下使用AJAX验证登陆后台</h3><blockquote>
 <p>主要分为前台页面，js，后台php的实现，代码如下</p>
@@ -571,7 +618,7 @@
     <link href="https://ytlm.github.io/2016/06/FIRST/"/>
     <id>https://ytlm.github.io/2016/06/FIRST/</id>
     <published>2016-06-04T15:16:53.000Z</published>
-    <updated>2017-04-05T02:48:00.633Z</updated>
+    <updated>2017-04-10T01:31:31.203Z</updated>
     
     <content type="html"><![CDATA[<p>  我的第一个私人博客，之前也一直想要有一个私人的博客，想租个vps和域名，可是没有money，自己维护也很麻烦就一直搁置了。</p>
 <p>  最近借助github平台和hexo工具实现了这个小小的愿望，终于有了一个自己的blog，哈哈哈。。。</p>
