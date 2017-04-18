@@ -1,11 +1,11 @@
 ---
 title: 'nginx基于tcp的转发,适用于HTTPS'
 date: 2017-04-05 09:52:22
-tags: 
+tags:
     - nginx
     - https
-categories: 
-    - 学习
+categories:
+    - nginx
 ---
 ## nginx的主要功能
 1，正向代理
