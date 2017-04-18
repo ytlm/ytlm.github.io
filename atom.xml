@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlm.github.io/"/>
-  <updated>2017-04-10T01:31:31.203Z</updated>
+  <updated>2017-04-18T05:21:44.671Z</updated>
   <id>https://ytlm.github.io/</id>
   
   <author>
@@ -16,11 +16,145 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>关于nginx缓存配置指令用法详解</title>
+    <link href="https://ytlm.github.io/2017/04/%E5%85%B3%E4%BA%8Enginx%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://ytlm.github.io/2017/04/关于nginx缓存配置指令用法详解/</id>
+    <published>2017-04-18T02:53:11.000Z</published>
+    <updated>2017-04-18T05:21:44.671Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="nginx简介"><a href="#nginx简介" class="headerlink" title="nginx简介"></a>nginx简介</h2><p>众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档<a href="http://nginx.org/" target="_blank" rel="external">nginx</a>，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。<br><a id="more"></a></p>
+<h2 id="配置指令详解"><a href="#配置指令详解" class="headerlink" title="配置指令详解"></a>配置指令详解</h2><ul>
+<li><strong><em> proxy_buffering </em></strong> on | off</li>
+</ul>
+<blockquote>
+<ul>
+<li>控制着缓存的总开关，如果设置off缓存就不会生效；设置on缓存相关的配置才会生效；</li>
+<li>缓存的开关也可以通过设置”X-Accel-Bufferinf”这个header为”yes” | “no”来控制；</li>
+<li>“X-Accel-Buffering”这个header可以被proxy_ingore_headers指令忽略；</li>
+<li><strong><em> proxy_cache </em></strong>  <em>zone</em> | off</li>
+<li>定义一个共享内存用于缓存，其中主要存一些缓存文件的主要信息，用于检索；</li>
+<li>同一个共享内存可以被用于不同的地方，<em> zone </em>可以支持配置变量；</li>
+<li>off 的意思是禁用从上层继承的缓存配置；</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><em> proxy_cache_background_update </em></strong>  on | off</li>
+</ul>
+<blockquote>
+<ul>
+<li>允许在后台发送子请求来更新过期的缓存文件；</li>
+<li>这个一般都不常用，一般一个请求过来判断一下缓存时间，如果 过期了再从后端取就行了；</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><em> proxy_cache_bypass </em></strong>  string …</li>
+</ul>
+<blockquote>
+<p>如果配置的字符串传中有一个不为空并且不等于”0”，这时候这个请求的相应就不会从缓存中取，应该到后端去取数据；</p>
+</blockquote>
+<ul>
+<li><strong><em> proxy_no_cache </em></strong> string …</li>
+</ul>
+<blockquote>
+<p>如果响应的数据中有任何一个满足让字符串中的值至少有一个不为空并且不等于”0”，那么这个响应就不会被缓存下来；</p>
+</blockquote>
+<ul>
+<li><strong><em> proxy_cache_key </em></strong> string</li>
+</ul>
+<blockquote>
+<ul>
+<li>配置缓存的key，缓存相关的内容都是根据这个key来进行查找的；</li>
+<li>key的配置很有灵活性，不同的配置可以达到不同的效果；</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><em> proxy_cache_lock </em></strong> on | off</li>
+</ul>
+<blockquote>
+<p>设置为on的时候，表示在同一时间如果请求同一个cache key的多个请求在没有缓存的情况下只有一个请求会通过后端取数据，其它的请求直接取上个请求的缓存，或者等到超时，直接也去后端去取数据；</p>
+</blockquote>
+<ul>
+<li><strong><em> proxy_cache_lock_timeout </em></strong> time</li>
+</ul>
+<blockquote>
+<ul>
+<li>这个超时时间就是上面的超时时间，如果proxy_cache_lock打开的时候，同一时间同一资源只有一个请求会到后端取数据，其它的请求如果达到这个超时时间之后也会直接到后端取数据；</li>
+<li>过了超时时间之后去到后端取下来数据不会缓存下来；</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><em> proxy_cache_lock_age </em></strong> time</li>
+</ul>
+<blockquote>
+<ul>
+<li>这个的意思是在time时间内一个请求还没有将数据完全从后端取下来并且缓存，那么下一个请求就会被发送到后端，并且这时候也要把数据缓存下来；</li>
+<li>这个lock age和上个lock timeout一直没有搞清楚根本的区别，这里只是简单的解释一下，我好像用的也不多，如果谁能够解释一下还望不吝赐教，谢谢0.0；</li>
+</ul>
+</blockquote>
+<ul>
+<li><em>*</em> proxy_cache_methods GET | HEAD | POST …</li>
+</ul>
+<blockquote>
+<p>如果客户端请求的方法在这个配置的方法列表中，这个请求才有可能被缓存，缓存还受其它的条件制约；</p>
+</blockquote>
+<ul>
+<li><strong><em> proxy_cache_path </em></strong> path [一堆的可选参数]</li>
+</ul>
+<blockquote>
+<ul>
+<li>proxy_cache_path /data/nginx/cachet levels=1:2 use_temp_path=off keys_zone=data:60m inactive=365d max_size=10m；</li>
+<li>上面是一个典型的配置，下面来解释一下每个的含义 ：<blockquote>
+<ul>
+<li>/data/nginx/cachet : 这个表示缓存文件实际的存储路径；</li>
+<li>levels=1:2 : 这个表示缓存文件的分级存储，如果不这样设置的话所有的文件都在同一个文件夹下面，看着比较乱，如果配成这样，缓存文件在实际上大概像这样 <strong><em> /data/nginx/cache/c/29/b7f54b2df7773722d382f4809d65029c </em></strong>；</li>
+<li>ues_temp_path=off : 禁用缓存响应到临时目录，直接缓存到缓存目录；</li>
+<li>keys_zone=data:60m : 设置一个共享内存和大小，里面存储的是缓存文件的一些key信息，在测试的时候发现1m的共享内存大概能够存8k左右个key；</li>
+<li>inactive=365d : 设置缓存时间，这个也受其它的条件限制，比如说响应头有Cache-Control: max-age=10，这样只能缓存10s；</li>
+<li>max_size=10m; 设置这个缓存目录的总大小，大小要根据配置的共享内存进行合理的配置；如果超过这个大小会通过LRU算法进行淘汰；</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><em> proxy_cache_valid </em></strong> [code … ] time</li>
+</ul>
+<blockquote>
+<p>设置特定的响应状态码缓存特定的时间；</p>
+</blockquote>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><ul>
+<li>上面就是我平常用到的关于nginx缓存的配置，组合起来还是能够达到很多需求的；</li>
+<li>这里只是介绍我平常接触到很多的指令，还可能有一些我没有接触过的关于缓存的配置指令，欢迎补充；</li>
+<li>另外在配置缓存目录的时候通过proxy_cache_path和proxy_cahce配置多个来达到把不同的缓存存储到不同的目录，这个时候就涉及到负载均衡了，要不然不同的目录缓存的大小不一样；</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><blockquote>
+<p><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html" target="_blank" rel="external">http://nginx.org/en/docs/http/ngx_http_proxy_module.html</a></p>
+</blockquote>
+<hr>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;nginx简介&quot;&gt;&lt;a href=&quot;#nginx简介&quot; class=&quot;headerlink&quot; title=&quot;nginx简介&quot;&gt;&lt;/a&gt;nginx简介&lt;/h2&gt;&lt;p&gt;众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx&lt;/a&gt;，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="nginx" scheme="https://ytlm.github.io/categories/nginx/"/>
+    
+    
+      <category term="nginx" scheme="https://ytlm.github.io/tags/nginx/"/>
+    
+      <category term="cache" scheme="https://ytlm.github.io/tags/cache/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ISO的OSI七层网络协议模型</title>
     <link href="https://ytlm.github.io/2017/04/ISO%E7%9A%84OSI%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A8%A1%E5%9E%8B/"/>
     <id>https://ytlm.github.io/2017/04/ISO的OSI七层网络协议模型/</id>
     <published>2017-04-10T01:01:17.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.667Z</updated>
     
     <content type="html"><![CDATA[<p>在网络的大环境中扮演者重要的角色的是网络协议，在这里简单的介绍一下关于ISO七层网络协议模型，当然还有TCP/IP四层网络协议，这里不再赘述。<br><a id="more"></a></p>
 <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在互联网中有千千万万的主机，也有千千万万应用程序，如果不同的主机不同的应用程序不遵守一个规则，就没法交流，那么也就不能称之为互联网了，这时候网络协议的重要性就体现出来了，我们都遵循同样的协议，这样主机和应用程序之间的交流就没有问题了。</p>
@@ -67,7 +201,7 @@
     <link href="https://ytlm.github.io/2017/04/nginx%E5%9F%BA%E4%BA%8Etcp%E7%9A%84%E8%BD%AC%E5%8F%91-%E9%80%82%E7%94%A8%E4%BA%8EHTTPS/"/>
     <id>https://ytlm.github.io/2017/04/nginx基于tcp的转发-适用于HTTPS/</id>
     <published>2017-04-05T01:52:22.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.671Z</updated>
     
     <content type="html"><![CDATA[<h2 id="nginx的主要功能"><a href="#nginx的主要功能" class="headerlink" title="nginx的主要功能"></a>nginx的主要功能</h2><p>1，正向代理<br>2，反向代理<br>3，负载均衡<br>4，WEB服务器</p>
 <blockquote>
@@ -97,7 +231,7 @@
     
     </summary>
     
-      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="nginx" scheme="https://ytlm.github.io/categories/nginx/"/>
     
     
       <category term="nginx" scheme="https://ytlm.github.io/tags/nginx/"/>
@@ -111,7 +245,7 @@
     <link href="https://ytlm.github.io/2017/03/hexo-travis-github/"/>
     <id>https://ytlm.github.io/2017/03/hexo-travis-github/</id>
     <published>2017-03-25T14:16:48.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.671Z</updated>
     
     <content type="html"><![CDATA[<p>利用hexo, travis, github联合的方式进行博客的创建并且自动发布.</p>
 <p>1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.<br>2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:</p>
@@ -158,7 +292,7 @@
     <link href="https://ytlm.github.io/2016/07/Wamp%E6%9B%B4%E6%94%B9web%E6%A0%B9%E7%9B%AE%E5%BD%95/"/>
     <id>https://ytlm.github.io/2016/07/Wamp更改web根目录/</id>
     <published>2016-07-24T07:44:08.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.667Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://blog.csdn.net/xia777xia/article/details/6282346" target="_blank" rel="external">原文链接</a><br>Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。</p>
 <p>比如e:/xx 或者 d:/php等等。</p>
@@ -200,7 +334,7 @@
     <link href="https://ytlm.github.io/2016/07/Wamp-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>https://ytlm.github.io/2016/07/Wamp-localhost-图标不显示解决办法/</id>
     <published>2016-07-24T07:28:29.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.667Z</updated>
     
     <content type="html"><![CDATA[<p>在用WampServer学习PHP的时候碰到，打开localhost的时候文件图标不显示，解决办法如下</p>
 <a id="more"></a>
@@ -234,7 +368,7 @@
     <link href="https://ytlm.github.io/2016/07/TCP-IP-%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
     <id>https://ytlm.github.io/2016/07/TCP-IP-各层的作用/</id>
     <published>2016-07-24T07:21:53.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.667Z</updated>
     
     <content type="html"><![CDATA[<p>计算机网络中的TCP/IP协议学习，纪录每层的作用</p>
 <a id="more"></a>
@@ -272,7 +406,7 @@
     <link href="https://ytlm.github.io/2016/07/MySQL-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
     <id>https://ytlm.github.io/2016/07/MySQL-使用总结/</id>
     <published>2016-07-24T07:14:56.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.667Z</updated>
     
     <content type="html"><![CDATA[<p>下面是在学习MySQL的时候一些命令的纪录</p>
 <a id="more"></a>
@@ -309,7 +443,7 @@
     <link href="https://ytlm.github.io/2016/07/javascript-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
     <id>https://ytlm.github.io/2016/07/javascript-显示当前系统时间/</id>
     <published>2016-07-24T07:00:15.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.671Z</updated>
     
     <content type="html"><![CDATA[<p>学习js时候的一些简单的纪录，用js实现显示当前系统时间</p>
 <blockquote>
@@ -345,7 +479,7 @@
     <link href="https://ytlm.github.io/2016/07/git-%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>https://ytlm.github.io/2016/07/git-命令学习/</id>
     <published>2016-07-24T06:52:07.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.671Z</updated>
     
     <content type="html"><![CDATA[<p>下面是一些在平时学习git时经常需要用的一些命令<br><a id="more"></a></p>
 <ol>
@@ -411,7 +545,7 @@
     <link href="https://ytlm.github.io/2016/07/static%E5%92%8Cextern%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E/"/>
     <id>https://ytlm.github.io/2016/07/static和extern，定义和声明/</id>
     <published>2016-07-23T15:04:48.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.671Z</updated>
     
     <content type="html"><![CDATA[<p>总结一下关于声明和定义的区别，以及static和extern的异同<br><a id="more"></a></p>
 <p><strong><em>声明和定义</em></strong></p>
@@ -490,7 +624,7 @@
     <link href="https://ytlm.github.io/2016/07/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
     <id>https://ytlm.github.io/2016/07/C语言编译过程/</id>
     <published>2016-07-23T14:20:38.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.667Z</updated>
     
     <content type="html"><![CDATA[<p>大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。<br>详细过程如下</p>
 <a id="more"></a>
@@ -547,7 +681,7 @@
     <link href="https://ytlm.github.io/2016/07/C%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80/"/>
     <id>https://ytlm.github.io/2016/07/C程序在内存中的布局/</id>
     <published>2016-07-23T11:47:06.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.667Z</updated>
     
     <content type="html"><![CDATA[<p><strong> C程序在内存中的布局大致如下图所示 </strong><br><img src="http://onl0zwdvm.bkt.clouddn.com/memory.png!blog" alt="内存布局"></p>
 <p><em>从上到下依次是栈空间，堆空间，bbs段，data段，文本段</em></p>
@@ -581,7 +715,7 @@
     <link href="https://ytlm.github.io/2016/07/%E5%9C%A8TP%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8AJAX%E9%AA%8C%E8%AF%81%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0/"/>
     <id>https://ytlm.github.io/2016/07/在TP框架下使用AJAX验证登陆后台/</id>
     <published>2016-07-23T11:34:34.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.671Z</updated>
     
     <content type="html"><![CDATA[<h3 id="在TP框架下使用AJAX验证登陆后台"><a href="#在TP框架下使用AJAX验证登陆后台" class="headerlink" title="在TP框架下使用AJAX验证登陆后台"></a>在TP框架下使用AJAX验证登陆后台</h3><blockquote>
 <p>主要分为前台页面，js，后台php的实现，代码如下</p>
@@ -618,7 +752,7 @@
     <link href="https://ytlm.github.io/2016/06/FIRST/"/>
     <id>https://ytlm.github.io/2016/06/FIRST/</id>
     <published>2016-06-04T15:16:53.000Z</published>
-    <updated>2017-04-10T01:31:31.203Z</updated>
+    <updated>2017-04-18T05:21:44.667Z</updated>
     
     <content type="html"><![CDATA[<p>  我的第一个私人博客，之前也一直想要有一个私人的博客，想租个vps和域名，可是没有money，自己维护也很麻烦就一直搁置了。</p>
 <p>  最近借助github平台和hexo工具实现了这个小小的愿望，终于有了一个自己的blog，哈哈哈。。。</p>
