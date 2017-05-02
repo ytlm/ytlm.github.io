@@ -1,14 +1,13 @@
-
 language: node_js
 
 node_js: stable
 
-branchs: 
-    only: 
+branchs:
+    only:
         - hexo
 
-before_install: 
-    - export TZ='Asia/Shanghai' 
+before_install:
+    - export TZ='Asia/Shanghai'
     - openssl aes-256-cbc -K $encrypted_c53d3c040872_key -iv $encrypted_c53d3c040872_iv -in ./.travis/id_rsa.enc -out ~/.ssh/id_rsa -d
     - chmod 600 ~/.ssh/id_rsa
     - eval $(ssh-agent)
@@ -17,26 +16,26 @@ before_install:
     - git config --global user.name "ytlm"
     - git config --global user.email "ytlm1314@gmail.com"
 
-install: 
+install:
     - npm install hexo-cli -g
     - npm install
 
-cache: 
-    directories: 
+cache:
+    directories:
         - node_modules
 
-before_script: 
+before_script:
     - git clone https://github.com/iissnan/hexo-theme-next themes/next --quiet
     - cp themes/config/_config.yml themes/next/_config.yml
     - cp themes/images/* themes/next/source/images/
     - git clone --branch master https://github.com/ytlm/ytlm.github.io ./.deploy_git --quiet
 
-script: 
-    - hexo clean
-    - hexo generate
+script:
+    - hexo clean --silent
+    - hexo generate --silent
     - hexo deploy --silent
 
-notifications: 
+notifications:
     email: ytlm1314@gmail.com
     on_success: change
     on_failure: always
