@@ -296,6 +296,160 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2017/05/tcp建立连接为什么需要三次握手/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ytlm">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ytlm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/tcp建立连接为什么需要三次握手/" itemprop="url">tcp建立连接为什么需要三次握手</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-03T09:22:40+08:00">
+                2017-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/tcp建立连接为什么需要三次握手/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/tcp建立连接为什么需要三次握手/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>众所周知tcp传输层协议在建立连接的时候需要三次才能建立起一个真正的可靠连接，可是为什么是三次呢，不可以是两次，四次等等呢，可以自己思考一番，带着疑问可以看下文。</li>
+</ul>
+<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><ul>
+<li>在《计算机网络》一书中其中有提到，三次握手的目的是“为了防止已经失效的连接请求报文段突然又传到服务端，因而产生错误”，这种情况是：一端(client)A发出去的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个网络节点上发生滞留，导致延迟到连接释放以后的某个时间才到达另一端(server)B。本来这是一个早已失效的报文段，但是B收到此失效的报文之后，会误认为是A再次发出的一个新的连接请求，于是B端就向A又发出确认报文，表示同意建立连接。如果不采用“三次握手”，那么只要B端发出确认报文就会认为新的连接已经建立了，但是A端并没有发出建立连接的请求，因此不会去向B端发送数据，B端没有收到数据就会一直等待，这样B端就会白白浪费掉很多资源。如果采用“三次握手”的话就不会出现这种情况，B端收到一个过时失效的报文段之后，向A端发出确认，此时A并没有要求建立连接，所以就不会向B端发送确认，这个时候B端也能够知道连接没有建立。</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/tcp建立连接为什么需要三次握手/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2017/04/关于nginx缓存配置指令用法详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -314,16 +468,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/关于nginx缓存配置指令用法详解/" itemprop="url">
-                  关于nginx缓存配置指令用法详解
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/关于nginx缓存配置指令用法详解/" itemprop="url">关于nginx缓存配置指令用法详解</a></h1>
         
 
         <div class="post-meta">
@@ -404,7 +550,7 @@
 
       
         
-          <h2 id="nginx简介"><a href="#nginx简介" class="headerlink" title="nginx简介"></a>nginx简介</h2><p>众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档<a href="http://nginx.org/" target="_blank" rel="external">nginx</a>，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。<br>
+          <h2 id="nginx简介"><a href="#nginx简介" class="headerlink" title="nginx简介"></a>nginx简介</h2><p>众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档<a href="http://nginx.org/" target="_blank" rel="external">nginx</a>，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/关于nginx缓存配置指令用法详解/#more" rel="contents">
@@ -471,16 +617,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/ISO的OSI七层网络协议模型/" itemprop="url">
-                  ISO的OSI七层网络协议模型
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/ISO的OSI七层网络协议模型/" itemprop="url">ISO的OSI七层网络协议模型</a></h1>
         
 
         <div class="post-meta">
@@ -628,16 +766,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/nginx基于tcp的转发-适用于HTTPS/" itemprop="url">
-                  nginx基于tcp的转发,适用于HTTPS
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/nginx基于tcp的转发-适用于HTTPS/" itemprop="url">nginx基于tcp的转发,适用于HTTPS</a></h1>
         
 
         <div class="post-meta">
@@ -788,16 +918,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/03/hexo-travis-github/" itemprop="url">
-                  hexo travis github
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/03/hexo-travis-github/" itemprop="url">hexo travis github</a></h1>
         
 
         <div class="post-meta">
@@ -953,16 +1075,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/Wamp更改web根目录/" itemprop="url">
-                  Wamp更改web根目录
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/Wamp更改web根目录/" itemprop="url">Wamp更改web根目录</a></h1>
         
 
         <div class="post-meta">
@@ -1112,16 +1226,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/Wamp-localhost-图标不显示解决办法/" itemprop="url">
-                  WampServer-localhost-图标不显示解决办法
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/Wamp-localhost-图标不显示解决办法/" itemprop="url">WampServer-localhost-图标不显示解决办法</a></h1>
         
 
         <div class="post-meta">
@@ -1269,16 +1375,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/TCP-IP-各层的作用/" itemprop="url">
-                  TCP/IP 各层的作用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/TCP-IP-各层的作用/" itemprop="url">TCP/IP 各层的作用</a></h1>
         
 
         <div class="post-meta">
@@ -1426,16 +1524,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/MySQL-使用总结/" itemprop="url">
-                  MySQL 使用总结
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/MySQL-使用总结/" itemprop="url">MySQL 使用总结</a></h1>
         
 
         <div class="post-meta">
@@ -1583,16 +1673,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2016/07/javascript-显示当前系统时间/" itemprop="url">
-                  javascript 显示当前系统时间
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/07/javascript-显示当前系统时间/" itemprop="url">javascript 显示当前系统时间</a></h1>
         
 
         <div class="post-meta">
@@ -1716,163 +1798,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2016/07/git-命令学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ytlm">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ytlm">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/git-命令学习/" itemprop="url">
-                  git 命令学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-24T14:52:07+08:00">
-                2016-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/git-命令学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/git-命令学习/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>下面是一些在平时学习git时经常需要用的一些命令<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/07/git-命令学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1922,7 +1847,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

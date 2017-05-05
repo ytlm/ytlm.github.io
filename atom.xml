@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ytlm.github.io/"/>
-  <updated>2017-05-02T15:50:23.148Z</updated>
+  <updated>2017-05-05T06:05:51.334Z</updated>
   <id>https://ytlm.github.io/</id>
   
   <author>
@@ -16,13 +16,119 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>tcp建立连接为什么需要三次握手</title>
+    <link href="https://ytlm.github.io/2017/05/tcp%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/"/>
+    <id>https://ytlm.github.io/2017/05/tcp建立连接为什么需要三次握手/</id>
+    <published>2017-05-03T01:22:40.000Z</published>
+    <updated>2017-05-05T06:05:51.334Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>众所周知tcp传输层协议在建立连接的时候需要三次才能建立起一个真正的可靠连接，可是为什么是三次呢，不可以是两次，四次等等呢，可以自己思考一番，带着疑问可以看下文。</li>
+</ul>
+<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><ul>
+<li>在《计算机网络》一书中其中有提到，三次握手的目的是“为了防止已经失效的连接请求报文段突然又传到服务端，因而产生错误”，这种情况是：一端(client)A发出去的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个网络节点上发生滞留，导致延迟到连接释放以后的某个时间才到达另一端(server)B。本来这是一个早已失效的报文段，但是B收到此失效的报文之后，会误认为是A再次发出的一个新的连接请求，于是B端就向A又发出确认报文，表示同意建立连接。如果不采用“三次握手”，那么只要B端发出确认报文就会认为新的连接已经建立了，但是A端并没有发出建立连接的请求，因此不会去向B端发送数据，B端没有收到数据就会一直等待，这样B端就会白白浪费掉很多资源。如果采用“三次握手”的话就不会出现这种情况，B端收到一个过时失效的报文段之后，向A端发出确认，此时A并没有要求建立连接，所以就不会向B端发送确认，这个时候B端也能够知道连接没有建立。</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>问题的本质是，信道是不可靠的，但是我们要建立可靠的连接发送可靠的数据，也就是数据传输是需要可靠的。在这个时候三次握手是一个理论上的最小值，并不是说是tcp协议要求的，而是为了满足在不可靠的信道上传输可靠的数据所要求的。</p>
+</li>
+<li><p>我们再来考虑，如果不是三次握手会出现什么情况呢：</p>
+<blockquote>
+<p>假设有A和B两端要进行通信，<br>1, 第一次：首先A发送一个(SYN)到B，意思是A要和B建立连接进行通信；</p>
+<blockquote>
+<p>如果是只有一次握手的话，这样肯定是不行的，A压根都不知道B是不是收到了这个请求。</p>
+</blockquote>
+<p>2, 第二次：B收到A要建立连接的请求之后，发送一个确认(SYN+ACK)给A，意思是收到A的消息了，B这里也是通的，表示可以建立连接；</p>
+<blockquote>
+<p>如果只有两次通信的话，这时候B不确定A是否收到了确认消息，有可能这个确认消息由于某些原因丢了。</p>
+</blockquote>
+<p>3, 第三次：A如果收到了B的确认消息之后，再发出一个确认(ACK)消息，意思是告诉B，这边是通的，然后A和B就可以建立连接相互通信了；</p>
+<blockquote>
+<p>这个时候经过了三次握手，A和B双方确认了两边都是通的，可以相互通信了，已经可以建立一个可靠的连接，并且可以相互发送数据。<br>4, 第四次：这个时候已经不需要B再发送一个确认消息了，两边已经通过前三次建立了一个可靠的连接，如果再发送第四次确认消息的话，就浪费资源了。</p>
+<p>如果第二个报文段B发出的(SYN+ACK)分别发送的话，也是可以理解为四次，但是被优化了，一起发送了。</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>超时重传机制，</p>
+<blockquote>
+<p>(1) 如果第一个包，A发送给B请求建立连接的报文(SYN)如果丢掉了，A会周期性的超时重传，直到B发出确认(SYN+ACK)；<br>(2) 如果第二个包，B发送给A的确认报文(SYN+ACK)如果丢掉了，B会周期性的超时重传，直到A发出确认(ACK)；<br>(3) 如果第三个包，A发送给B的确认报文(ACK)如果丢掉了，</p>
+<blockquote>
+<ul>
+<li>A在发送完确认报文之后，单方面会进入ESTABLISHED的状态，B还是SYN_RCVD状态</li>
+<li>如果此时双方都没有数据需要发送，B会周期性的超时发送(SYN+ACK)，直到收到A的确认报文(ACK)，此时B也进入ESTABLISHED状态，双方可以发送数据；</li>
+<li>如果A有数据发送，A发送的是(ACK+DATA)，B会在收到这个数据包的时候自动切换到ESTABLISHED状态，并接受数据(DATA)；</li>
+<li>如果这个时候B要发送数据，B是发送不了数据的，会周期性的超时重传(SYN+ACK)直到收到A的确认(ACK)B才能发送数据。</li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
+<li><p>三次握手牵扯到的状态转换</p>
+<blockquote>
+<ul>
+<li><strong> LISTEN </strong> 表示socket已经处于listen状态了，可以建立连接；</li>
+<li><strong> SYN_SENT </strong> 表示socket在发出connect连接的时候，会首先发送SYN报文，然后等待另一端发送的确认报文(ACK)，表示这端已经发送完SYN报文了；</li>
+<li><strong> SYN_RCVD </strong> 表示一端已经接收到SYN报文了；</li>
+<li><strong> ESTABLISHED </strong> 表示已经建立连接了，可以发送数据了。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/616078-5093ce7f19f61840.png!blog?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三次握手状态装换图解"></p>
+<h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><ul>
+<li>说完TCP建立连接的时候为什么是三次，相对的就会想到为什么断开连接的时候是需要四次呢，而不是三次，五次等等呢；</li>
+<li>本质的原因是tcp是全双公的，要实现可靠的连接关闭，A发出结束报文FIN，收到B确认后A知道自己没有数据需要发送了，B知道A不再发送数据了，自己也不会接收数据了，但是此时A还是可以接收数据，B也可以发送数据；当B发出FIN报文的时候此时两边才会真正的断开连接，读写分开。</li>
+<li>四次挥手牵扯到的状态装换<blockquote>
+<ul>
+<li><strong> FIN_WAIT_1 </strong> 表示在等待另一方的FIN报文，和FIN_WAIT_2的区别是，FIN_WAIT_1表示socket现在要主动关闭连接，在发送完FIN报文后socket进入FIN_WAIT_1状态，当收到另一方发送FIN的ACK之后立即进入FIN_WAIT_2状态；</li>
+<li><strong> FIN_WAIT_2 </strong> 同上，此时需要做的事情是可能还会接收数据，然后等待另一方的FIN；</li>
+<li><strong> TIME_WAIT </strong> 存在主动关闭的一方，表示收到了对方的FIN报文，并发送出了ACK报文，就等2MSL(Max Segment Lifetime))后即可回到CLOSED可用状态了，需要等一段时间时原因是网络是不可靠的，不能保证这个ACK发送成功了，如果失败了，对端会超时重传FIN；</li>
+<li><strong> CLOSING </strong> 表示在发送FIN之后，没有收到对方的ACK，而是收到了对方的FIN，这中情况很少见，只有在两端几乎同时关闭同一个socket的时候才会出现CLOSING状态；</li>
+<li><strong> CLOSE_WAIT </strong> 表示收到对方的FIN之后，回给对方ACK，此时处于CLOSE_WAIT状态，等待关闭，要看自己是否还有数据要发送；</li>
+<li><strong> LAST_ACK </strong> 表示收到对方的FIN之后，回给对方ACK，然后自己也要关闭发送FIN，等待另一方的ACK时候的状态；</li>
+<li><strong> CLOSED </strong> 这个状态表示连接已经断开。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/616078-5aeaf2475546f960.png!blog?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="四次挥手状态装换图解"></p>
+<ul>
+<li>最后放一张状态转换图<br><img src="http://upload-images.jianshu.io/upload_images/616078-ca7ed52491141161.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三次握手和四次挥手状态转换图"></li>
+</ul>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><ul>
+<li>在状态转换图中省略了数据的发送；</li>
+<li>对于tcp/ip的学习还需要努力，可能文中有些表达不够严谨，还望海涵。</li>
+</ul>
+<hr>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;众所周知tcp传输层协议在建立连接的时候需要三次才能建立起一个真正的可靠连接，可是为什么是三次呢，不可以是两次，四次等等呢，可以自己思考一番，带着疑问可以看下文。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;三次握手&quot;&gt;&lt;a href=&quot;#三次握手&quot; class=&quot;headerlink&quot; title=&quot;三次握手&quot;&gt;&lt;/a&gt;三次握手&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在《计算机网络》一书中其中有提到，三次握手的目的是“为了防止已经失效的连接请求报文段突然又传到服务端，因而产生错误”，这种情况是：一端(client)A发出去的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个网络节点上发生滞留，导致延迟到连接释放以后的某个时间才到达另一端(server)B。本来这是一个早已失效的报文段，但是B收到此失效的报文之后，会误认为是A再次发出的一个新的连接请求，于是B端就向A又发出确认报文，表示同意建立连接。如果不采用“三次握手”，那么只要B端发出确认报文就会认为新的连接已经建立了，但是A端并没有发出建立连接的请求，因此不会去向B端发送数据，B端没有收到数据就会一直等待，这样B端就会白白浪费掉很多资源。如果采用“三次握手”的话就不会出现这种情况，B端收到一个过时失效的报文段之后，向A端发出确认，此时A并没有要求建立连接，所以就不会向B端发送确认，这个时候B端也能够知道连接没有建立。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="https://ytlm.github.io/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="网络协议" scheme="https://ytlm.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>关于nginx缓存配置指令用法详解</title>
     <link href="https://ytlm.github.io/2017/04/%E5%85%B3%E4%BA%8Enginx%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3/"/>
     <id>https://ytlm.github.io/2017/04/关于nginx缓存配置指令用法详解/</id>
     <published>2017-04-18T02:53:11.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.338Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="nginx简介"><a href="#nginx简介" class="headerlink" title="nginx简介"></a>nginx简介</h2><p>众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档<a href="http://nginx.org/" target="_blank" rel="external">nginx</a>，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。<br><a id="more"></a></p>
+    <content type="html"><![CDATA[<h2 id="nginx简介"><a href="#nginx简介" class="headerlink" title="nginx简介"></a>nginx简介</h2><p>众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档<a href="http://nginx.org/" target="_blank" rel="external">nginx</a>，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。</p>
+<a id="more"></a>
 <h2 id="配置指令详解"><a href="#配置指令详解" class="headerlink" title="配置指令详解"></a>配置指令详解</h2><ul>
 <li><strong><em> proxy_buffering </em></strong> on | off</li>
 </ul>
@@ -136,7 +242,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;nginx简介&quot;&gt;&lt;a href=&quot;#nginx简介&quot; class=&quot;headerlink&quot; title=&quot;nginx简介&quot;&gt;&lt;/a&gt;nginx简介&lt;/h2&gt;&lt;p&gt;众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档&lt;a href=&quot;http://nginx.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nginx&lt;/a&gt;，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。&lt;br&gt;
+      &lt;h2 id=&quot;nginx简介&quot;&gt;&lt;a href=&quot;#nginx简介&quot; class=&quot;headerlink&quot; title=&quot;nginx简介&quot;&gt;&lt;/a&gt;nginx简介&lt;/h2&gt;&lt;p&gt;众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档&lt;a href=&quot;http://nginx.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nginx&lt;/a&gt;，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。&lt;/p&gt;
     
     </summary>
     
@@ -154,7 +260,7 @@
     <link href="https://ytlm.github.io/2017/04/ISO%E7%9A%84OSI%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A8%A1%E5%9E%8B/"/>
     <id>https://ytlm.github.io/2017/04/ISO的OSI七层网络协议模型/</id>
     <published>2017-04-10T01:01:17.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>在网络的大环境中扮演者重要的角色的是网络协议，在这里简单的介绍一下关于ISO七层网络协议模型，当然还有TCP/IP四层网络协议，这里不再赘述。<br><a id="more"></a></p>
 <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在互联网中有千千万万的主机，也有千千万万应用程序，如果不同的主机不同的应用程序不遵守一个规则，就没法交流，那么也就不能称之为互联网了，这时候网络协议的重要性就体现出来了，我们都遵循同样的协议，这样主机和应用程序之间的交流就没有问题了。</p>
@@ -201,7 +307,7 @@
     <link href="https://ytlm.github.io/2017/04/nginx%E5%9F%BA%E4%BA%8Etcp%E7%9A%84%E8%BD%AC%E5%8F%91-%E9%80%82%E7%94%A8%E4%BA%8EHTTPS/"/>
     <id>https://ytlm.github.io/2017/04/nginx基于tcp的转发-适用于HTTPS/</id>
     <published>2017-04-05T01:52:22.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<h2 id="nginx的主要功能"><a href="#nginx的主要功能" class="headerlink" title="nginx的主要功能"></a>nginx的主要功能</h2><p>1，正向代理<br>2，反向代理<br>3，负载均衡<br>4，WEB服务器</p>
 <blockquote>
@@ -245,7 +351,7 @@
     <link href="https://ytlm.github.io/2017/03/hexo-travis-github/"/>
     <id>https://ytlm.github.io/2017/03/hexo-travis-github/</id>
     <published>2017-03-25T14:16:48.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>利用hexo, travis, github联合的方式进行博客的创建并且自动发布.</p>
 <p>1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.<br>2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:</p>
@@ -292,7 +398,7 @@
     <link href="https://ytlm.github.io/2016/07/Wamp%E6%9B%B4%E6%94%B9web%E6%A0%B9%E7%9B%AE%E5%BD%95/"/>
     <id>https://ytlm.github.io/2016/07/Wamp更改web根目录/</id>
     <published>2016-07-24T07:44:08.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://blog.csdn.net/xia777xia/article/details/6282346" target="_blank" rel="external">原文链接</a><br>Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。</p>
 <p>比如e:/xx 或者 d:/php等等。</p>
@@ -334,7 +440,7 @@
     <link href="https://ytlm.github.io/2016/07/Wamp-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
     <id>https://ytlm.github.io/2016/07/Wamp-localhost-图标不显示解决办法/</id>
     <published>2016-07-24T07:28:29.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>在用WampServer学习PHP的时候碰到，打开localhost的时候文件图标不显示，解决办法如下</p>
 <a id="more"></a>
@@ -368,7 +474,7 @@
     <link href="https://ytlm.github.io/2016/07/TCP-IP-%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
     <id>https://ytlm.github.io/2016/07/TCP-IP-各层的作用/</id>
     <published>2016-07-24T07:21:53.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>计算机网络中的TCP/IP协议学习，纪录每层的作用</p>
 <a id="more"></a>
@@ -406,7 +512,7 @@
     <link href="https://ytlm.github.io/2016/07/MySQL-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
     <id>https://ytlm.github.io/2016/07/MySQL-使用总结/</id>
     <published>2016-07-24T07:14:56.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>下面是在学习MySQL的时候一些命令的纪录</p>
 <a id="more"></a>
@@ -443,7 +549,7 @@
     <link href="https://ytlm.github.io/2016/07/javascript-%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/"/>
     <id>https://ytlm.github.io/2016/07/javascript-显示当前系统时间/</id>
     <published>2016-07-24T07:00:15.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>学习js时候的一些简单的纪录，用js实现显示当前系统时间</p>
 <blockquote>
@@ -479,7 +585,7 @@
     <link href="https://ytlm.github.io/2016/07/git-%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>https://ytlm.github.io/2016/07/git-命令学习/</id>
     <published>2016-07-24T06:52:07.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>下面是一些在平时学习git时经常需要用的一些命令<br><a id="more"></a></p>
 <ol>
@@ -545,7 +651,7 @@
     <link href="https://ytlm.github.io/2016/07/static%E5%92%8Cextern%EF%BC%8C%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E/"/>
     <id>https://ytlm.github.io/2016/07/static和extern，定义和声明/</id>
     <published>2016-07-23T15:04:48.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>总结一下关于声明和定义的区别，以及static和extern的异同<br><a id="more"></a></p>
 <p><strong><em>声明和定义</em></strong></p>
@@ -624,7 +730,7 @@
     <link href="https://ytlm.github.io/2016/07/C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
     <id>https://ytlm.github.io/2016/07/C语言编译过程/</id>
     <published>2016-07-23T14:20:38.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。<br>详细过程如下</p>
 <a id="more"></a>
@@ -681,7 +787,7 @@
     <link href="https://ytlm.github.io/2016/07/C%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80/"/>
     <id>https://ytlm.github.io/2016/07/C程序在内存中的布局/</id>
     <published>2016-07-23T11:47:06.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p><strong> C程序在内存中的布局大致如下图所示 </strong><br><img src="http://onl0zwdvm.bkt.clouddn.com/memory.png!blog" alt="内存布局"></p>
 <p><em>从上到下依次是栈空间，堆空间，bbs段，data段，文本段</em></p>
@@ -715,15 +821,15 @@
     <link href="https://ytlm.github.io/2016/07/%E5%9C%A8TP%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8AJAX%E9%AA%8C%E8%AF%81%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0/"/>
     <id>https://ytlm.github.io/2016/07/在TP框架下使用AJAX验证登陆后台/</id>
     <published>2016-07-23T11:34:34.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.338Z</updated>
     
     <content type="html"><![CDATA[<h3 id="在TP框架下使用AJAX验证登陆后台"><a href="#在TP框架下使用AJAX验证登陆后台" class="headerlink" title="在TP框架下使用AJAX验证登陆后台"></a>在TP框架下使用AJAX验证登陆后台</h3><blockquote>
 <p>主要分为前台页面，js，后台php的实现，代码如下</p>
 </blockquote>
 <a id="more"></a>
-<h5 id="前台页面"><a href="#前台页面" class="headerlink" title="前台页面"></a><em>前台页面</em></h5><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"><span class="keyword">var</span> handleUrl = <span class="string">'&#123;:U("Home/Login/handle", "", "")&#125;'</span>;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"login"</span>&gt;</span><span class="tag">&lt;<span class="name">table</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span>  <span class="tag">&lt;<span class="name">th</span>&gt;</span>帐号:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"username"</span> <span class="attr">name</span>=<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>验证码:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"code"</span> <span class="attr">name</span>=<span class="string">"code"</span>/&gt;</span> <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;:U('Home/Login/verify', '', '')&#125;"</span> <span class="attr">id</span>=<span class="string">"code"</span> <span class="attr">onclick</span>=<span class="string">"javascript:change_code()"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">class</span>=<span class="string">'reset'</span> <span class="attr">value</span>=<span class="string">"重置"</span> /&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"登录"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">"2"</span> &gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"errM"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="前台页面"><a href="#前台页面" class="headerlink" title="前台页面"></a><em>前台页面</em></h5><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"><span class="keyword">var</span> handleUrl = <span class="string">'&#123;:U("Home/Login/handle", "", "")&#125;'</span>;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"login"</span>&gt;</span><span class="tag">&lt;<span class="name">table</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span>  <span class="tag">&lt;<span class="name">th</span>&gt;</span>帐号:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"username"</span> <span class="attr">name</span>=<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>验证码:<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"code"</span> <span class="attr">name</span>=<span class="string">"code"</span>/&gt;</span> <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;:U('Home/Login/verify', '', '')&#125;"</span> <span class="attr">id</span>=<span class="string">"code"</span> <span class="attr">onclick</span>=<span class="string">"javascript:change_code()"</span> /&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">class</span>=<span class="string">'reset'</span> <span class="attr">value</span>=<span class="string">"重置"</span> /&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">td</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"登录"</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">"2"</span> &gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"errM"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
 <h5 id="JS"><a href="#JS" class="headerlink" title="JS"></a><em>JS</em></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">  var username = $(&quot;input[name=&apos;username&apos;]&quot;);</div><div class="line">  var password = $(&quot;input[name=&apos;password&apos;]&quot;);</div><div class="line">  var code = $(&quot;input[name=&apos;code&apos;]&quot;);</div><div class="line">  $(&quot;input[type=&apos;submit&apos;]&quot;).click(function()&#123;</div><div class="line">      event.preventDefault();//取消默认提交表单</div><div class="line">      $.post(</div><div class="line">            handleUrl,</div><div class="line">            &#123;username:username.val(), password:password.val(), code:code.val()&#125;,</div><div class="line">            function(data)&#123;</div><div class="line">                if(data.status == 1)&#123;</div><div class="line">                    window.location.href = data.url;</div><div class="line">                &#125;</div><div class="line">                $(&quot;#errM&quot;).html(data.info);</div><div class="line">            &#125;, &quot;json&quot;);&#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h5 id="TP后台实现"><a href="#TP后台实现" class="headerlink" title="TP后台实现"></a><em>TP后台实现</em></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public function handle()&#123;</div><div class="line">	if(!IS_AJAX) $this-&gt;error(&quot;页面不存在。。。&quot;);</div><div class="line">	$code     = I(&apos;code&apos;);</div><div class="line">    $username = I(&apos;username&apos;);</div><div class="line">    $pwd      = I(&apos;password&apos;, &apos;&apos;, &apos;md5&apos;);</div><div class="line">    $data = array(); </div><div class="line">    if ( !$this-&gt;checkCode($code) ) &#123;</div><div class="line">    	//检查验证码是否正确</div><div class="line">        $data[&apos;info&apos;]   = &quot;验证码错误,请检查重试。。。&quot;;</div><div class="line">        $data[&apos;status&apos;] = 0;</div><div class="line">        $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">    &#125; else &#123;</div><div class="line">        //验证码正确</div><div class="line">        $arrUser[&apos;username&apos;] = $username;</div><div class="line">        $User = M(&apos;user&apos;)-&gt;where($arrUser)-&gt;find();</div><div class="line">        if( !$User ) &#123;</div><div class="line">            //检查用户是否存在</div><div class="line">            $data[&apos;info&apos;]   = &quot;用户不存在，请检查重试。。。&quot;;</div><div class="line">            $data[&apos;status&apos;] = 0;</div><div class="line">            $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">        &#125; else &#123;</div><div class="line">            //用户存在检查密码是否正确</div><div class="line">            if( $pwd != $User[&apos;password&apos;]) &#123;</div><div class="line">                $data[&apos;info&apos;]   = &quot;密码错误，请检查重试。。。&quot;;</div><div class="line">                $data[&apos;status&apos;] = 0;</div><div class="line">                $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">            &#125; else &#123;</div><div class="line">                //登陆通过，把相关内容写入session</div><div class="line">                session(&apos;uid&apos;,      $User[&apos;userid&apos;]);</div><div class="line">                session(&apos;username&apos;, $User[&apos;username&apos;]);</div><div class="line">                session(&apos;role&apos;,     $User[&apos;role&apos;]);</div><div class="line">                $data[&apos;info&apos;]   = &quot;登陆成功,正在跳转。。。&quot;;</div><div class="line">                $data[&apos;status&apos;] = 1;</div><div class="line">                $data[&apos;url&apos;]    = U(&apos;Home/Index/index&apos;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    $this-&gt;ajaxReturn($data, &apos;json&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="TP后台实现"><a href="#TP后台实现" class="headerlink" title="TP后台实现"></a><em>TP后台实现</em></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public function handle()&#123;</div><div class="line">	if(!IS_AJAX) $this-&gt;error(&quot;页面不存在。。。&quot;);</div><div class="line">	$code     = I(&apos;code&apos;);</div><div class="line">    $username = I(&apos;username&apos;);</div><div class="line">    $pwd      = I(&apos;password&apos;, &apos;&apos;, &apos;md5&apos;);</div><div class="line">    $data = array();</div><div class="line">    if ( !$this-&gt;checkCode($code) ) &#123;</div><div class="line">    	//检查验证码是否正确</div><div class="line">        $data[&apos;info&apos;]   = &quot;验证码错误,请检查重试。。。&quot;;</div><div class="line">        $data[&apos;status&apos;] = 0;</div><div class="line">        $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">    &#125; else &#123;</div><div class="line">        //验证码正确</div><div class="line">        $arrUser[&apos;username&apos;] = $username;</div><div class="line">        $User = M(&apos;user&apos;)-&gt;where($arrUser)-&gt;find();</div><div class="line">        if( !$User ) &#123;</div><div class="line">            //检查用户是否存在</div><div class="line">            $data[&apos;info&apos;]   = &quot;用户不存在，请检查重试。。。&quot;;</div><div class="line">            $data[&apos;status&apos;] = 0;</div><div class="line">            $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">        &#125; else &#123;</div><div class="line">            //用户存在检查密码是否正确</div><div class="line">            if( $pwd != $User[&apos;password&apos;]) &#123;</div><div class="line">                $data[&apos;info&apos;]   = &quot;密码错误，请检查重试。。。&quot;;</div><div class="line">                $data[&apos;status&apos;] = 0;</div><div class="line">                $data[&apos;url&apos;]    = U(&apos;index&apos;);</div><div class="line">            &#125; else &#123;</div><div class="line">                //登陆通过，把相关内容写入session</div><div class="line">                session(&apos;uid&apos;,      $User[&apos;userid&apos;]);</div><div class="line">                session(&apos;username&apos;, $User[&apos;username&apos;]);</div><div class="line">                session(&apos;role&apos;,     $User[&apos;role&apos;]);</div><div class="line">                $data[&apos;info&apos;]   = &quot;登陆成功,正在跳转。。。&quot;;</div><div class="line">                $data[&apos;status&apos;] = 1;</div><div class="line">                $data[&apos;url&apos;]    = U(&apos;Home/Index/index&apos;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    $this-&gt;ajaxReturn($data, &apos;json&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
 <p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 ]]></content>
@@ -752,7 +858,7 @@
     <link href="https://ytlm.github.io/2016/06/FIRST/"/>
     <id>https://ytlm.github.io/2016/06/FIRST/</id>
     <published>2016-06-04T15:16:53.000Z</published>
-    <updated>2017-05-02T15:50:23.148Z</updated>
+    <updated>2017-05-05T06:05:51.334Z</updated>
     
     <content type="html"><![CDATA[<p>  我的第一个私人博客，之前也一直想要有一个私人的博客，想租个vps和域名，可是没有money，自己维护也很麻烦就一直搁置了。</p>
 <p>  最近借助github平台和hexo工具实现了这个小小的愿望，终于有了一个自己的blog，哈哈哈。。。</p>

@@ -1232,6 +1232,7 @@ pre .javascript .function {
 }
 .posts-collapse .collection-title small {
   color: #bbb;
+  margin-left: 5px;
 }
 .posts-collapse .collection-title::before {
   content: " ";
@@ -1694,7 +1695,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8a18d4;
+  background: #14ffff;
 }
 .links-of-blogroll {
   font-size: 13px;
