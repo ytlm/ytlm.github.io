@@ -1,16 +1,16 @@
 ---
 title: javascript 显示当前系统时间
 date: 2016-07-24 15:00:15
-tags: 
+tags:
     - javascript
-categories: 
+categories:
     - 学习
 ---
 学习js时候的一些简单的纪录，用js实现显示当前系统时间
 
 > 详细代码如下
 
-<!--more-->
+<!-- more -->
 
 js实现
 ```javascript

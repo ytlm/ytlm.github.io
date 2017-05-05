@@ -1,24 +1,24 @@
 ---
 title: 在TP框架下使用AJAX验证登陆后台
 date: 2016-07-23 19:34:34
-tags: 
+tags:
     - ThinkPHP
     - Jquery
     - AJAX
-categories: 
+categories:
     - 学习
 ---
 
 ### 在TP框架下使用AJAX验证登陆后台 ###
 > 主要分为前台页面，js，后台php的实现，代码如下
 
-<!--more-->
+<!-- more -->
 
 ##### *前台页面* #####
 ```html
 <script type="text/javascript">var handleUrl = '{:U("Home/Login/handle", "", "")}';</script>
 
-<form id="login"><table align="center"> 
+<form id="login"><table align="center">
 <tr>  <th>帐号:</th><td><input type="username" name="username"/></td></tr>
 <tr><th>密码:</th><td><input type="password" name="password"/></td></tr>
 <tr><th>验证码:</th><td><input type="code" name="code"/> <img src="{:U('Home/Login/verify', '', '')}" id="code" onclick="javascript:change_code()" /></td></tr>
@@ -57,7 +57,7 @@ public function handle(){
 	$code     = I('code');
     $username = I('username');
     $pwd      = I('password', '', 'md5');
-    $data = array(); 
+    $data = array();
     if ( !$this->checkCode($code) ) {
     	//检查验证码是否正确
         $data['info']   = "验证码错误,请检查重试。。。";

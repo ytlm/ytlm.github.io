@@ -1,16 +1,16 @@
 ---
 title: C语言编译过程
 date: 2016-07-23 22:20:38
-tags: 
+tags:
     - C
-categories: 
+categories:
     - 学习
 ---
 
 大致分为如下几个过程，编译预处理阶段，编译阶段， 汇编阶段， 链接。
 详细过程如下
 
-<!--more-->
+<!-- more -->
 
 1，编译预处理（gcc -E main.c -o main.i）
 > * 文件包含复制 将源文件中一"#include"格式包含的文件复制到编译的源文件中

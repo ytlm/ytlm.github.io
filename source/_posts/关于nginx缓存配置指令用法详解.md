@@ -9,7 +9,9 @@ categories:
 ---
 ## nginx简介
 众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档[nginx](http://nginx.org/)，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。
+
 <!-- more -->
+
 ## 配置指令详解
 
 * *** proxy_buffering *** on | off

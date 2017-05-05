@@ -1,14 +1,14 @@
 ---
 title: MySQL 使用总结
 date: 2016-07-24 15:14:56
-tags: 
+tags:
     - MySQL
-categories: 
+categories:
     - 学习
 ---
 下面是在学习MySQL的时候一些命令的纪录
 
-<!--more-->
+<!-- more -->
 
 1，增
 ```MySQL

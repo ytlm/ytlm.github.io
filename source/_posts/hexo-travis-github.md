@@ -1,11 +1,11 @@
 ---
 title: hexo travis github
 date: 2017-03-25 22:16:48
-tags: 
+tags:
     - hexo
     - travis
     - github
-categories: 
+categories:
     - 总结
 ---
 
@@ -26,7 +26,7 @@ categories:
        然后在hexo的分支上创建并提交.travis.yml文件,注意github token的生成和使用
 > (3). 最后就是在hexo的分支上进行写博客和提交到hexo分支上,剩下的发布到master上通过travis自动发布.
 
-<!--more-->
+<!-- more -->
 
 [参考这里](http://lotabout.me/2016/Hexo-Auto-Deploy-to-Github/)
 [还有这里](https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/)

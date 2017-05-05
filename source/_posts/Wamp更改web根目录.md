@@ -1,9 +1,9 @@
 ---
 title: Wamp更改web根目录
 date: 2016-07-24 15:44:08
-tags: 
+tags:
     - Wamp
-categories: 
+categories:
     - 软件
 ---
 
@@ -14,7 +14,7 @@ Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是�
 
 下面以原来的默认目录为d:/wamp/www改为e:/xx为例。
 
-<!--more-->
+<!-- more -->
 
 1,
 

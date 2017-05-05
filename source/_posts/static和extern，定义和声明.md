@@ -1,14 +1,14 @@
 ---
 title: static和extern，定义和声明
 date: 2016-07-23 23:04:48
-tags: 
+tags:
     - C
-categories: 
+categories:
     - 学习
 ---
 
 总结一下关于声明和定义的区别，以及static和extern的异同
-<!--more-->
+<!-- more -->
 
 ***声明和定义***
 >1,广义角度声明包含定义，定义是声明的一个特例。

@@ -7,7 +7,7 @@ categories:
     - 学习
 ---
 下面是一些在平时学习git时经常需要用的一些命令
-<!--more-->
+<!-- more -->
 
 1. git stash
 > 把当前未提交的改动「复制」到另一个地方暂存起来，待要恢复的时候执行 git stash pop

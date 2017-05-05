@@ -1,15 +1,15 @@
 ---
 title: WampServer-localhost-图标不显示解决办法
 date: 2016-07-24 15:28:29
-tags: 
+tags:
     - Wamp
-categories: 
+categories:
     - 软件
 ---
 
 在用WampServer学习PHP的时候碰到，打开localhost的时候文件图标不显示，解决办法如下
 
-<!--more-->
+<!-- more -->
 
 [原文链接](http://blog.warmcolor.net/2011/11/03/wampserver-localhost-%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/ "原文链接")
 
