@@ -1,5 +1,5 @@
 ---
 title: about
 date: 2016-06-04 15:39:04
-comments: false
 ---
+这个人很懒 什么都没有留下 . . .
