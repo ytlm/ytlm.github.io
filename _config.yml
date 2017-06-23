@@ -83,6 +83,12 @@ feed:
     path: atom.xml
     limit: 0
 
+search:
+    path: search.xml
+    filed: port
+    format: html
+    limit: 10000
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
