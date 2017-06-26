@@ -1,0 +1,1403 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="lua," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ytlm" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。 文字简述 metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。 metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函数">
+<meta name="keywords" content="lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua学习之元表和元方法">
+<meta property="og:url" content="https://ytlm.github.io/2017/06/lua学习之元表和元方法/index.html">
+<meta property="og:site_name" content="ytlm">
+<meta property="og:description" content="学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。 文字简述 metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。 metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函数">
+<meta property="og:updated_time" content="2017-06-26T10:14:54.320Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="lua学习之元表和元方法">
+<meta name="twitter:description" content="学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。 文字简述 metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。 metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ytlm.github.io/2017/06/lua学习之元表和元方法/"/>
+
+
+
+
+
+  <title>lua学习之元表和元方法 | ytlm</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-101512273-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ytlm</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">stay hungry, stay foolish.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2017/06/lua学习之元表和元方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ytlm">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ytlm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">lua学习之元表和元方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-26T15:14:05+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/lua/" itemprop="url" rel="index">
+                    <span itemprop="name">lua</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/lua学习之元表和元方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/lua学习之元表和元方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/06/lua学习之元表和元方法/" class="leancloud_visitors" data-flag-title="lua学习之元表和元方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。</p>
+<h3 id="文字简述"><a href="#文字简述" class="headerlink" title="文字简述"></a>文字简述</h3><ul>
+<li>metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。</li>
+<li><p>metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函数是用来绑定lua中特定的值，这些特定的值可以称为事件。这个函数我们可以进行我们一些自定义的操作。</p>
+<blockquote>
+<p>元表之中的事件其实是一些定义的值，这些值后面会讲到；<br>实际上我们只能对lua中table类型的值进行修改元表和元方法的操作，其它的一些例如number, string等都已经有自己内置的元表和元方法，且不可改变。</p>
+</blockquote>
+</li>
+<li><p>通过元表和元方法，我们可以实现lua的面向对象编程。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h3><h4 id="api-介绍"><a href="#api-介绍" class="headerlink" title="api 介绍"></a>api 介绍</h4><p>简单的介绍一下会用到的api。</p>
+<blockquote>
+<p><code>setmetatable(table, metatable)</code> 设置table的元表为metatable并且返回这个table。不能为除table类型之外的值设置元表，如果metatable为nil，则将指定的元表移除 。如果存在<code>__metatable</code>，则会抛出一个错误。<br><code>getmetatable(obj)</code> 返回一个类型的元表，如果没有元表返回nil。如果存在<code>__metatable</code>，则返回这个域的值。<br><code>rawget(table, index)</code> 在不触发任何元方法的情况下获取table中的值。也就是跳过元表和元方法。<br><code>rawset(table, index, value)</code> 在不触发任何元方法的情况下设置table[index]的值为value，index不能是nil和NaN</p>
+</blockquote>
+<h4 id="元方法介绍"><a href="#元方法介绍" class="headerlink" title="元方法介绍"></a>元方法介绍</h4><p>我们都知道对于两个number型的值，我们可以进行加，减，乘，除等的元算，但是对于table我们是不能直接进行这些预定义的运算的。但是通过通过元表和元方法我们是可以实现的；首先介绍下有哪些特定的值被用于绑定元方法，也称为事件，如下：<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">__index</span> <span class="comment">-- 用于取操作</span></div><div class="line"><span class="built_in">__newindex</span> <span class="comment">-- 用于赋值操作</span></div><div class="line"><span class="built_in">__metatable</span> <span class="comment">-- 限定元表操作</span></div><div class="line"><span class="built_in">__call</span> <span class="comment">-- 用于把一个函数当成函数调用的操作</span></div><div class="line"><span class="built_in">__add</span> <span class="comment">-- '+' 加</span></div><div class="line"><span class="built_in">__sub</span> <span class="comment">-- '-' 减</span></div><div class="line"><span class="built_in">__mul</span> <span class="comment">-- '*' 乘</span></div><div class="line"><span class="built_in">__div</span> <span class="comment">-- '/' 除</span></div><div class="line"><span class="built_in">__mod</span> <span class="comment">-- '%' 取余</span></div><div class="line"><span class="built_in">__pow</span> <span class="comment">-- '^' 次方</span></div><div class="line"><span class="built_in">__unm</span> <span class="comment">-- '-' 取反</span></div><div class="line"><span class="built_in">__concat</span> <span class="comment">-- '..' 连接</span></div><div class="line"><span class="built_in">__tostring</span> <span class="comment">-- 字符串序列话</span></div><div class="line"><span class="built_in">__len</span> <span class="comment">-- '#' 取长</span></div><div class="line"><span class="built_in">__eq</span> <span class="comment">-- '==’ 相等</span></div><div class="line"><span class="built_in">__lt</span> <span class="comment">-- '&lt;' 小于</span></div><div class="line"><span class="built_in">__le</span> <span class="comment">-- '&lt;=' 小于等于</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>对于不同的lua版本可能这些事件还有区别，具体详细的可以看lua对应版本的介绍，这里只列出了一些常用的。<br>对于一些特定的事件进行一些简单的介绍</p>
+<blockquote>
+<ul>
+<li>__index 当我们在取一个table中的不存在这个index的值的时候，如果有元表的话，会触发这个操作，会到元表中进行查询，并且返回这个值，元表中月不存在的时候返回nil。</li>
+<li>__newindex 当我们对一个table中的一个不存在的index赋值的时候，如果有元表的话，会触发这个操作，如果元表中有定义这个行为，就按照这个进行。</li>
+<li>__metatable 使用这个元方法的时候是保护元表，进值对元表中的成员进行获取或者修改</li>
+<li>__call 使用这个的时候我们可以吧table当成函数来进行调用。</li>
+</ul>
+</blockquote>
+</blockquote>
+<h4 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h4><h5 id="简单的元方法"><a href="#简单的元方法" class="headerlink" title="简单的元方法"></a>简单的元方法</h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t1 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</div><div class="line"><span class="keyword">local</span> t2 = &#123;<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>&#125;</div><div class="line"><span class="keyword">local</span> t = &#123;</div><div class="line">    <span class="built_in">__add</span> = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span></span></div><div class="line">        <span class="keyword">local</span> tmp = &#123;&#125;</div><div class="line">        <span class="keyword">for</span> i = <span class="number">1</span>, #a <span class="keyword">do</span></div><div class="line">            tmp[i] = a[i] + b[i]</div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">for</span> i = #tmp + <span class="number">1</span>, #b <span class="keyword">do</span></div><div class="line">            tmp[i] = b[i]</div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">return</span> tmp</div><div class="line">    <span class="keyword">end</span>,</div><div class="line">    <span class="built_in">__tostring</span> = <span class="function"><span class="keyword">function</span><span class="params">(a)</span></span></div><div class="line">        <span class="keyword">local</span> str = <span class="string">""</span></div><div class="line">        <span class="keyword">local</span> split = <span class="string">""</span></div><div class="line">        <span class="keyword">for</span> i = <span class="number">1</span>, #a <span class="keyword">do</span></div><div class="line">            str = str .. split .. a[i]</div><div class="line">            split = <span class="string">"|"</span></div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">return</span> str</div><div class="line">    <span class="keyword">end</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">setmetatable</span>(t1, t)</div><div class="line"><span class="built_in">print</span>(<span class="string">"t1 : "</span>, t1)</div><div class="line"><span class="built_in">print</span>(<span class="string">"t2 : "</span>, t2)</div><div class="line"><span class="keyword">local</span> tmp = t1 + t2</div><div class="line"><span class="built_in">print</span>(<span class="string">"tmp : "</span>, tmp)</div><div class="line"><span class="built_in">setmetatable</span>(t2, t)</div><div class="line"><span class="built_in">print</span>(<span class="string">" - t2 : "</span>, t2)</div><div class="line"><span class="built_in">setmetatable</span>(tmp, t)</div><div class="line"><span class="built_in">print</span>(<span class="string">" - tmp : "</span>, tmp)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">t1 :    1|2|3</div><div class="line">t2 :    table: 0x16984f0</div><div class="line">tmp :   table: 0x16981c0</div><div class="line"> - t2 :         5|6|7|9</div><div class="line"> - tmp :        6|8|10|9</div></pre></td></tr></table></figure></p>
+<p>当对两个table进行加(+)的操作的时候，会查找元表中对应的元方法，然后按照元方法的行为去做。其它的一些算术运算都和这个例子大同小异，就不多做介绍了。</p>
+</blockquote>
+<h5 id="index"><a href="#index" class="headerlink" title="__index"></a>__index</h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t1 = &#123;&#125;</div><div class="line"><span class="keyword">local</span> t2 = &#123;&#125;</div><div class="line">t2.a = <span class="number">10</span></div><div class="line"><span class="built_in">setmetatable</span>(t1, &#123;<span class="built_in">__index</span> = t2&#125;)</div><div class="line"><span class="built_in">print</span>(t1.a)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10</div></pre></td></tr></table></figure></p>
+<p>当访问t1中的a的时候，t1中并没有这个值，但是t1有元表，则会到元表中查询a，并返回；<br>__index 也可以是一个函数，用于自定义的一些行为。</p>
+</blockquote>
+<h5 id="newindex"><a href="#newindex" class="headerlink" title="__newindex"></a>__newindex</h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t1 = &#123;&#125;</div><div class="line">t1.c = <span class="number">30</span></div><div class="line"><span class="keyword">local</span> t2 = &#123;&#125;</div><div class="line">t2.a = <span class="number">10</span></div><div class="line">t2.b = <span class="number">20</span></div><div class="line"><span class="built_in">setmetatable</span>(t1, &#123;<span class="built_in">__newindex</span> = t2&#125;)</div><div class="line"><span class="built_in">print</span>(t1.a)</div><div class="line"><span class="built_in">print</span>(t2.a)</div><div class="line">t1.a = <span class="string">"a10"</span></div><div class="line"><span class="built_in">print</span>(t1.a)</div><div class="line"><span class="built_in">print</span>(t2.a)</div><div class="line"><span class="built_in">print</span>(t1.c)</div><div class="line">t1.c = <span class="string">"c10"</span></div><div class="line"><span class="built_in">print</span>(t1.c)</div><div class="line"><span class="built_in">print</span>(t2.c)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">nil</div><div class="line">10</div><div class="line">nil</div><div class="line">a10</div><div class="line">30</div><div class="line">c10</div><div class="line">nil</div></pre></td></tr></table></figure></p>
+<p>在对t1中的变量进行赋值的时候，如果存在则直接进行赋值，如果不存在则触发__newindex，设置元表中对应的值</p>
+</blockquote>
+<h5 id="metatable"><a href="#metatable" class="headerlink" title="__metatable"></a>__metatable</h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t1 = &#123;&#125;</div><div class="line"><span class="keyword">local</span> t = &#123;&#125;</div><div class="line"><span class="built_in">setmetatable</span>(t1, t)</div><div class="line"><span class="built_in">print</span>(<span class="built_in">getmetatable</span>(t1))</div><div class="line">t.<span class="built_in">__metatable</span> = <span class="string">"lock"</span></div><div class="line"><span class="built_in">print</span>(<span class="string">" metatable : "</span>, <span class="built_in">getmetatable</span>(t1))</div><div class="line"><span class="built_in">setmetatable</span>(t1, t)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">table: 0xe7f4f0</div><div class="line"> metatable :    lock</div><div class="line">lua: test.lua:11: cannot change a protected metatable</div></pre></td></tr></table></figure></p>
+<p>在设置完__metatable域的时候，就不能再对元表进行操作了，会报错。</p>
+</blockquote>
+<h5 id="call"><a href="#call" class="headerlink" title="__call"></a>__call</h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t1 = &#123;&#125;</div><div class="line"><span class="built_in">setmetatable</span>(t1, &#123;</div><div class="line">    <span class="built_in">__call</span> = <span class="function"><span class="keyword">function</span><span class="params">(t, a, b, c, ...)</span></span></div><div class="line">        <span class="keyword">local</span> num = a + b + c</div><div class="line">        <span class="built_in">print</span>(<span class="string">"__call str : "</span>, num)</div><div class="line">    <span class="keyword">end</span></div><div class="line">&#125;)</div><div class="line">t1(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">__call str :    6</div></pre></td></tr></table></figure></p>
+<p>t1作为table，但是可以直接当成函数来进行调用，会查找__call元方法</p>
+</blockquote>
+<h5 id="rawget"><a href="#rawget" class="headerlink" title="rawget"></a>rawget</h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t1 = &#123;&#125;</div><div class="line"><span class="keyword">local</span> t2 = &#123;&#125;</div><div class="line">t2.a = <span class="number">20</span></div><div class="line"><span class="built_in">setmetatable</span>(t1, &#123;<span class="built_in">__index</span> = t2&#125;)</div><div class="line"><span class="built_in">print</span>(<span class="string">"t1 a : "</span>, t1.a)</div><div class="line"><span class="built_in">print</span>(<span class="string">"rawget t1 a : "</span>, <span class="built_in">rawget</span>(t1,a))</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">t1 a :  20</div><div class="line">rawget t1 a :   nil</div></pre></td></tr></table></figure></p>
+<p>设置完元表后可以取到t1中的a，从元表t2中，但是用rawget的时候会会忽略元表的存在</p>
+</blockquote>
+<h5 id="rawset"><a href="#rawset" class="headerlink" title="rawset"></a>rawset</h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> t1 = &#123;&#125;</div><div class="line"><span class="keyword">local</span> t2 = &#123;&#125;</div><div class="line">t2.a = <span class="number">20</span></div><div class="line"><span class="built_in">setmetatable</span>(t1, &#123;<span class="built_in">__newindex</span> = t2&#125;)</div><div class="line">t1.b = <span class="string">"bbb"</span></div><div class="line"><span class="built_in">print</span>(<span class="string">"t1 b : "</span>, t1.b)</div><div class="line"><span class="built_in">print</span>(<span class="string">"t2 b : "</span>, t2.b)</div><div class="line"><span class="built_in">rawset</span>(t1, b, <span class="string">"ccc"</span>)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">t1 b :  nil</div><div class="line">t2 b :  bbb</div><div class="line">lua: table index is nil</div></pre></td></tr></table></figure></p>
+<p>正常的设置完元表并且设置__newindex域之后，对t1中的不存在的b赋值的时候会触发__newindex操作，但是如果用rawset的话就会报错，rawset(t1, b, “ccc”)，会对t1中的b进行赋值，并不会触发__newindex，而t1中也没有b这个值，所以报错了。</p>
+</blockquote>
+<h5 id="系统代码"><a href="#系统代码" class="headerlink" title="系统代码"></a>系统代码</h5><p>以一个之前写的例子结束这篇介绍<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--[[</span></div><div class="line">    lua 5.1.5</div><div class="line">    socket 2.0.2</div><div class="line">]]<span class="comment">--</span></div><div class="line"><span class="keyword">local</span> socket = <span class="built_in">require</span>(<span class="string">"socket"</span>)</div><div class="line"><span class="keyword">local</span> <span class="built_in">sub</span> = <span class="built_in">string</span>.<span class="built_in">sub</span></div><div class="line"><span class="keyword">local</span> <span class="built_in">byte</span> = <span class="built_in">string</span>.<span class="built_in">byte</span></div><div class="line"><span class="keyword">local</span> <span class="built_in">concat</span> = <span class="built_in">table</span>.<span class="built_in">concat</span></div><div class="line"><span class="keyword">local</span> <span class="built_in">tonumber</span> = <span class="built_in">tonumber</span></div><div class="line"><span class="keyword">local</span> <span class="built_in">tostring</span> = <span class="built_in">tostring</span></div><div class="line"><span class="keyword">local</span> _M = &#123;</div><div class="line">    <span class="built_in">_VERSION</span> = <span class="string">"0.1"</span>,</div><div class="line">&#125;</div><div class="line"><span class="keyword">local</span> mt = &#123; <span class="built_in">__index</span> = _M &#125;</div><div class="line"><span class="function"><span class="keyword">function</span> _M.new<span class="params">(self)</span></span></div><div class="line">    <span class="keyword">local</span> sock, err = socket.tcp()</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> sock <span class="keyword">then</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">return</span> <span class="built_in">setmetatable</span>(&#123;_sock = sock, _subscribed = <span class="literal">false</span> &#125;, mt)</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="function"><span class="keyword">function</span> _M.connect<span class="params">(self, ...)</span></span></div><div class="line">    <span class="keyword">local</span> args = &#123;...&#125;</div><div class="line">    <span class="keyword">local</span> sock = <span class="built_in">rawget</span>(self, <span class="string">"_sock"</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> sock <span class="keyword">then</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="string">"not initialized"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    self._subscribed = <span class="literal">false</span></div><div class="line">    <span class="keyword">return</span> sock:connect(...)</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="function"><span class="keyword">function</span> _M.close<span class="params">(self)</span></span></div><div class="line">    <span class="keyword">local</span> sock = <span class="built_in">rawget</span>(self, <span class="string">"_sock"</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> sock <span class="keyword">then</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="string">"not initialized"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">return</span> sock:<span class="built_in">close</span>()</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> _gen_req<span class="params">(args)</span></span></div><div class="line">    <span class="keyword">local</span> nargs = #args</div><div class="line">    <span class="keyword">local</span> req = <span class="string">""</span></div><div class="line">    req = req .. <span class="string">"*"</span> .. nargs .. <span class="string">"\r\n"</span></div><div class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, nargs <span class="keyword">do</span></div><div class="line">        <span class="keyword">local</span> <span class="built_in">arg</span> = args[i]</div><div class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(<span class="built_in">arg</span>) ~= <span class="string">"string"</span> <span class="keyword">then</span> <span class="built_in">arg</span> = <span class="built_in">tostring</span>(<span class="built_in">arg</span>) <span class="keyword">end</span></div><div class="line">        req = req .. <span class="string">"$"</span></div><div class="line">        req = req .. #<span class="built_in">arg</span></div><div class="line">        req = req .. <span class="string">"\r\n"</span></div><div class="line">        req = req .. <span class="built_in">arg</span></div><div class="line">        req = req .. <span class="string">"\r\n"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="comment">-- print("req : ", req)</span></div><div class="line">    <span class="keyword">return</span> req</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> _read_reply<span class="params">(self, sock)</span></span></div><div class="line">    <span class="keyword">local</span> line, err = sock:receive()</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> line <span class="keyword">then</span></div><div class="line">        <span class="keyword">if</span> err == <span class="string">"timeout"</span> <span class="keyword">then</span></div><div class="line">            sock:<span class="built_in">close</span>()</div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">local</span> prefix = <span class="built_in">byte</span>(line)</div><div class="line">    <span class="keyword">if</span> prefix == <span class="number">42</span> <span class="keyword">then</span> <span class="comment">-- char "*"</span></div><div class="line">        <span class="keyword">local</span> n = <span class="built_in">tonumber</span>(<span class="built_in">sub</span>(line, <span class="number">2</span>))</div><div class="line">        <span class="keyword">if</span> n &lt; <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="literal">nil</span> <span class="keyword">end</span></div><div class="line">        <span class="keyword">local</span> vals = &#123;&#125;</div><div class="line">        <span class="keyword">local</span> ind = <span class="number">1</span></div><div class="line">        <span class="keyword">for</span> i = <span class="number">1</span>, n <span class="keyword">do</span></div><div class="line">            <span class="keyword">local</span> res, err = _read_reply(self, sock)</div><div class="line">            <span class="keyword">if</span> res <span class="keyword">then</span></div><div class="line">                vals[ind] = res</div><div class="line">                ind = ind + <span class="number">1</span></div><div class="line">            <span class="keyword">elseif</span> <span class="keyword">not</span> res <span class="keyword">then</span></div><div class="line">                <span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">            <span class="keyword">end</span></div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">return</span> vals</div><div class="line">    <span class="keyword">elseif</span> prefix == <span class="number">36</span> <span class="keyword">then</span> <span class="comment">-- char "$"</span></div><div class="line">        <span class="keyword">local</span> size = <span class="built_in">tonumber</span>(<span class="built_in">sub</span>(line, <span class="number">2</span>))</div><div class="line">        <span class="keyword">if</span> size &lt; <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="literal">nil</span>, <span class="built_in">sub</span>(line, <span class="number">2</span>) <span class="keyword">end</span></div><div class="line">        <span class="keyword">local</span> data, err = sock:receive(size)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> data <span class="keyword">then</span></div><div class="line">            <span class="keyword">if</span> err == <span class="string">"timeout"</span> <span class="keyword">then</span></div><div class="line">                sock:<span class="built_in">close</span>()</div><div class="line">            <span class="keyword">end</span></div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="keyword">local</span> crlf, err = sock:receive(<span class="number">2</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> crlf <span class="keyword">then</span> <span class="keyword">return</span> <span class="literal">nil</span>, err <span class="keyword">end</span></div><div class="line">        <span class="keyword">return</span> data</div><div class="line">    <span class="keyword">elseif</span> prefix == <span class="number">45</span> <span class="keyword">then</span> <span class="comment">-- char "-"</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="built_in">sub</span>(line, <span class="number">2</span>)</div><div class="line">    <span class="keyword">elseif</span> prefix == <span class="number">43</span> <span class="keyword">then</span> <span class="comment">-- char "+"</span></div><div class="line">        <span class="keyword">return</span> <span class="built_in">sub</span>(line, <span class="number">2</span>)</div><div class="line">    <span class="keyword">elseif</span> prefix == <span class="number">58</span> <span class="keyword">then</span> <span class="comment">-- char ":"</span></div><div class="line">        <span class="keyword">return</span> <span class="built_in">tonumber</span>(<span class="built_in">sub</span>(line, <span class="number">2</span>))</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="string">"unknow prefix : \""</span> .. <span class="built_in">tostring</span>(prefix) .. <span class="string">"\""</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> _do_cmd<span class="params">(self, ...)</span></span></div><div class="line">    <span class="keyword">local</span> args = &#123;...&#125;</div><div class="line">    <span class="keyword">local</span> sock = <span class="built_in">rawget</span>(self, <span class="string">"_sock"</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> sock <span class="keyword">then</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="string">"not initialized"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">local</span> req = _gen_req(args)</div><div class="line">    <span class="keyword">local</span> bytes, err = sock:send(req)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> bytes <span class="keyword">then</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">return</span> _read_reply(self, sock)</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="built_in">setmetatable</span>( _M, &#123; <span class="built_in">__index</span> = <span class="function"><span class="keyword">function</span><span class="params">(self, cmd)</span></span></div><div class="line">    <span class="keyword">local</span> method = <span class="function"><span class="keyword">function</span> <span class="params">(self, ...)</span></span></div><div class="line">        <span class="keyword">return</span> _do_cmd(self, cmd, ...)</div><div class="line">    <span class="keyword">end</span></div><div class="line">    _M[cmd] = method</div><div class="line">    <span class="keyword">return</span> method</div><div class="line"><span class="keyword">end</span>&#125;)</div><div class="line"><span class="keyword">return</span> _M</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这是仿照lua-resty-redis，用luasocket实现的一个简单的lua redis客户端。<br>每次用的时候需要 require这个文件，并且调用new，设置相应元表，之后就可以进行简单的redis操作了。</p>
+</blockquote>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><blockquote>
+<ul>
+<li>本文代码部分比较多，尽可能的用代码来解释lua中元表和元方法的一些用法，如果理解起来还是不清楚可以查看lua官方文档，也可以联系我。</li>
+</ul>
+</blockquote>
+<hr>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>Post author:</strong>
+      ytl
+    </li>
+    <li class="post-copyright-link">
+      <strong>Post link:</strong>
+      <a href="https://ytlm.github.io/2017/06/lua学习之元表和元方法/" title="lua学习之元表和元方法">https://ytlm.github.io/2017/06/lua学习之元表和元方法/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright Notice: </strong>
+      All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/lua/" rel="tag"># lua</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/tcp建立连接为什么需要三次握手/" rel="next" title="tcp建立连接为什么需要三次握手">
+                <i class="fa fa-chevron-left"></i> tcp建立连接为什么需要三次握手
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/head.png"
+               alt="ytlm" />
+          <p class="site-author-name" itemprop="name">ytlm</p>
+           
+              <p class="site-description motion-element" itemprop="description">stay hungry, stay foolish.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ytlm" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/ytlm1314" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vcpu.me/" title="龙哥" target="_blank">龙哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文字简述"><span class="nav-number">1.</span> <span class="nav-text">文字简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码讲解"><span class="nav-number">2.</span> <span class="nav-text">代码讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#api-介绍"><span class="nav-number">2.1.</span> <span class="nav-text">api 介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元方法介绍"><span class="nav-number">2.2.</span> <span class="nav-text">元方法介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码分析"><span class="nav-number">2.3.</span> <span class="nav-text">代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简单的元方法"><span class="nav-number">2.3.1.</span> <span class="nav-text">简单的元方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#index"><span class="nav-number">2.3.2.</span> <span class="nav-text">__index</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#newindex"><span class="nav-number">2.3.3.</span> <span class="nav-text">__newindex</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#metatable"><span class="nav-number">2.3.4.</span> <span class="nav-text">__metatable</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#call"><span class="nav-number">2.3.5.</span> <span class="nav-text">__call</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rawget"><span class="nav-number">2.3.6.</span> <span class="nav-text">rawget</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rawset"><span class="nav-number">2.3.7.</span> <span class="nav-text">rawset</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统代码"><span class="nav-number">2.3.8.</span> <span class="nav-text">系统代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ytl</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ytlm.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://ytlm.github.io/2017/06/lua学习之元表和元方法/';
+          this.page.identifier = '2017/06/lua学习之元表和元方法/';
+          this.page.title = 'lua学习之元表和元方法';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ytlm.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("w66AIpT8CCqdEQIGozVF1vN5-gzGzoHsz", "B3TqxrlHII3nMnQbAJ0qMshC");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
