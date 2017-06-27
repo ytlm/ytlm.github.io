@@ -101,7 +101,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="lua," />
 
 
 
@@ -119,12 +119,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="ytlm">
-<meta property="og:url" content="https://ytlm.github.io/tags/https/index.html">
+<meta name="description" content="lua中的另一个高级功能是coroutine(协程)，协同式多线程的意思，不同于线程和进程，协程仅在显示的调用一个让出(yield)函数时才会挂起当前的执行，同一时间内只有一个协程正在运行，非抢占式的。">
+<meta name="keywords" content="lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua学习之协程">
+<meta property="og:url" content="https://ytlm.github.io/2017/06/lua学习之协程/index.html">
 <meta property="og:site_name" content="ytlm">
+<meta property="og:description" content="lua中的另一个高级功能是coroutine(协程)，协同式多线程的意思，不同于线程和进程，协程仅在显示的调用一个让出(yield)函数时才会挂起当前的执行，同一时间内只有一个协程正在运行，非抢占式的。">
+<meta property="og:updated_time" content="2017-06-27T03:16:54.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ytlm">
+<meta name="twitter:title" content="lua学习之协程">
+<meta name="twitter:description" content="lua中的另一个高级功能是coroutine(协程)，协同式多线程的意思，不同于线程和进程，协程仅在显示的调用一个让出(yield)函数时才会挂起当前的执行，同一时间内只有一个协程正在运行，非抢占式的。">
 
 
 
@@ -152,13 +157,13 @@
 
 
 
-  <link rel="canonical" href="https://ytlm.github.io/tags/https/"/>
+  <link rel="canonical" href="https://ytlm.github.io/2017/06/lua学习之协程/"/>
 
 
 
 
 
-  <title>Tag: https | ytlm</title>
+  <title>lua学习之协程 | ytlm</title>
   
 
 
@@ -192,7 +197,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -330,44 +335,234 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>https<small>Tag</small>
-      </h1>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2017/06/lua学习之协程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ytlm">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ytlm">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">lua学习之协程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-27T11:01:27+08:00">
+                2017-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/lua/" itemprop="url" rel="index">
+                    <span itemprop="name">lua</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/lua学习之协程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/lua学习之协程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/06/lua学习之协程/" class="leancloud_visitors" data-flag-title="lua学习之协程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>lua中的另一个高级功能是coroutine(协程)，协同式多线程的意思，不同于线程和进程，协程仅在显示的调用一个让出(yield)函数时才会挂起当前的执行，同一时间内只有一个协程正在运行，非抢占式的。</p>
+<a id="more"></a>
+<h3 id="api介绍"><a href="#api介绍" class="headerlink" title="api介绍"></a>api介绍</h3><blockquote>
+<ul>
+<li><code>coroutine.create( fun )</code> <strong><em> 参数： </em></strong> 是一个函数，是这个协程的主体函数。<strong><em> 返回值： </em></strong> 返回一个新的协程，类型为”thread”。<strong><em> 作用： </em></strong> 创建一个新的协程。</li>
+<li><code>coroutine.yield( ... )</code> <strong><em> 参数： </em></strong> 任意变长参数。<strong><em> 返回值： </em></strong> 状态true或者false表示这个协程有没有挂起成功，然后返回传递的变长参数，全部返回给上次的coroutine.resume()调用。<strong><em> 作用： </em></strong> 挂起一个正在运行的协程，这个是有限制的，比如在调用C函数中和一些迭代器中是不能yield的。</li>
+<li><code>coroutine.resume( co, ... )</code> <strong><em> 参数： </em></strong>  一个协程，通过coroutine.create()创建的，加上自定义参数，这些自定义参数都会传递给协程的主函数。<strong><em><br>返回值： </em></strong> 一个boolean型的值表示有没有正确执行，之后的返回值都是coroutine.yield()中的参数。如果第一个值是false，后面的是错误信息。<strong><em> 作用： </em></strong> 运行一个协程直到函数执行完或者函数调用coroutine.yield()主动退出。</li>
+<li><code>coroutine.wrap( fun )</code>，<strong><em> 参数： </em></strong>  一个函数。<strong><em>  返回值： </em></strong> 和coroutinue.resume()相同，只不过没有boolean变量。<strong><em> 作用： </em></strong> 和coroutine.create()相似，只不过返回的是一个函数，每次调用这个函数就继续执行这个协程。传递给这个函数的参数都将作为coroutine.resume()额外的参数。</li>
+<li><code>coroutine.running( )</code> <strong><em> 参数： </em></strong> 无。<strong><em> 返回值： </em></strong> 返回正在运行的协程否则返回nil。</li>
+<li><code>coroutine.status( co )</code> <strong><em> 参数： </em></strong> 一个协程。<strong><em> 返回值： </em></strong> 返回这个协程当前的状态，主要有，<em> running </em> 表示正在运行；<em> suspended </em> 表示没有运行或者yield让出的状态；<em> normal </em> 表示协程是活的，但是并不在运行（正在延续其它的协程）；<em> dead </em> 表示协程执行完毕或者因错误停止。</li>
+</ul>
+</blockquote>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">(a)</span></span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"test : "</span>, a)</div><div class="line">    <span class="keyword">return</span> coroutine.<span class="built_in">yield</span>(<span class="number">2</span> * a)</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="keyword">local</span> co = coroutine.<span class="built_in">create</span>( <span class="function"><span class="keyword">function</span><span class="params">(b, c)</span></span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"running : "</span>, coroutine.<span class="built_in">running</span>())</div><div class="line">    <span class="built_in">print</span>(<span class="string">"co-body 1 : "</span>, b, c)</div><div class="line">    <span class="keyword">local</span> r = test(b + <span class="number">1</span>)</div><div class="line">    <span class="built_in">print</span>(<span class="string">"co-body 2 : "</span>, r)</div><div class="line">    <span class="keyword">local</span> n, m = coroutine.<span class="built_in">yield</span>(b - c, b + c)</div><div class="line">    <span class="built_in">print</span>(<span class="string">"co-body 3 : "</span>, n, m)</div><div class="line">    <span class="keyword">return</span> <span class="string">"begin"</span>, <span class="string">"end"</span></div><div class="line"><span class="keyword">end</span>)</div><div class="line"><span class="built_in">print</span>(<span class="string">"test status 1 : "</span>, coroutine.<span class="built_in">status</span>(co))</div><div class="line"><span class="built_in">print</span>(<span class="string">"main 1 : "</span>, coroutine.<span class="built_in">resume</span>(co, <span class="number">1</span>, <span class="number">9</span>))</div><div class="line"><span class="built_in">print</span>(<span class="string">"main 2 : "</span>, coroutine.<span class="built_in">resume</span>(co, <span class="string">"r"</span>))</div><div class="line"><span class="built_in">print</span>(<span class="string">"main 3 : "</span>, coroutine.<span class="built_in">resume</span>(co, <span class="string">"n"</span>, <span class="string">"m"</span>))</div><div class="line"><span class="built_in">print</span>(<span class="string">"main 4 : "</span>, coroutine.<span class="built_in">resume</span>(co, <span class="string">"x"</span>, <span class="string">"y"</span>))</div><div class="line"><span class="built_in">print</span>(<span class="string">"test status 3 : "</span>, coroutine.<span class="built_in">status</span>(co))</div></pre></td></tr></table></figure>
+<blockquote>
+<p>结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">test status 1 :         suspended</div><div class="line">running :       thread: 0x1e64df0</div><div class="line">co-body 1 :     1       9</div><div class="line">test :  2</div><div class="line">main 1 :        true    4</div><div class="line">co-body 2 :     r</div><div class="line">main 2 :        true    -8      10</div><div class="line">co-body 3 :     n       m</div><div class="line">main 3 :        true    begin   end</div><div class="line">main 4 :        false   cannot resume dead coroutine</div><div class="line">test status 3 :         dead</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>结合上面的介绍和代码可以简单的理解各个函数的作用，并且对lua的协程有一个感性的认知。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>经典的生产者消费者问题，我们用lua协程的方式来实现一遍<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">send</span><span class="params">(p)</span></span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"product send : "</span>, p)</div><div class="line">    coroutine.<span class="built_in">yield</span>(p)</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="keyword">local</span> product = coroutine.<span class="built_in">create</span>(<span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) <span class="keyword">do</span></div><div class="line">        <span class="keyword">local</span> p = <span class="built_in">io</span>.<span class="built_in">read</span>()</div><div class="line">        send(p)</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span>)</div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">receive</span><span class="params">(co)</span></span></div><div class="line">    <span class="keyword">local</span> ok, res = coroutine.<span class="built_in">resume</span>(co)</div><div class="line">    <span class="keyword">if</span> ok <span class="keyword">then</span></div><div class="line">        <span class="built_in">print</span>(<span class="string">"consumer received : "</span>, res)</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="built_in">print</span>(<span class="string">"consumer receive failed : "</span>, res)</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">consumer</span><span class="params">(co)</span></span></div><div class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) <span class="keyword">do</span></div><div class="line">        receive(co)</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">consumer(product)</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hello world</div><div class="line">product send :  hello world</div><div class="line">consumer received :     hello world</div><div class="line">1234567890</div><div class="line">product send :  1234567890</div><div class="line">consumer received :     1234567890</div><div class="line">1 + 1 = 2</div><div class="line">product send :  1 + 1 = 2</div><div class="line">consumer received :     1 + 1 = 2</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>大致的解释一遍，程序会创建一个product协程，然后consumer函数调用recieve的时候会唤醒生产者协程主函数，主函数会把得到的值yield出去，这一步做了两个事情，一个是把得到的值返回给消费者，另一个是挂起自己，等待下次被激活。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ul>
+<li>通过lua的协程我们可以用同步的方式写出异步的程序。</li>
+<li>当然本文只是简单的介绍lua的协程机制，具体到实际应用的话，还是会有很多变化的，<a href="https://github.com/pintsized/lua-resty-http" target="_blank" rel="external">lua-resty-http</a>是使用ngx_lua socket实现的一个http客户端，其中就有用到协程相关，有兴趣可以看看具体的实现。</li>
+</ul>
+<hr>
+<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
 
-      <h2 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/04/nginx基于tcp的转发-适用于HTTPS/" itemprop="url">
-              
-                <span itemprop="name">nginx基于tcp的转发,适用于HTTPS</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-05T09:52:22+08:00"
-              content="2017-04-05" >
-          04-05
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>Post author:</strong>
+      ytl
+    </li>
+    <li class="post-copyright-link">
+      <strong>Post link:</strong>
+      <a href="https://ytlm.github.io/2017/06/lua学习之协程/" title="lua学习之协程">https://ytlm.github.io/2017/06/lua学习之协程/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright Notice: </strong>
+      All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/lua/" rel="tag"># lua</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/lua学习之元表和元方法/" rel="next" title="lua学习之元表和元方法">
+                <i class="fa fa-chevron-left"></i> lua学习之元表和元方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -375,6 +570,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -394,8 +600,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/head.png"
@@ -498,6 +713,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#api介绍"><span class="nav-number">1.</span> <span class="nav-text">api介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -616,10 +847,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
@@ -637,6 +868,18 @@
       <script id="dsq-count-scr" src="https://ytlm.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://ytlm.github.io/2017/06/lua学习之协程/';
+          this.page.identifier = '2017/06/lua学习之协程/';
+          this.page.title = 'lua学习之协程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ytlm.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
