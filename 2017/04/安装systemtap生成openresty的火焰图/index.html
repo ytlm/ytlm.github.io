@@ -10,6 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -36,60 +37,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic|Source Code Pro:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -98,10 +50,25 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="nginx,openresty,systemmap,linux," />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,nginx,openresty,systemmap," />
 
 
 
@@ -112,23 +79,18 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
-
-
-
-
-<meta name="description" content="SystemTap简单介绍 systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。 基本思想是name events(命名事件)，并给它们处理程序。每当事件发生的时候，linux内核运行处理程序，就像一个子程序一样，之后恢复。处理程序是一系列的脚本语言，">
-<meta name="keywords" content="nginx,openresty,systemmap,linux">
+<meta name="description" content="SystemTap简单介绍 systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。 基本思想是name events(命名事件)，并给它们处理程序。每当事件发生的时候，lin">
+<meta name="keywords" content="linux,nginx,openresty,systemmap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装systemmap生成openresty的火焰图">
-<meta property="og:url" content="https://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/index.html">
+<meta property="og:url" content="http://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/index.html">
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="SystemTap简单介绍 systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。 基本思想是name events(命名事件)，并给它们处理程序。每当事件发生的时候，linux内核运行处理程序，就像一个子程序一样，之后恢复。处理程序是一系列的脚本语言，">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://onl0zwdvm.bkt.clouddn.com/nginx.svg">
-<meta property="og:updated_time" content="2017-07-28T03:05:50.379Z">
+<meta property="og:updated_time" content="2017-12-05T02:43:36.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装systemmap生成openresty的火焰图">
 <meta name="twitter:description" content="SystemTap简单介绍 systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。 基本思想是name events(命名事件)，并给它们处理程序。每当事件发生的时候，linux内核运行处理程序，就像一个子程序一样，之后恢复。处理程序是一系列的脚本语言，">
@@ -141,9 +103,11 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    version: '5.1.3',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: 'Author'
@@ -160,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="https://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/"/>
+  <link rel="canonical" href="http://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/"/>
 
 
 
@@ -185,12 +149,6 @@
 
 
 
-
-
-
-
-
-
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -200,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -216,7 +174,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">stay hungry, stay foolish.</p>
+        <h1 class="site-subtitle" itemprop="description">stay hungry, stay foolish.</h1>
       
   </div>
 
@@ -247,7 +205,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -257,7 +215,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -267,7 +225,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -277,7 +235,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -347,8 +305,12 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ytlm">
@@ -365,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">安装systemmap生成openresty的火焰图</h1>
+          <h2 class="post-title" itemprop="name headline">安装systemmap生成openresty的火焰图</h2>
         
 
         <div class="post-meta">
@@ -434,7 +396,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">Visitors </span>
+                 <span class="post-meta-item-text">Visitors&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -450,6 +412,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -457,28 +422,28 @@
 
       
         <h2 id="SystemTap"><a href="#SystemTap" class="headerlink" title="SystemTap"></a>SystemTap</h2><h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><ul>
-<li><a href="https://sourceware.org/systemtap/" target="_blank" rel="external">systemtap</a>是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。</li>
+<li><a href="https://sourceware.org/systemtap/" target="_blank" rel="noopener">systemtap</a>是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。</li>
 <li>基本思想是name events(命名事件)，并给它们处理程序。每当事件发生的时候，linux内核运行处理程序，就像一个子程序一样，之后恢复。处理程序是一系列的脚本语言，用于指定事件完成时要完成的工作，这种工作通常包括是提取数据，打印结果等。</li>
 <li>systemtap通过将脚本装换成C，运行系统的时候创建一个内核模块，当模块加在的时候，它通过挂载到内核的钩子来激活所有的探测事件。最后，这次事件结束的时候，挂载的钩子断开连接，移除模块。</li>
 </ul>
 <a id="more"></a>
 <blockquote>
-<p>systemtap工具功能很强大，目前刚接触，在此仅仅通过<a href="https://sourceware.org/systemtap/tutorial/Introduction.html" target="_blank" rel="external">官网</a>做一些简单的介绍。</p>
+<p>systemtap工具功能很强大，目前刚接触，在此仅仅通过<a href="https://sourceware.org/systemtap/tutorial/Introduction.html" target="_blank" rel="noopener">官网</a>做一些简单的介绍。</p>
 </blockquote>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
 <li>环境 centos 7，直接用<code>yum install systemtap systemtap-runtime</code>安装，如果遇到依赖包的问题，安装所需要的依赖就好了；</li>
-<li>另外需要注意一个重要的问题是需要安装kernel-debuginfo和kernel-debuginfo-common；可以直接用yum安装也可以<a href="http://debuginfo.centos.org/" target="_blank" rel="external">下载rpm</a>包安装；但是 <strong> 必须要和kernel版本一样 </strong></li>
+<li>另外需要注意一个重要的问题是需要安装kernel-debuginfo和kernel-debuginfo-common；可以直接用yum安装也可以<a href="http://debuginfo.centos.org/" target="_blank" rel="noopener">下载rpm</a>包安装；但是 <strong> 必须要和kernel版本一样 </strong></li>
 <li>安装完成后可以用<code>stap -v -e &#39;probe vfs.read {printf(&quot;read performed\n&quot;); exit()}&#39;</code>测试，如果不出意外的话会正常输出的</li>
 </ul>
 <blockquote>
 <p>表示在这里被坑了好久，全部安装好后运行的时候一直报错，累。。。</p>
 </blockquote>
 <h2 id="Openresty"><a href="#Openresty" class="headerlink" title="Openresty"></a>Openresty</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><ul>
-<li><a href="http://openresty.org/" target="_blank" rel="external">OpenResty</a>是一个动态的基于nginx和lua的网络平台。把nginx和lua集成在一起，可以通过lua完成一些复杂的需求，而不用再去开发C层面的module了，同时性能也很理想。</li>
+<li><a href="http://openresty.org/" target="_blank" rel="noopener">OpenResty</a>是一个动态的基于nginx和lua的网络平台。把nginx和lua集成在一起，可以通过lua完成一些复杂的需求，而不用再去开发C层面的module了，同时性能也很理想。</li>
 </ul>
 <blockquote>
 <ul>
-<li>目前应该直接集成<a href="http://luajit.org/" target="_blank" rel="external">LuaJIT</a>了，简单来说LuaJIT是lua的一个更高性能的版本。</li>
+<li>目前应该直接集成<a href="http://luajit.org/" target="_blank" rel="noopener">LuaJIT</a>了，简单来说LuaJIT是lua的一个更高性能的版本。</li>
 </ul>
 </blockquote>
 <h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><ul>
@@ -488,15 +453,15 @@
 <p>目前在做nginx的相关工作，所以对openresty了解的比较多一点，如有兴趣，欢迎共同交流。</p>
 </blockquote>
 <h2 id="火焰图"><a href="#火焰图" class="headerlink" title="火焰图"></a>火焰图</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><ul>
-<li><a href="https://github.com/brendangregg/FlameGraph" target="_blank" rel="external">火焰图(Flame Graphs)</a>是一个通过可视话堆栈的方法，可以直观的看出每个函数占用cpu的时间，内存，off-cpu等等，对于我们排查软件问题很有帮助。</li>
+<li><a href="https://github.com/brendangregg/FlameGraph" target="_blank" rel="noopener">火焰图(Flame Graphs)</a>是一个通过可视话堆栈的方法，可以直观的看出每个函数占用cpu的时间，内存，off-cpu等等，对于我们排查软件问题很有帮助。</li>
 <li>显示的是，Y轴是堆栈的深度，X轴是样本数量。每个样本（函数）是一个矩形。鼠标点击可以看到一些详细的信息。通过这些可以看出那些需要调整优化。</li>
 </ul>
 <blockquote>
 <p>对于火焰图也是最近才了解到的，有些解释可能很牵强，误怪，后面会慢慢的了解学习的。</p>
 </blockquote>
 <h3 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h3><ul>
-<li>openresty提供了一套完整的<a href="https://github.com/openresty/openresty-systemtap-toolkit" target="_blank" rel="external">工具</a>用于探测运行的状况。可以直接下载并根据介绍运行。</li>
-<li>然后下载<a href="https://github.com/brendangregg/FlameGraph" target="_blank" rel="external">FlameGraph</a>火焰图生成工具，用于把前面采样到的信息绘制成火焰图。</li>
+<li>openresty提供了一套完整的<a href="https://github.com/openresty/openresty-systemtap-toolkit" target="_blank" rel="noopener">工具</a>用于探测运行的状况。可以直接下载并根据介绍运行。</li>
+<li>然后下载<a href="https://github.com/brendangregg/FlameGraph" target="_blank" rel="noopener">FlameGraph</a>火焰图生成工具，用于把前面采样到的信息绘制成火焰图。</li>
 <li>然后在浏览器中打开进行观察分析。</li>
 </ul>
 <blockquote>
@@ -545,54 +510,45 @@
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    ytl
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/" title="安装systemmap生成openresty的火焰图">http://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
 
-      
-    </div>
-
-    <div>
-      
-        
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-      <strong>Post author:</strong>
-      ytl
-    </li>
-    <li class="post-copyright-link">
-      <strong>Post link:</strong>
-      <a href="https://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/" title="安装systemmap生成openresty的火焰图">https://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>Copyright Notice: </strong>
-      All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
-    </li>
-  </ul>
-
-
-      
-    </div>
+      </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
             <a href="/tags/nginx/" rel="tag"># nginx</a>
           
             <a href="/tags/openresty/" rel="tag"># openresty</a>
           
             <a href="/tags/systemmap/" rel="tag"># systemmap</a>
-          
-            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
       
@@ -626,6 +582,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -641,16 +601,19 @@
 
 
           
-  <div class="comments" id="comments">
-    
+
+  
+    <div class="comments" id="comments">
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
         </noscript>
       </div>
-    
-  </div>
+    </div>
+
+  
+
 
 
         </div>
@@ -673,120 +636,100 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/head.png"
-               alt="ytlm" />
-          <p class="site-author-name" itemprop="name">ytlm</p>
-           
-              <p class="site-description motion-element" itemprop="description">stay hungry, stay foolish.</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">19</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.png"
+                alt="ytlm" />
             
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">categories</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
+              <p class="site-author-name" itemprop="name">ytlm</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
-        
 
-        <div class="links-of-author motion-element">
-          
+          <nav class="site-state motion-element">
+
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/ytlm" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
-              </span>
+              </div>
             
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/ytlm1314" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
-              </span>
+              </div>
             
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
           
-        </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              Links
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
             </div>
-            <ul class="links-of-blogroll-list">
+          
+
+          <div class="links-of-author motion-element">
+            
               
-                <li class="links-of-blogroll-item">
-                  <a href="http://vcpu.me/" title="龙哥" target="_blank">龙哥</a>
-                </li>
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ytlm" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
               
-                <li class="links-of-blogroll-item">
-                  <a href="http://io.iwalk.me/" title="大神师傅" target="_blank">大神师傅</a>
-                </li>
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/ytlm1314" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
               
-            </ul>
+            
           </div>
-        
 
-        
+          
+          
 
+          
+          
 
+          
+
+        </div>
       </section>
 
       
@@ -819,30 +762,30 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2015 - 
-  <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">ytl</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
 
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+
+
+
+
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -853,6 +796,8 @@
         <i class="fa fa-arrow-up"></i>
         
       </div>
+    
+
     
 
   </div>
@@ -889,49 +834,63 @@
 
 
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
   
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
 
 
 
@@ -947,7 +906,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/';
+          this.page.url = 'http://ytlm.github.io/2017/04/安装systemtap生成openresty的火焰图/';
           this.page.identifier = '2017/04/安装systemtap生成openresty的火焰图/';
           this.page.title = '安装systemmap生成openresty的火焰图';
         };
@@ -959,6 +918,12 @@
     
 
   
+
+
+
+
+
+
 
 
 
@@ -1403,6 +1368,8 @@
 
 
   
+
+  
 <script>
 (function(){
     var bp = document.createElement('script');
@@ -1419,6 +1386,7 @@
 </script>
 
 
+  
   
 
   
