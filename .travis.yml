@@ -33,7 +33,7 @@ script:
     - hexo clean --silent
     - hexo generate --silent
     - hexo deploy --silent
-    - sh test/post.sh
+    - sh post/post.sh
 
 notifications:
     email: ytlm1314@gmail.com
