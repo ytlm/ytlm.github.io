@@ -39,3 +39,5 @@ notifications:
     email: ytlm1314@gmail.com
     on_success: change
     on_failure: always
+    slack:
+        secure: jNLE9n+QmFTtSLUBM3nvcfE3Bb7bCzKV4Uq1DtK147W5BkAmg+e6dg6msPK9bdmQhj0RerAAz3Kk0ndjW+oRuaG7PvMxZVSHxO9+z27LsMn7S7zE84MVkoEiT0d2jVSyRLS6/a/IzEWiQIHUreBCXNxoAxMN+A6DM6tXy5QJgQvzXLR+KlJr1uXWodhOWAz1HIy9icus0K+bq6Dte8SYo5bJ8jib/npz5+fg1hiYv5qygVWcHaik7X4yZff/hmbtggweC9nFwkZW7GyCe+tOSPhgivT33oqOa/zhxKgOPuLoswAUO95DCYn5YblkcUcDVReTz0VikG61qXoPP4lsDEBaYUrH27kyX1cueCCQrn2Y/rHvNUyYTA13f41V2pS+421bFkAVFXVDsz/g/N0F+jOj0tSC24vq1zTwzIZqCPP90pCfxS41Lt/D+lB2xLG1pdsuqGwsV4zKJpv7K6r28TCBZLRQzH9kSFx5dpGDq+dcDFMvgUxyLeny5p1Toba736mPqE6Tx5mD8qHVSb05PmtEOSV8GevCPcvQSHJp+cLNprq6NpLw2haAliM0u6CwuMlDDGcBix70D5g2B4oFky4baPRv8QVJ/6Omy3U15CqyDHHdCURaj7a6Wephrgcv8AHRypSnAAfiCiryGNET0alPzwc7l6nsilNYotGss/M=
