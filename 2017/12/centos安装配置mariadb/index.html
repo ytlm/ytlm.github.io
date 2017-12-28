@@ -83,7 +83,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="这里简单介绍一下在centos环境下mariadb的安装和配置">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-12-28T02:29:08.325Z">
+<meta property="og:updated_time" content="2017-12-28T05:52:04.153Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos安装配置mariadb">
 <meta name="twitter:description" content="这里简单介绍一下在centos环境下mariadb的安装和配置">
@@ -493,6 +493,12 @@
 <li><p>外网登陆命令</p>
 <blockquote>
 <p><code>mysql -h &#39;ip&#39; -u &#39;root&#39; -P 3306 -p&#39;password&#39;</code><br>-h <code>ip</code>为远程数据库ip地址，<br>-P <code>3306</code>是数据库默认端口，<br>-u root 登陆用户名，<br>-p<code>password</code> 登陆用户对应的密码；</p>
+<ul>
+<li>外网登陆的时候可能会遇到防火墙的原因，导致连接失败，需要根据以下配置防火墙</li>
+<li><code>iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT</code></li>
+<li><code>iptables-save &gt; /etc/iptables/iptables.rules</code></li>
+<li><code>systemctl reload iptables</code> || <code>iptables-restore &lt; /etc/iptables/iptables.rules</code></li>
+</ul>
 </blockquote>
 </li>
 </ul>
@@ -558,6 +564,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/初识SystemTap/" rel="prev" title="初识SystemTap">
+                初识SystemTap <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -648,7 +658,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -659,7 +669,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -670,7 +680,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
