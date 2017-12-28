@@ -79,6 +79,10 @@ date: 2017-12-28 09:44:42
 > -P `3306`是数据库默认端口，
 > -u root 登陆用户名，
 > -p`password` 登陆用户对应的密码；
+> * 外网登陆的时候可能会遇到防火墙的原因，导致连接失败，需要根据以下配置防火墙
+> * `iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT`
+> * `iptables-save > /etc/iptables/iptables.rules`
+> * `systemctl reload iptables` || `iptables-restore < /etc/iptables/iptables.rules`
 
 ### 后记
 * 之前装过一次，在本地登陆进去之后，创建数据库的时候一直有权限错误，在搜索之后并没有得到解决，所以就把这些全部删除，尤其是要把之前的数据库删除，一般默认位置是在`/var/lib/mysql`目录下面，然后重新安装配置一遍就正常了，这里简单的记录一下以后有问题可以来此查看。
