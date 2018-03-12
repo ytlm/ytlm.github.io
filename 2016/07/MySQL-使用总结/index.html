@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="下面是在学习MySQL的时候一些命令的纪录">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-07T11:15:44.895Z">
+<meta property="og:updated_time" content="2018-03-12T01:45:11.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 使用总结">
 <meta name="twitter:description" content="下面是在学习MySQL的时候一些命令的纪录">
@@ -403,7 +403,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">Visitors&#58;</span>
+                 <span class="post-meta-item-text">Views&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -446,6 +446,9 @@
 
       
     </div>
+
+    
+
     
     
     
@@ -458,7 +461,7 @@
       <div>
         <ul class="post-copyright">
   <li class="post-copyright-author">
-    <strong>Post author:</strong>ytl</li>
+    <strong>Post author: </strong>ytl</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
     <a href="https://ytlm.github.io/2016/07/MySQL-使用总结/" title="MySQL 使用总结">https://ytlm.github.io/2016/07/MySQL-使用总结/</a>
@@ -568,7 +571,7 @@
                 alt="ytlm" />
             
               <p class="site-author-name" itemprop="name">ytlm</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">stay hungry, stay foolish.</p>
           </div>
 
           
@@ -668,6 +671,7 @@
 
 
         
+
 
 
 
@@ -1204,35 +1208,40 @@
             var counter = results[0];
             counter.fetchWhenSave(true);
             counter.increment("time");
+            
             counter.save(null, {
               success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
               },
               error: function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
               }
             });
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
           }
         },
         error: function(error) {

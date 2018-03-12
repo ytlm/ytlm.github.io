@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="原文链接Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。 比如e:/xx 或者 d:/php等等。 下面以原来的默认目录为d:/wamp/www改为e:/xx为例。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-07T11:15:44.895Z">
+<meta property="og:updated_time" content="2018-03-12T01:45:11.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wamp更改web根目录">
 <meta name="twitter:description" content="原文链接Wampserver安装好后，“www目录”默认为X:/wamp/www，（这里的X是盘符）也就是wampserver安装目录下的www文件夹。实际使用中，默认设置往往不是我们想要的，可能改成其他文件夹更适合我们。 比如e:/xx 或者 d:/php等等。 下面以原来的默认目录为d:/wamp/www改为e:/xx为例。">
@@ -403,7 +403,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">Visitors&#58;</span>
+                 <span class="post-meta-item-text">Views&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -438,7 +438,7 @@
 </blockquote>
 <p>2,</p>
 <blockquote>
-<p>修改Apache默认根目录<br>打开wamp/bin/apache/apache2.2.11/conf/httpd.conf,修改DocumentRoot后面双引号中的值为你所要的。<br>比如将DocumentRoot “D:/wamp/www/”<br>改成DocumentRoot “e:/xx/”<br>同时将<directory “d:="" wamp="" www="" “=""><br>改成<directory “e:="" xx="" “=""></directory></directory></p>
+<p>修改Apache默认根目录<br>打开wamp/bin/apache/apache2.2.11/conf/httpd.conf,修改DocumentRoot后面双引号中的值为你所要的。<br>比如将DocumentRoot “D:/wamp/www/”<br>改成DocumentRoot “e:/xx/”<br>同时将&lt;Directory “D:/wamp/www/“&gt;<br>改成&lt;Directory “e:/xx/“&gt;</p>
 </blockquote>
 <p>3,</p>
 <blockquote>
@@ -449,6 +449,9 @@
 
       
     </div>
+
+    
+
     
     
     
@@ -461,7 +464,7 @@
       <div>
         <ul class="post-copyright">
   <li class="post-copyright-author">
-    <strong>Post author:</strong>ytl</li>
+    <strong>Post author: </strong>ytl</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
     <a href="https://ytlm.github.io/2016/07/Wamp更改web根目录/" title="Wamp更改web根目录">https://ytlm.github.io/2016/07/Wamp更改web根目录/</a>
@@ -571,7 +574,7 @@
                 alt="ytlm" />
             
               <p class="site-author-name" itemprop="name">ytlm</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">stay hungry, stay foolish.</p>
           </div>
 
           
@@ -671,6 +674,7 @@
 
 
         
+
 
 
 
@@ -1207,35 +1211,40 @@
             var counter = results[0];
             counter.fetchWhenSave(true);
             counter.increment("time");
+            
             counter.save(null, {
               success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
               },
               error: function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
               }
             });
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
           }
         },
         error: function(error) {

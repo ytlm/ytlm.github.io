@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/616078-5093ce7f19f61840.png!blog?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/616078-5aeaf2475546f960.png!blog?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/616078-ca7ed52491141161.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-07T11:15:44.899Z">
+<meta property="og:updated_time" content="2018-03-12T01:45:11.476Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tcp建立连接为什么需要三次握手">
 <meta name="twitter:description" content="前言 众所周知tcp传输层协议在建立连接的时候需要三次才能建立起一个真正的可靠连接，可是为什么是三次呢，不可以是两次，四次等等呢，可以自己思考一番，带着疑问可以看下文。  三次握手 在《计算机网络》一书中其中有提到，三次握手的目的是“为了防止已经失效的连接请求报文段突然又传到服务端，因而产生错误”，这种情况是：一端(client)A发出去的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个">
@@ -407,7 +407,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">Visitors&#58;</span>
+                 <span class="post-meta-item-text">Views&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -455,6 +455,8 @@
 <p>3, 第三次：A如果收到了B的确认消息之后，再发出一个确认(ACK)消息，意思是告诉B，这边是通的，然后A和B就可以建立连接相互通信了；</p>
 <blockquote>
 <p>这个时候经过了三次握手，A和B双方确认了两边都是通的，可以相互通信了，已经可以建立一个可靠的连接，并且可以相互发送数据。<br>4, 第四次：这个时候已经不需要B再发送一个确认消息了，两边已经通过前三次建立了一个可靠的连接，如果再发送第四次确认消息的话，就浪费资源了。</p>
+</blockquote>
+<blockquote>
 <p>如果第二个报文段B发出的(SYN+ACK)分别发送的话，也是可以理解为四次，但是被优化了，一起发送了。</p>
 </blockquote>
 </blockquote>
@@ -513,6 +515,9 @@
 
       
     </div>
+
+    
+
     
     
     
@@ -525,7 +530,7 @@
       <div>
         <ul class="post-copyright">
   <li class="post-copyright-author">
-    <strong>Post author:</strong>ytl</li>
+    <strong>Post author: </strong>ytl</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
     <a href="https://ytlm.github.io/2017/05/tcp建立连接为什么需要三次握手/" title="tcp建立连接为什么需要三次握手">https://ytlm.github.io/2017/05/tcp建立连接为什么需要三次握手/</a>
@@ -644,7 +649,7 @@
                 alt="ytlm" />
             
               <p class="site-author-name" itemprop="name">ytlm</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">stay hungry, stay foolish.</p>
           </div>
 
           
@@ -760,6 +765,7 @@
 
 
         
+
 
 
 
@@ -1296,35 +1302,40 @@
             var counter = results[0];
             counter.fetchWhenSave(true);
             counter.increment("time");
+            
             counter.save(null, {
               success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
               },
               error: function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
               }
             });
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
           }
         },
         error: function(error) {

@@ -106,7 +106,7 @@
 <meta property="og:url" content="https://ytlm.github.io/tags/index.html">
 <meta property="og:site_name" content="ytlm">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-07T11:15:44.899Z">
+<meta property="og:updated_time" content="2018-03-12T01:45:11.476Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tags">
 
@@ -309,9 +309,15 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">tags</h2>
+<h2 class="post-title" itemprop="name headline">tags</h2>
+
+<div class="post-meta">
+  
+  
 
 
+
+</div>
 
 </header>
 
@@ -413,14 +419,10 @@
                     
                   
                 
-                  
-                    
-                  
-                
-                23 tags in total
+                22 tags in total
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/AJAX/" style="font-size: 12px; color: #ccc">AJAX</a> <a href="/tags/C/" style="font-size: 30px; color: #111">C</a> <a href="/tags/Jquery/" style="font-size: 12px; color: #ccc">Jquery</a> <a href="/tags/MySQL/" style="font-size: 12px; color: #ccc">MySQL</a> <a href="/tags/ThinkPHP/" style="font-size: 12px; color: #ccc">ThinkPHP</a> <a href="/tags/Wamp/" style="font-size: 18px; color: #8e8e8e">Wamp</a> <a href="/tags/awk/" style="font-size: 12px; color: #ccc">awk</a> <a href="/tags/cache/" style="font-size: 12px; color: #ccc">cache</a> <a href="/tags/define/" style="font-size: 12px; color: #ccc">define</a> <a href="/tags/git/" style="font-size: 12px; color: #ccc">git</a> <a href="/tags/github/" style="font-size: 18px; color: #8e8e8e">github</a> <a href="/tags/hexo/" style="font-size: 18px; color: #8e8e8e">hexo</a> <a href="/tags/https/" style="font-size: 12px; color: #ccc">https</a> <a href="/tags/javascript/" style="font-size: 12px; color: #ccc">javascript</a> <a href="/tags/linux/" style="font-size: 18px; color: #8e8e8e">linux</a> <a href="/tags/lua/" style="font-size: 18px; color: #8e8e8e">lua</a> <a href="/tags/mariadb/" style="font-size: 12px; color: #ccc">mariadb</a> <a href="/tags/nginx/" style="font-size: 24px; color: #4f4f4f">nginx</a> <a href="/tags/openresty/" style="font-size: 12px; color: #ccc">openresty</a> <a href="/tags/systemmap/" style="font-size: 12px; color: #ccc">systemmap</a> <a href="/tags/systemtap/" style="font-size: 12px; color: #ccc">systemtap</a> <a href="/tags/travis/" style="font-size: 12px; color: #ccc">travis</a> <a href="/tags/网络协议/" style="font-size: 24px; color: #4f4f4f">网络协议</a>
+              <a href="/tags/AJAX/" style="font-size: 12px; color: #ccc">AJAX</a> <a href="/tags/C/" style="font-size: 30px; color: #111">C</a> <a href="/tags/Jquery/" style="font-size: 12px; color: #ccc">Jquery</a> <a href="/tags/MySQL/" style="font-size: 12px; color: #ccc">MySQL</a> <a href="/tags/ThinkPHP/" style="font-size: 12px; color: #ccc">ThinkPHP</a> <a href="/tags/Wamp/" style="font-size: 18px; color: #8e8e8e">Wamp</a> <a href="/tags/cache/" style="font-size: 12px; color: #ccc">cache</a> <a href="/tags/define/" style="font-size: 12px; color: #ccc">define</a> <a href="/tags/git/" style="font-size: 12px; color: #ccc">git</a> <a href="/tags/github/" style="font-size: 18px; color: #8e8e8e">github</a> <a href="/tags/hexo/" style="font-size: 18px; color: #8e8e8e">hexo</a> <a href="/tags/https/" style="font-size: 12px; color: #ccc">https</a> <a href="/tags/javascript/" style="font-size: 12px; color: #ccc">javascript</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/lua/" style="font-size: 18px; color: #8e8e8e">lua</a> <a href="/tags/mariadb/" style="font-size: 12px; color: #ccc">mariadb</a> <a href="/tags/nginx/" style="font-size: 24px; color: #4f4f4f">nginx</a> <a href="/tags/openresty/" style="font-size: 12px; color: #ccc">openresty</a> <a href="/tags/systemmap/" style="font-size: 12px; color: #ccc">systemmap</a> <a href="/tags/systemtap/" style="font-size: 12px; color: #ccc">systemtap</a> <a href="/tags/travis/" style="font-size: 12px; color: #ccc">travis</a> <a href="/tags/网络协议/" style="font-size: 24px; color: #4f4f4f">网络协议</a>
             </div>
           </div>
         
@@ -429,6 +431,10 @@
       
       
     </div>
+    
+
+
+
     
     
     
@@ -467,7 +473,7 @@
                 alt="ytlm" />
             
               <p class="site-author-name" itemprop="name">ytlm</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">stay hungry, stay foolish.</p>
           </div>
 
           
@@ -567,6 +573,7 @@
 
 
         
+
 
 
 
@@ -1086,35 +1093,40 @@
             var counter = results[0];
             counter.fetchWhenSave(true);
             counter.increment("time");
+            
             counter.save(null, {
               success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
               },
               error: function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
               }
             });
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
           }
         },
         error: function(error) {

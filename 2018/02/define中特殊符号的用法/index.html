@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="在C语言中宏定义#define 是一个很有用处的一个特性，在看其它一些源码的时候宏定义#define中会出现一些特殊的符号，主要有# ## do{}while(0)，这里记录以下这几种特殊符号的含义和用法">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-07T11:15:44.895Z">
+<meta property="og:updated_time" content="2018-03-12T01:45:11.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="define中特殊符号的用法">
 <meta name="twitter:description" content="在C语言中宏定义#define 是一个很有用处的一个特性，在看其它一些源码的时候宏定义#define中会出现一些特殊的符号，主要有# ## do{}while(0)，这里记录以下这几种特殊符号的含义和用法">
@@ -403,7 +403,7 @@
                  <i class="fa fa-eye"></i>
                </span>
                
-                 <span class="post-meta-item-text">Visitors&#58;</span>
+                 <span class="post-meta-item-text">Views&#58;</span>
                
                  <span class="leancloud-visitors-count"></span>
              </span>
@@ -454,6 +454,9 @@
 
       
     </div>
+
+    
+
     
     
     
@@ -466,7 +469,7 @@
       <div>
         <ul class="post-copyright">
   <li class="post-copyright-author">
-    <strong>Post author:</strong>ytl</li>
+    <strong>Post author: </strong>ytl</li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
     <a href="https://ytlm.github.io/2018/02/define中特殊符号的用法/" title="define中特殊符号的用法">https://ytlm.github.io/2018/02/define中特殊符号的用法/</a>
@@ -574,7 +577,7 @@
                 alt="ytlm" />
             
               <p class="site-author-name" itemprop="name">ytlm</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">stay hungry, stay foolish.</p>
           </div>
 
           
@@ -674,6 +677,7 @@
 
 
         
+
 
 
 
@@ -1210,35 +1214,40 @@
             var counter = results[0];
             counter.fetchWhenSave(true);
             counter.increment("time");
+            
             counter.save(null, {
               success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
               },
               error: function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
               }
             });
           } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
           }
         },
         error: function(error) {
