@@ -69,7 +69,6 @@ since: 2015
 
 disqus_shortname: ytlm
 
-
 sitemap:
     path: sitemap.xml
 
@@ -99,4 +98,3 @@ deploy:
 - type: git
   repo: git@git.coding.net:ytlm/ytlm.coding.me.git
   branch: master
-
