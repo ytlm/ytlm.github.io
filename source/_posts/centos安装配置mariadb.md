@@ -4,8 +4,6 @@ tags:
   - mariadb
 categories:
   - mariadb
-  - linux
-  - centos
 date: 2017-12-28 09:44:42
 ---
 

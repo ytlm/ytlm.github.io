@@ -3,7 +3,6 @@ title: 初识SystemTap
 tags:
   - systemtap
 categories:
-  - linux
   - systemtap
 date: 2017-12-28 09:45:38
 ---
