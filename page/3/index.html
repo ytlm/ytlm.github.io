@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-03 12:37:21" itemprop="dateModified" datetime="2018-05-03T12:37:21+08:00">2018-05-03</time>
+                <time title="Modified: 2018-05-03 13:04:34" itemprop="dateModified" datetime="2018-05-03T13:04:34+08:00">2018-05-03</time>
               
             
           </span>
@@ -594,7 +594,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-03 12:37:21" itemprop="dateModified" datetime="2018-05-03T12:37:21+08:00">2018-05-03</time>
+                <time title="Modified: 2018-05-03 13:04:34" itemprop="dateModified" datetime="2018-05-03T13:04:34+08:00">2018-05-03</time>
               
             
           </span>
@@ -792,7 +792,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-03 12:37:21" itemprop="dateModified" datetime="2018-05-03T12:37:21+08:00">2018-05-03</time>
+                <time title="Modified: 2018-05-03 13:04:34" itemprop="dateModified" datetime="2018-05-03T13:04:34+08:00">2018-05-03</time>
               
             
           </span>
@@ -1663,11 +1663,11 @@
             counter.fetchWhenSave(true);
             counter.increment("time");
             
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
             counter.save(null, {
               success: function(counter) {
-                
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
                 
               },
               error: function(counter, error) {

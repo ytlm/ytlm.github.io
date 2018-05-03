@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="SAD O.O ! 您找的东西到火星上去了 . . . 听首歌休息一下先">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-03T04:37:21.142Z">
+<meta property="og:updated_time" content="2018-05-03T05:04:34.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="404 Not Found">
 <meta name="twitter:description" content="SAD O.O ! 您找的东西到火星上去了 . . . 听首歌休息一下先">
@@ -1167,11 +1167,11 @@
             counter.fetchWhenSave(true);
             counter.increment("time");
             
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
             counter.save(null, {
               success: function(counter) {
-                
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
                 
               },
               error: function(counter, error) {
