@@ -2,6 +2,9 @@
 
 
 
+
+
+
   
 
 
@@ -9,7 +12,7 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
 
 
@@ -49,11 +52,11 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=6.0.5" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
 
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.0.5">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.2.0">
 
 
 
@@ -70,7 +73,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '6.0.5',
+    version: '6.2.0',
     sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -93,16 +96,12 @@
 
 
 
-  
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-<meta property="og:type" content="website">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="tags">
 <meta property="og:url" content="https://ytlm.github.io/tags/index.html">
 <meta property="og:site_name" content="ytlm">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-12T03:11:37.141Z">
+<meta property="og:updated_time" content="2018-05-03T03:35:54.003Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tags">
 
@@ -122,6 +121,7 @@
     sidebar: "",
   };
 </script>
+
   <title>tags | ytlm</title>
   
 
@@ -182,12 +182,12 @@
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">ytlm</span>
         <span class="logo-line-after"><i></i></span>
@@ -199,7 +199,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -207,43 +207,55 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
-        </li>
-      
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
-        </li>
-      
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags menu-item-active">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
 
+      
       
         <li class="menu-item menu-item-search">
           
@@ -254,6 +266,33 @@
         </li>
       
     </ul>
+  
+
+  
+    
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
   
 
   
@@ -283,11 +322,12 @@
 </nav>
 
 
+
   
 
 
 
- </div>
+</div>
     </header>
 
     
@@ -296,6 +336,7 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -416,10 +457,18 @@
                     
                   
                 
-                22 tags in total
+                  
+                    
+                  
+                
+                  
+                    
+                  
+                
+                24 tags in total
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/AJAX/" style="font-size: 12px; color: #ccc">AJAX</a> <a href="/tags/C/" style="font-size: 30px; color: #111">C</a> <a href="/tags/Jquery/" style="font-size: 12px; color: #ccc">Jquery</a> <a href="/tags/MySQL/" style="font-size: 12px; color: #ccc">MySQL</a> <a href="/tags/ThinkPHP/" style="font-size: 12px; color: #ccc">ThinkPHP</a> <a href="/tags/Wamp/" style="font-size: 18px; color: #8e8e8e">Wamp</a> <a href="/tags/cache/" style="font-size: 12px; color: #ccc">cache</a> <a href="/tags/define/" style="font-size: 12px; color: #ccc">define</a> <a href="/tags/git/" style="font-size: 12px; color: #ccc">git</a> <a href="/tags/github/" style="font-size: 18px; color: #8e8e8e">github</a> <a href="/tags/hexo/" style="font-size: 18px; color: #8e8e8e">hexo</a> <a href="/tags/https/" style="font-size: 12px; color: #ccc">https</a> <a href="/tags/javascript/" style="font-size: 12px; color: #ccc">javascript</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/lua/" style="font-size: 18px; color: #8e8e8e">lua</a> <a href="/tags/mariadb/" style="font-size: 12px; color: #ccc">mariadb</a> <a href="/tags/nginx/" style="font-size: 24px; color: #4f4f4f">nginx</a> <a href="/tags/openresty/" style="font-size: 12px; color: #ccc">openresty</a> <a href="/tags/systemmap/" style="font-size: 12px; color: #ccc">systemmap</a> <a href="/tags/systemtap/" style="font-size: 12px; color: #ccc">systemtap</a> <a href="/tags/travis/" style="font-size: 12px; color: #ccc">travis</a> <a href="/tags/网络协议/" style="font-size: 24px; color: #4f4f4f">网络协议</a>
+              <a href="/tags/AJAX/" style="font-size: 12px; color: #ccc">AJAX</a> <a href="/tags/C/" style="font-size: 30px; color: #111">C</a> <a href="/tags/Jquery/" style="font-size: 12px; color: #ccc">Jquery</a> <a href="/tags/MySQL/" style="font-size: 12px; color: #ccc">MySQL</a> <a href="/tags/ThinkPHP/" style="font-size: 12px; color: #ccc">ThinkPHP</a> <a href="/tags/Wamp/" style="font-size: 18px; color: #8e8e8e">Wamp</a> <a href="/tags/cache/" style="font-size: 12px; color: #ccc">cache</a> <a href="/tags/define/" style="font-size: 12px; color: #ccc">define</a> <a href="/tags/dpdk/" style="font-size: 12px; color: #ccc">dpdk</a> <a href="/tags/f-stack/" style="font-size: 12px; color: #ccc">f-stack</a> <a href="/tags/git/" style="font-size: 12px; color: #ccc">git</a> <a href="/tags/github/" style="font-size: 18px; color: #8e8e8e">github</a> <a href="/tags/hexo/" style="font-size: 18px; color: #8e8e8e">hexo</a> <a href="/tags/https/" style="font-size: 12px; color: #ccc">https</a> <a href="/tags/javascript/" style="font-size: 12px; color: #ccc">javascript</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/lua/" style="font-size: 18px; color: #8e8e8e">lua</a> <a href="/tags/mariadb/" style="font-size: 12px; color: #ccc">mariadb</a> <a href="/tags/nginx/" style="font-size: 30px; color: #111">nginx</a> <a href="/tags/openresty/" style="font-size: 12px; color: #ccc">openresty</a> <a href="/tags/systemmap/" style="font-size: 12px; color: #ccc">systemmap</a> <a href="/tags/systemtap/" style="font-size: 12px; color: #ccc">systemtap</a> <a href="/tags/travis/" style="font-size: 12px; color: #ccc">travis</a> <a href="/tags/网络协议/" style="font-size: 24px; color: #4f4f4f">网络协议</a>
             </div>
           </div>
         
@@ -480,7 +529,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -513,11 +562,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -574,7 +619,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -654,8 +703,8 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
+  <span class="with-love" id="animate">
+    <i class="fa fa-"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">ytl</span>
 
@@ -752,25 +801,25 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=6.0.5"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=6.0.5"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.5"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.0.5"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
 
 
 
   
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.5"></script>
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
 
 
 
@@ -1199,7 +1248,7 @@
             
               var $element = $(document.getElementById(url));
               $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set 'security' option to 'false'.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
             
           }
         },
@@ -1243,6 +1292,8 @@
   
 
   
+  
+
   
 
   
