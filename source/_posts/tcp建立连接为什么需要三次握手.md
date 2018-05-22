@@ -45,7 +45,7 @@ categories:
 > * ** SYN_RCVD ** 表示一端已经接收到SYN报文了；
 > * ** ESTABLISHED ** 表示已经建立连接了，可以发送数据了。
 
-![三次握手状态装换图解](http://upload-images.jianshu.io/upload_images/616078-5093ce7f19f61840.png!blog?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![三次握手状态装换图解](http://onl0zwdvm.bkt.clouddn.com/tcp/tcp-syn-ack.png)
 
 ## 四次挥手
 * 说完TCP建立连接的时候为什么是三次，相对的就会想到为什么断开连接的时候是需要四次呢，而不是三次，五次等等呢；
@@ -59,10 +59,10 @@ categories:
 > * ** LAST_ACK ** 表示收到对方的FIN之后，回给对方ACK，然后自己也要关闭发送FIN，等待另一方的ACK时候的状态；
 > * ** CLOSED ** 这个状态表示连接已经断开。
 
-![四次挥手状态装换图解](http://upload-images.jianshu.io/upload_images/616078-5aeaf2475546f960.png!blog?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![四次挥手状态装换图解](http://onl0zwdvm.bkt.clouddn.com/tcp/tcp-fin-ack.png)
 
 * 最后放一张状态转换图
-![三次握手和四次挥手状态转换图](http://upload-images.jianshu.io/upload_images/616078-ca7ed52491141161.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![三次握手和四次挥手状态转换图](http://onl0zwdvm.bkt.clouddn.com/tcp/tcp-syn-fin-ack.png)
 
 ## 后记
 * 在状态转换图中省略了数据的发送；
