@@ -88,13 +88,6 @@ search:
     format: html
     limit: 10000
 
-leancloud_counter_security:
-    enable_sync: true
-    app_id: w66AIpT8CCqdEQIGozVF1vN5-gzGzoHsz
-    app_key: B3TqxrlHII3nMnQbAJ0qMshC
-    username: admin
-    password: admin
-
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
@@ -104,4 +97,3 @@ deploy:
 - type: git
   repo: git@git.coding.net:ytlm/ytlm.coding.me.git
   branch: master
-- type: leancloud_counter_security_sync

@@ -56,7 +56,7 @@ favicon:
 keywords: "Hexo, NexT"
 
 # Set rss to false to disable feed link.
-# Leave rss as empty to use site's feed link.
+# Leave rss as empty to use site's feed link, and install hexo-generator-feed: `npm install hexo-generator-feed --save`.
 # Set rss to specific value if you have burned your feed already.
 rss:
 
@@ -288,7 +288,10 @@ codeblock:
   # Leave it empty for the default 1
   border_radius:
   # Add copy button on codeblock
-  copy_button: false
+  copy_button:
+    enable: true
+    # Show text copy result
+    show_result: false
 
 # Wechat Subscriber
 #wechat_subscriber:
@@ -478,7 +481,7 @@ disqus:
   enable: true
   shortname: ytlm
   count: true
-  lazyload: false
+  lazyload: true
 
 # Hypercomments
 #hypercomments_id:
@@ -641,8 +644,8 @@ leancloud_visitors:
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in lc counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set the `security` to `false`.
-  security: true
-  betterPerformance: true
+  security: false
+  betterPerformance: false
 
 # Another tool to show number of visitors to each article.
 # visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
