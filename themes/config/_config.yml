@@ -191,8 +191,8 @@ links_title: Links
 links_layout: block
 #links_layout: inline
 links:
-    龙哥: http://vcpu.me
-    师傅: http://iwalk.me
+    龙哥: http://vcpu.me/
+    高手: http://io.iwalk.me/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
