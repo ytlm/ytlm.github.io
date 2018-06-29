@@ -1,9 +1,9 @@
 ---
 title: arch linux 初次安装成功
 tags:
-  - null
+  - arch
 categories:
-  - null
+  - arch
 date: 2018-06-28 16:59:34
 ---
 
