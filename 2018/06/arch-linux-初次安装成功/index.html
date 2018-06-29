@@ -115,8 +115,11 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/c11fed42gy1fsqpk87oylj20io02z0sk.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/c11fed42gy1fsqple6avrj20eg069jrc.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/c11fed42gy1fsqpwlcfj9j20er064glk.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c11fed42gy1fsr24xtp5pj20iq0b7q30.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c11fed42gy1fsr27494o9j20fw04hweb.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c11fed42gy1fsr29cwtmrj20iu02zjr5.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/c11fed42gy1fsqzpcluv6j20k308g3zg.jpg">
-<meta property="og:updated_time" content="2018-06-28T09:07:42.502Z">
+<meta property="og:updated_time" content="2018-06-29T00:43:38.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="arch linux 初次安装成功">
 <meta name="twitter:description" content="之前一直对archlinux有很大的兴趣，期间也去尝试去安装，不过全部都失败了，最近又有时间，终于安装完成，并且安装了gnome桌面。感觉用的时候是非常好的。everything is simple。首先说一下现在装好，感觉最难的就是磁盘分区和格式化，选择什么样的分区方法，怎样分区。">
@@ -508,18 +511,19 @@
 <h3 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">首先退出chroot环境，用`<span class="built_in">exit</span>`命令或者直接使用`Ctrl+d`快捷键</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>配置virtualbox，因为我这里是用virtualbox安装的archlinxu，在第一次重启系统的时候，会进入EFI shell，并没有进入系统，这里要修改如下：</p>
+<blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/c11fed42gy1fsr24xtp5pj20iq0b7q30.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/c11fed42gy1fsr27494o9j20fw04hweb.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/c11fed42gy1fsr29cwtmrj20iu02zjr5.jpg" alt=""></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs0:</span><br><span class="line">edit startup.nsh</span><br><span class="line">\EFI\grub\grubx64.efi</span><br><span class="line">reset</span><br></pre></td></tr></table></figure>
+</blockquote>
 </li>
 <li><p>配置安装gnome</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S xf86-video-intel                  <span class="comment"># intel显卡驱动,如果是其它的需要安装对应的驱动</span></span><br><span class="line">sudo pacman -S xorg</span><br><span class="line">sudo pacman -S gnome gnome-extra gnome-tweak-tool</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> gdm</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>简单配置gnome安装常用软件<br>编辑 /etc/pacman.conf 文件，在文件末加入（源可以替换为更适合自己的）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustedOnly</span><br><span class="line">Server = http://mirrors.163.com/archlinux-cn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustedOnly</span><br><span class="line">Server = http://mirrors.163.com/archlinux-cn/<span class="variable">$arch</span></span><br><span class="line"></span><br><span class="line">pacman -Syu &amp;&amp; pacman -Sy archlinuxcn-keyring                           <span class="comment"># 更新</span></span><br><span class="line">pacman -S yaourt fakeroot                                               <span class="comment"># 安装yaourt用于构建</span></span><br><span class="line"></span><br><span class="line">yaourt -S google-chrome wireshark-gtk vlc ffmpeg vim sublime-text-deve tcpdump</span><br><span class="line">yaourt -S fcitx fcitx-configtool fcitx-im                               <span class="comment"># 中文输入法</span></span><br><span class="line">    &gt; 在.bashrc中添加一下环境变量</span><br><span class="line">    &gt; <span class="built_in">export</span> XMODIFIERS=<span class="string">"@im=fcitx"</span></span><br><span class="line">    &gt; <span class="built_in">export</span> GTK_IM_MODULE=<span class="string">"fcitx"</span></span><br><span class="line">    &gt; <span class="built_in">export</span> QT_IM_MODULE=<span class="string">"fcitx"</span></span><br><span class="line">yaourt -S noto-fonts-cjk                                                <span class="comment"># 中文字体</span></span><br><span class="line">yaourt -S screenfetch                                                   <span class="comment"># 一个shell脚本</span></span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pacman -Syy &amp;&amp; pacman -Sy archlinuxcn-keyring</span><br><span class="line">pacman -S yaourt fakeroot</span><br><span class="line"></span><br><span class="line">yaourt -S google-chrome wireshark-gtk vlc ffmpeg vim sublime-text-deve tcpdump</span><br><span class="line">yaourt -S fcix fcix-configtool screenfetch</span><br></pre></td></tr></table></figure>
-<ul>
-<li>最后放一张图，oh yeah!<br><img src="https://ws1.sinaimg.cn/large/c11fed42gy1fsqzpcluv6j20k308g3zg.jpg" alt=""></li>
+<li><p>最后放一张图，oh yeah!<br><img src="https://ws1.sinaimg.cn/large/c11fed42gy1fsqzpcluv6j20k308g3zg.jpg" alt=""></p>
+</li>
 </ul>
 <h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>感觉这个系统真的很适合我啊，决定以后开发环境都在这上面了，哈哈</p>
 <h3 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h3><blockquote>
