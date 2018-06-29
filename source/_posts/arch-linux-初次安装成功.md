@@ -134,6 +134,9 @@ reboot
 ```
 
 * 配置virtualbox，因为我这里是用virtualbox安装的archlinxu，在第一次重启系统的时候，会进入EFI shell，并没有进入系统，这里要修改如下：
+> ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsr24xtp5pj20iq0b7q30.jpg)
+> ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsr27494o9j20fw04hweb.jpg)
+> ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsr29cwtmrj20iu02zjr5.jpg)
 ```bash
 fs0:
 edit startup.nsh
@@ -155,13 +158,18 @@ sudo systemctl enable gdm
 [archlinuxcn]
 SigLevel = Optional TrustedOnly
 Server = http://mirrors.163.com/archlinux-cn/$arch
-```
-```bash
-pacman -Syy && pacman -Sy archlinuxcn-keyring
-pacman -S yaourt fakeroot
+
+pacman -Syu && pacman -Sy archlinuxcn-keyring                           # 更新
+pacman -S yaourt fakeroot                                               # 安装yaourt用于构建
 
 yaourt -S google-chrome wireshark-gtk vlc ffmpeg vim sublime-text-deve tcpdump
-yaourt -S fcix fcix-configtool screenfetch
+yaourt -S fcitx fcitx-configtool fcitx-im                               # 中文输入法
+    > 在.bashrc中添加一下环境变量
+    > export XMODIFIERS="@im=fcitx"
+    > export GTK_IM_MODULE="fcitx"
+    > export QT_IM_MODULE="fcitx"
+yaourt -S noto-fonts-cjk                                                # 中文字体
+yaourt -S screenfetch                                                   # 一个shell脚本
 ```
 * 最后放一张图，oh yeah!
 ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsqzpcluv6j20k308g3zg.jpg)
