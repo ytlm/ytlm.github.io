@@ -163,7 +163,7 @@ pacman -Syu && pacman -Sy archlinuxcn-keyring                           # 更新
 pacman -S yaourt fakeroot                                               # 安装yaourt用于构建
 
 yaourt -S google-chrome wireshark-gtk vlc ffmpeg vim sublime-text-deve tcpdump
-yaourt -S fcitx fcitx-configtool fcitx-im                               # 中文输入法
+yaourt -S fcitx fcitx-configtool fcitx-im fcitx-googlepinyin            # 中文输入法
     > 在.bashrc中添加一下环境变量
     > export XMODIFIERS="@im=fcitx"
     > export GTK_IM_MODULE="fcitx"
