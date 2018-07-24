@@ -69,7 +69,10 @@ ping www.baidu.com                    # 检查是否可用
 pacstrap -i /mnt base base-devel      # 安装基础系统，这个可能要花费一些时间，和网速有关
 
 genfstab -U /mnt >> /mnt/etc/fstab    # 生fstab文件
+
 cat /mnt/etc/fstab                    # 查看上一部的fstab是否生效，这里可以看到，每一个分区的情况
+
+# 对比**blkid**命令下硬盘分区UID和此文件是否对应，我这里就是因为没有mount好，生成的fstab也不对，导致安装完成无法启动
 
 ```
 
@@ -136,7 +139,8 @@ exit                       # 退出chroot环境，用`exit`命令或者直接使
 
 umount -R /mnt             # 卸载分区
 
-reboot                     # 重启系统
+shutdown -h now            # 关机，拔掉U盘，开机
+
 ```
 
 * 配置virtualbox，因为我这里是用virtualbox安装的archlinxu，在第一次重启系统的时候，会进入EFI shell，并没有进入系统，这里要修改如下：
