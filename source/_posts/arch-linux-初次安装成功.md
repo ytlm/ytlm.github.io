@@ -13,7 +13,7 @@ date: 2018-06-28 16:59:34
 
 ### 准备
 首先要到官网上下在[iso](https://www.archlinux.org/download/)，做一个u盘启动盘，或者软盘，或者用virtualbox安装。
-> linux系统可以直接用**dd**，windows系统可以用**ultraiso**
+> linux系统可以直接用**dd**，windows系统可以用**[rufus](https://rufus.akeo.ie/)**
 
 #### 确认引导方式
 用命令`ls /sys/firmware/efi/efivars`，[详细情况看这里](https://wiki.archlinux.org/index.php/GRUB)
@@ -60,7 +60,10 @@ mkdir /mnt/home mount /dev/sda2 /mnt/home         # `/home`分区挂载到`/mnt/
 ```bash
 vim /etc/pacman.d/mirrorlist          # 修改源镜像，一般是不用动的，我这里就是默认的
 
-dhcpcd                                # 检查网络，我这里没有动，网络自动已经连接好了
+dhcpcd                                # 检查网络，使用有线网络，我这里没有动，网络自动已经连接好了
+
+wifi-menu                             # 使用无线网络
+
 ping www.baidu.com                    # 检查是否可用
 
 pacstrap -i /mnt base base-devel      # 安装基础系统，这个可能要花费一些时间，和网速有关
