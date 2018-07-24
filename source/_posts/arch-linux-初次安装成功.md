@@ -132,8 +132,11 @@ visudo                               # 配置sudo
 
 ### 重启
 ```bash
-首先退出chroot环境，用`exit`命令或者直接使用`Ctrl+d`快捷键
-reboot
+exit                       # 退出chroot环境，用`exit`命令或者直接使用`Ctrl+d`快捷键
+
+umount -R /mnt             # 卸载分区
+
+reboot                     # 重启系统
 ```
 
 * 配置virtualbox，因为我这里是用virtualbox安装的archlinxu，在第一次重启系统的时候，会进入EFI shell，并没有进入系统，这里要修改如下：
