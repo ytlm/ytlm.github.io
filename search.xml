@@ -148,9 +148,9 @@
         <category>总结</category>
       </categories>
       <tags>
+        <tag>github</tag>
         <tag>hexo</tag>
         <tag>travis</tag>
-        <tag>github</tag>
       </tags>
   </entry>
   <entry>
@@ -273,8 +273,8 @@
         <category>随笔</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
         <tag>github</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
 </search>

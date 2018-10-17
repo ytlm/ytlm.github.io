@@ -58,11 +58,11 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
 
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.4.2">
 
 
 
@@ -79,7 +79,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '6.3.0',
+    version: '6.4.2',
     sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="这里简单介绍一下在centos环境下mariadb的安装和配置">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-24T10:09:34.583Z">
+<meta property="og:updated_time" content="2018-10-17T08:58:28.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos安装配置mariadb">
 <meta name="twitter:description" content="这里简单介绍一下在centos环境下mariadb的安装和配置">
@@ -866,7 +866,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -968,25 +968,25 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
 
 
 
   
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
 
 
 
@@ -1017,8 +1017,12 @@
             loadComments();
           } else {
             $(window).on('scroll.disqus_scroll', function () {
-              var scrollTop = document.documentElement.scrollTop;
-              if (scrollTop >= offsetTop) {
+              // offsetTop may changes because of manually resizing browser window or lazy loading images.
+              var offsetTop = $('#comments').offset().top - $(window).height();
+              var scrollTop = $(window).scrollTop();
+
+              // pre-load comments a bit? (margin or anything else)
+              if (offsetTop - scrollTop < 60) {
                 $(window).off('.disqus_scroll');
                 loadComments();
               }
@@ -1369,112 +1373,66 @@
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("w66AIpT8CCqdEQIGozVF1vN5-gzGzoHsz", "B3TqxrlHII3nMnQbAJ0qMshC");</script>
   <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
+    
     function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
       var url = $visitors.attr('id').trim();
       var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
 
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
           if (results.length > 0) {
             var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
             
-            counter.save(null, {
-              success: function(counter) {
-                
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
                   var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
-                
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
           } else {
             
-              var newcounter = new Counter();
-              /* Set ACL */
-              var acl = new AV.ACL();
-              acl.setPublicReadAccess(true);
-              acl.setPublicWriteAccess(true);
-              newcounter.setACL(acl);
-              /* End Set ACL */
-              newcounter.set("title", title);
-              newcounter.set("url", url);
-              newcounter.set("time", 1);
-              newcounter.save(null, {
-                success: function(newcounter) {
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
                   var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-                },
-                error: function(newcounter, error) {
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
                   console.log('Failed to create');
-                }
-              });
+                });
             
           }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
       });
     }
+    
 
     $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "w66AIpT8CCqdEQIGozVF1vN5-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "w66AIpT8CCqdEQIGozVF1vN5-gzGzoHsz",
+                'X-LC-Key': "B3TqxrlHII3nMnQbAJ0qMshC",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
     });
   </script>
 
