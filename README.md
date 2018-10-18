@@ -6,7 +6,7 @@ hexo with github page
 ```shell
 sudo npm install -g hexo-cli
 npm install
-git clone https://github.com/iissnan/hexo-theme-next themes/next
+git clone https://github.com/theme-next/hexo-theme-next.git themes/next
 cp themes/config/_config.yml themes/next/_config.yml
 ```
 
