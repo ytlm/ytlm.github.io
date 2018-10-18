@@ -160,7 +160,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。 文字简述 metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。 metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函数">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-18T03:05:06.413Z">
+<meta property="og:updated_time" content="2018-10-18T03:53:20.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lua学习之元表和元方法">
 <meta name="twitter:description" content="学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。 文字简述 metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。 metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函数">
@@ -454,7 +454,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-10-18 11:05:06" itemprop="dateModified" datetime="2018-10-18T11:05:06+08:00">2018-10-18</time>
+                <time title="Modified: 2018-10-18 11:53:20" itemprop="dateModified" datetime="2018-10-18T11:53:20+08:00">2018-10-18</time>
               
             
           </span>
@@ -1448,21 +1448,24 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
             })
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
             
           }
         })

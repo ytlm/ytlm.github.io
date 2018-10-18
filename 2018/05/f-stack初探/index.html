@@ -160,7 +160,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="介绍f-stack是基于DPDK(Data Plante Development Kit)实现的一个用户态的协议栈；DPDK主要是操作系统内核数据平面，重载网卡驱动，减少内核中断，内存拷贝和上下文切换；在此之前Linux数据平面和控制平面混在一起，不适合处理大规模的网络数据包；f-stack是基于DPDK从FressBsd协议栈移植而来的用户态协议栈；详细解释何以看相关blog，论坛和官网文档；">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-18T03:05:06.413Z">
+<meta property="og:updated_time" content="2018-10-18T03:53:20.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="f-stack初探">
 <meta name="twitter:description" content="介绍f-stack是基于DPDK(Data Plante Development Kit)实现的一个用户态的协议栈；DPDK主要是操作系统内核数据平面，重载网卡驱动，减少内核中断，内存拷贝和上下文切换；在此之前Linux数据平面和控制平面混在一起，不适合处理大规模的网络数据包；f-stack是基于DPDK从FressBsd协议栈移植而来的用户态协议栈；详细解释何以看相关blog，论坛和官网文档；">
@@ -454,7 +454,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-10-18 11:05:06" itemprop="dateModified" datetime="2018-10-18T11:05:06+08:00">2018-10-18</time>
+                <time title="Modified: 2018-10-18 11:53:20" itemprop="dateModified" datetime="2018-10-18T11:53:20+08:00">2018-10-18</time>
               
             
           </span>
@@ -1426,21 +1426,24 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
             })
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
             
           }
         })

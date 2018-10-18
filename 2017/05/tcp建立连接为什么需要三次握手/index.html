@@ -163,7 +163,7 @@
 <meta property="og:image" content="http://onl0zwdvm.bkt.clouddn.com/tcp/tcp-syn-ack.png!blog">
 <meta property="og:image" content="http://onl0zwdvm.bkt.clouddn.com/tcp/tcp-fin-ack.png!blog">
 <meta property="og:image" content="http://onl0zwdvm.bkt.clouddn.com/tcp/tcp-syn-fin-ack.png!blog">
-<meta property="og:updated_time" content="2018-10-18T03:05:06.417Z">
+<meta property="og:updated_time" content="2018-10-18T03:53:20.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tcp建立连接为什么需要三次握手">
 <meta name="twitter:description" content="前言 众所周知tcp传输层协议在建立连接的时候需要三次才能建立起一个真正的可靠连接，可是为什么是三次呢，不可以是两次，四次等等呢，可以自己思考一番，带着疑问可以看下文。  三次握手 在《计算机网络》一书中其中有提到，三次握手的目的是“为了防止已经失效的连接请求报文段突然又传到服务端，因而产生错误”，这种情况是：一端(client)A发出去的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个">
@@ -458,7 +458,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-10-18 11:05:06" itemprop="dateModified" datetime="2018-10-18T11:05:06+08:00">2018-10-18</time>
+                <time title="Modified: 2018-10-18 11:53:20" itemprop="dateModified" datetime="2018-10-18T11:53:20+08:00">2018-10-18</time>
               
             
           </span>
@@ -1444,21 +1444,24 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
             })
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
             
           }
         })
