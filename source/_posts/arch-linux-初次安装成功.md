@@ -66,7 +66,7 @@ wifi-menu                             # 使用无线网络
 
 ping www.baidu.com                    # 检查是否可用
 
-pacstrap -i /mnt base base-devel      # 安装基础系统，这个可能要花费一些时间，和网速有关
+pacstrap -i /mnt base base-devel dialog wpa_supplicant      # 安装基础系统，这个可能要花费一些时间，和网速有关
 
 genfstab -U /mnt >> /mnt/etc/fstab    # 生fstab文件
 
