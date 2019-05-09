@@ -25,18 +25,20 @@ cache:
         - node_modules
 
 before_script:
-    - git clone https://github.com/theme-next/hexo-theme-next.git themes/next --quiet
+    - git clone https://github.com/theme-next/hexo-theme-next.git themes/next
     - cp themes/config/_config.yml themes/next/_config.yml
-    - git clone --branch master https://github.com/ytlm/ytlm.github.io ./.deploy_git --quiet
+    - git clone --branch master https://github.com/ytlm/ytlm.github.io ./.deploy_git
 
 script:
-    - hexo clean --silent
-    - hexo generate --silent
-    - hexo deploy --silent
+    - hexo clean
+    - hexo generate
+    - hexo deploy
     - bash ./script/post.sh
 
 notifications:
-    email: ytlm.lv@gmail.com
+    email:
+        recipients:
+            - ytlm.lv@gmail.com
         on_success: change
         on_failure: always
     slack:
