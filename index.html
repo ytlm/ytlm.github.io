@@ -99,10 +99,16 @@
 <link rel="stylesheet" href="/css/main.css?v=7.1.1">
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
 
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.1.1">
 
 
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
 
 
 
@@ -116,9 +122,9 @@
     root: '/',
     scheme: 'Mist',
     version: '7.1.1',
-    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    back2top: ,
-    back2top_sidebar: ,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -169,11 +175,22 @@
   };
 </script>
 
-  <title>ytlm – stay hungry, stay foolish.</title>
+  <title>ytlm</title>
   
 
 
 
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-127763990-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-127763990-1');
+    }
+  </script>
 
 
 
@@ -277,6 +294,23 @@
         
         
           
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-about">
 
     
@@ -287,7 +321,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-about"></i> <br>About</a>
 
   </li>
         
@@ -321,24 +355,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Categories</a>
 
   </li>
 
@@ -468,6 +485,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -544,6 +577,12 @@
         
           <p>之前一直对archlinux有很大的兴趣，期间也去尝试去安装，不过全部都失败了，最近又有时间，终于安装完成，并且安装了gnome桌面。感觉用的时候是非常好的。everything is simple。首先说一下现在装好，感觉最难的就是磁盘分区和格式化，选择什么样的分区方法，怎样分区。</p>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/06/arch-linux-初次安装成功/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -649,6 +688,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -725,6 +780,12 @@
         
           <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><a href="http://www.f-stack.org/" target="_blank" rel="noopener">f-stack</a>是基于<a href="https://dpdk.org" target="_blank" rel="noopener">DPDK</a>(Data Plante Development Kit)实现的一个用户态的协议栈；DPDK主要是操作系统内核数据平面，重载网卡驱动，减少内核中断，内存拷贝和上下文切换；在此之前Linux数据平面和控制平面混在一起，不适合处理大规模的网络数据包；f-stack是基于DPDK从FressBsd协议栈移植而来的用户态协议栈；详细解释何以看相关blog，论坛和官网文档；</p>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/f-stack初探/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -830,6 +891,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -906,6 +983,12 @@
         
           <p>在C语言中宏定义#define 是一个很有用处的一个特性，在看其它一些源码的时候宏定义#define中会出现一些特殊的符号，主要有<code>#</code> <code>##</code> <code>do{}while(0)</code>，这里记录以下这几种特殊符号的含义和用法</p>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/02/define中特殊符号的用法/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -1011,6 +1094,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -1087,6 +1186,12 @@
         
           <p>systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。</p>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/12/初识SystemTap/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -1192,6 +1297,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -1268,6 +1389,12 @@
         
           <p>这里简单介绍一下在centos环境下mariadb的安装和配置</p>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/12/centos安装配置mariadb/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -1373,6 +1500,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -1449,6 +1592,12 @@
         
           <p>lua中的另一个高级功能是coroutine(协程)，协同式多线程的意思，不同于线程和进程，协程仅在显示的调用一个让出(yield)函数时才会挂起当前的执行，同一时间内只有一个协程正在运行，非抢占式的。</p>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/06/lua学习之协程/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -1554,6 +1703,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -1640,6 +1805,12 @@
 </li>
 </ul>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/06/lua学习之元表和元方法/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -1745,6 +1916,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -1826,6 +2013,12 @@
 <li>在《计算机网络》一书中其中有提到，三次握手的目的是“为了防止已经失效的连接请求报文段突然又传到服务端，因而产生错误”，这种情况是：一端(client)A发出去的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个网络节点上发生滞留，导致延迟到连接释放以后的某个时间才到达另一端(server)B。本来这是一个早已失效的报文段，但是B收到此失效的报文之后，会误认为是A再次发出的一个新的连接请求，于是B端就向A又发出确认报文，表示同意建立连接。如果不采用“三次握手”，那么只要B端发出确认报文就会认为新的连接已经建立了，但是A端并没有发出建立连接的请求，因此不会去向B端发送数据，B端没有收到数据就会一直等待，这样B端就会白白浪费掉很多资源。如果采用“三次握手”的话就不会出现这种情况，B端收到一个过时失效的报文段之后，向A端发出确认，此时A并没有要求建立连接，所以就不会向B端发送确认，这个时候B端也能够知道连接没有建立。</li>
 </ul>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/05/tcp建立连接为什么需要三次握手/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -1931,6 +2124,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -2011,6 +2220,12 @@
 <li>systemtap通过将脚本装换成C，运行系统的时候创建一个内核模块，当模块加在的时候，它通过挂载到内核的钩子来激活所有的探测事件。最后，这次事件结束的时候，挂载的钩子断开连接，移除模块。</li>
 </ul>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/04/安装systemtap生成openresty的火焰图/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -2116,6 +2331,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+              
+            
           </span>
 
           
@@ -2192,6 +2423,12 @@
         
           <h2 id="nginx简介"><a href="#nginx简介" class="headerlink" title="nginx简介"></a>nginx简介</h2><p>众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档<a href="http://nginx.org/" target="_blank" rel="noopener">nginx</a>，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。</p>
           <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/04/关于nginx缓存配置指令用法详解/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
@@ -2413,19 +2650,19 @@
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
-                友情链接
+                Links
               </div>
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="http://amjy.github.io/" title="http://amjy.github.io/" rel="noopener" target="_blank">老大</a>
+                    <a href="http://amjy.github.io/" title="http://amjy.github.io/" rel="noopener" target="_blank">amjy</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
-                    <a href="http://vcpu.github.io/" title="http://vcpu.github.io/" rel="noopener" target="_blank">龙哥</a>
+                    <a href="http://vcpu.github.io/" title="http://vcpu.github.io/" rel="noopener" target="_blank">vcpu</a>
                   </li>
                 
               </ul>
@@ -2487,6 +2724,11 @@
       </div>
     </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
     
@@ -2859,7 +3101,7 @@
             }
           }
 
-          if ('auto' === 'auto') {
+          if ('auto' === 'manual') {
             input.addEventListener('input', inputEventFunction);
           } else {
             $('.search-icon').click(inputEventFunction);
@@ -2985,16 +3227,6 @@
   
 
   
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
 
   
 
@@ -3008,7 +3240,7 @@
 
   
 <script>
-  $('.highlight').not('.gist .highlight').each(function(i, e) {
+  $('.highlight').each(function(i, e) {
     var $wrap = $('<div>').addClass('highlight-wrap');
     $(e).after($wrap);
     $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
