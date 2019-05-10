@@ -154,7 +154,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="利用hexo, travis, github联合的方式进行博客的创建并且自动发布. 1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:  (1). yml格式的配置冒号(:)后必须要有一个空格.(2). hexo generate不生效的时候要用hexo clean清空缓存.(3). h">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-05-10T03:49:49.936Z">
+<meta property="og:updated_time" content="2019-05-10T05:32:11.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo travis github">
 <meta name="twitter:description" content="利用hexo, travis, github联合的方式进行博客的创建并且自动发布. 1,首先是在github创建对应的github pages, 网上有很多教程,这里就不再赘述.2,安装hexo环境用于生成静态博客,这里简单的列举下自己遇到的坑:  (1). yml格式的配置冒号(:)后必须要有一个空格.(2). hexo generate不生效的时候要用hexo clean清空缓存.(3). h">
@@ -305,7 +305,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archives</a>
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
         
@@ -322,7 +322,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-about"></i> <br>About</a>
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -339,7 +339,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tag"></i> <br>Tags</a>
 
   </li>
         
@@ -356,7 +356,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
 
@@ -497,7 +497,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-10 11:49:49" itemprop="dateModified" datetime="2019-05-10T11:49:49+08:00">2019-05-10</time>
+                <time title="Modified: 2019-05-10 13:32:11" itemprop="dateModified" datetime="2019-05-10T13:32:11+08:00">2019-05-10</time>
               
             
           </span>
@@ -604,6 +604,30 @@
     
 
     
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>ytlm</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://ytlm.github.io/2017/03/hexo-travis-github/" title="hexo travis github">https://ytlm.github.io/2017/03/hexo-travis-github/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
@@ -705,7 +729,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/archives/">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">posts</span>
@@ -719,7 +743,7 @@
                 <div class="site-state-item site-state-categories">
                   
                     
-                      <a href="/categories/">
+                      <a href="/categories">
                     
                   
                     
@@ -756,7 +780,7 @@
                 <div class="site-state-item site-state-tags">
                   
                     
-                      <a href="/tags/">
+                      <a href="/tags">
                     
                   
                     
@@ -1313,7 +1337,7 @@
             }
           }
 
-          if ('auto' === 'manual') {
+          if ('auto' === 'auto') {
             input.addEventListener('input', inputEventFunction);
           } else {
             $('.search-icon').click(inputEventFunction);
