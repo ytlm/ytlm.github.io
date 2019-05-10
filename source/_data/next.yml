@@ -16,16 +16,26 @@ seo: true
 
 menu:
     home: / || home
-    about: /about/ || about
-    tags: /tags/ || tags
-    categories: /categories/ || categories
-    archives: /archives/ || archives
+    about: /about || user
+    tags: /tags || tag
+    categories: /categories || th
+    archives: /archives || archive
 
 scheme: Mist
 
+index_generator:
+    per_page: 5
+
+archive_generator:
+    per_page: 20
+    yearly: true
+    monthly: true
+
+tag_generator:
+    per_page: 10
+
 local_search:
     enable: true
-    trigger: manual
 
 social:
     GitHub: https://github.com/ytlm || github
@@ -46,6 +56,12 @@ sidebar:
 codeblock:
     copy_button:
         enable: true
+
+highlight_theme: 'night eighties'
+
+creative_commons:
+    license: by-nc-sa
+    post: true
 
 font:
     enable: true
