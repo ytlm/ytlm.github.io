@@ -1,0 +1,76 @@
+favicon:
+    medium: /favicon.ico
+
+footer:
+    since: 2015
+    icon:
+        name: heart
+    powered:
+        enable: false
+        version: false
+    theme:
+        enable: false
+        version: false
+
+seo: true
+
+menu:
+    home: / || home
+    about: /about/ || about
+    tags: /tags/ || tags
+    categories: /categories/ || categories
+    archives: /archives/ || archives
+
+scheme: Mist
+
+local_search:
+    enable: true
+    trigger: manual
+
+social:
+    GitHub: https://github.com/ytlm || github
+
+links_layout: block
+links:
+    amjy: http://amjy.github.io/
+    vcpu: http://vcpu.github.io/
+
+avatar:
+    url: /images/head.png
+    rounded: true
+    rotated: true
+
+sidebar:
+    position: right
+
+codeblock:
+    copy_button:
+        enable: true
+
+font:
+    enable: true
+    global:
+        family: Source Code Pro
+    headings:
+        family: Source Code Pro
+    posts:
+        family: Source Code Pro
+    logo:
+        family: Source Code Pro
+    codes:
+        family: Source Code Pro
+
+disqus:
+    enable: true
+    shortname: ytlm
+
+google_analytics:
+    tracking_id: UA-127763990-1
+    localhost_ignored: true
+
+leancloud_visitors:
+    enable: true
+    app_id: w66AIpT8CCqdEQIGozVF1vN5-gzGzoHsz
+    app_key: B3TqxrlHII3nMnQbAJ0qMshC
+    security: false
+
