@@ -63,7 +63,7 @@ categories:
 > 3. sudo ./flamegraph.pl /tmp/nginx.cbt > /tmp/nginx.svg
 > 4. 用浏览器打开/tmp/nginx.svg
 
-![openresty C层面的火焰图](http://onl0zwdvm.bkt.clouddn.com/nginx.svg)
+![openresty C层面的火焰图](https://drive.google.com/uc?export=view&id=1WxAEn4a10UGygSMhyc8sSQHgt4nwWg6c)
 > 我用wrk给nginx的压力还不是很大大概CPU才20%左右，所以这个不是很准确的；但是也可以看出一些问题，比如看出在发送数据的时候还是有问题的，都在body_filter阶段，可能因为我用了很多的buffer的原因
 
 * 采样lua层面的信息进行分析，在编译luaJIT的时候需要添加`CCDEBUG=-g`参数

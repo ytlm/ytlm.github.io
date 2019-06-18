@@ -18,12 +18,12 @@ date: 2018-06-28 16:59:34
 #### 确认引导方式
 用命令`ls /sys/firmware/efi/efivars`，[详细情况看这里](https://wiki.archlinux.org/index.php/GRUB)
 * `ls: cannot access '/sys/firmware/efi/efivars': No such file or directory` 这样表示是BIOS引导方式
-* ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsqorm8bw7j20me0j0ab0.jpg)如果显示的是这样表示是UEFI引导方式
+* ![](https://drive.google.com/uc?export=view&id=1lFfBZtn6oL1W1nelZuSl8sCATzpXZD5z)如果显示的是这样表示是UEFI引导方式
 > 我这里就是这样的，为UEFI引导方式启动的，一下全部按照这种方式进行操作的。
 
 #### 分区并格式化
 分区用的是fdisk，当然还有其它的工具分区，基本上都是大同小异的
-+ [1] 首先用`fdisk -l`查看磁盘情况，这里我只有一块磁盘，所以显示的是`/dev/sda`还有此块磁盘相关的一些信息如下：![](https://ws1.sinaimg.cn/large/c11fed42gy1fsqp2v1xpyj20e004ydfq.jpg)
++ [1] 首先用`fdisk -l`查看磁盘情况，这里我只有一块磁盘，所以显示的是`/dev/sda`还有此块磁盘相关的一些信息如下：![](https://drive.google.com/uc?export=view&id=15MIAiNNPz0J19got9ErdWhp-8FfbxNAk)
 
 + [2] 我这里分区是按照`/`，`/boot` , `/home`, `swap`这四个分区
 > 大小 `/` 10G ， `/home` 5G ， `/boot` 1G ， `swap` 4G
@@ -31,14 +31,14 @@ date: 2018-06-28 16:59:34
 
 +  [3] 然后`fdisk /dev/sda`，开始分区，[详细情况看这里](https://wiki.archlinux.org/index.php/Fdisk)
     - (3.1) 首先输入 `g` create a new empty GPT partition table
-        * ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsqpc1ikvsj20gx01gq2p.jpg)
+        * ![](https://drive.google.com/uc?export=view&id=1fp_ufEkX_RCeCzAfAyLPkBAU8CuHE5eT)
     - (3.2) 创建分区，详细如下图，分别创建4个分区， 输入`w`保存
-        * ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsqpk87oylj20io02z0sk.jpg)
+        * ![](https://drive.google.com/uc?export=view&id=1gzp4RPP4cy2p-jXw794bfTeYf5NsMQ3s)
         * 最后分区结果如下: 其中 `/dev/sda1`代表`/`，`/dev/sda2`代表`/home`，`/dev/sda3`代表`/boot`，`/dev/sda4`代表`swap`
-        * ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsqple6avrj20eg069jrc.jpg)
+        * ![](https://drive.google.com/uc?export=view&id=14wS7E084xrQNzBWMA8iM9UNH-nCsKiAs)
     - (3.3) 修改分区类型，`/dev/sda1`和`/dev/sda2`不变，默认就好，`/dev/sda3`改成`UFI`，`/dev/sda4`改成`linux swap`
         * 输入 `t`； 选择需要修改类型的分区编号； 输入`L`查看所有分区类型；选择需要的类型的编号； 确认； 输入`w`保存。
-        * ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsqpwlcfj9j20er064glk.jpg)
+        * ![](https://drive.google.com/uc?export=view&id=1GXHIjz14aF-7jlJG-I2q3h0FQ7qi_all)
 + [4] 格式化分区
 ```bash
 mkfs.ext4 /dev/sda1           # /     格式化为 ext4
@@ -144,9 +144,9 @@ shutdown -h now            # 关机，拔掉U盘，开机
 ```
 
 * 配置virtualbox，因为我这里是用virtualbox安装的archlinxu，在第一次重启系统的时候，会进入EFI shell，并没有进入系统，这里要修改如下：
-> ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsr24xtp5pj20iq0b7q30.jpg)
-> ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsr27494o9j20fw04hweb.jpg)
-> ![](https://ws1.sinaimg.cn/large/c11fed42gy1fsr29cwtmrj20iu02zjr5.jpg)
+> ![](https://drive.google.com/uc?export=view&id=1JbhKYyY-isnwA-qsuMgpSeYksdl673Mo)
+> ![](https://drive.google.com/uc?export=view&id=1qBgHFilPxMwoR1ulaPTSnJlPuKch8up0)
+> ![](https://drive.google.com/uc?export=view&id=1prTLwyU3mKzXkRoQAaHHc_lULZ8W5o_T)
 ```bash
 fs0:
 edit startup.nsh
@@ -182,7 +182,7 @@ yaourt -S noto-fonts-cjk                                                # 中文
 yaourt -S screenfetch                                                   # 一个shell脚本
 ```
 * 最后放一张图，oh yeah!
-![](https://ws1.sinaimg.cn/large/c11fed42gy1fsqzpcluv6j20k308g3zg.jpg)
+![](https://drive.google.com/uc?export=view&id=1s3kku_8TcZwSmtKnB18DeLNI0GfHzVyM)
 
 ### 后记
 感觉这个系统真的很适合我啊，决定以后开发环境都在这上面了，哈哈
