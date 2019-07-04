@@ -154,7 +154,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-28T09:23:26.479Z">
+<meta property="og:updated_time" content="2019-07-04T10:25:44.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识SystemTap">
 <meta name="twitter:description" content="systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。">
@@ -497,7 +497,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-28 17:23:26" itemprop="dateModified" datetime="2019-06-28T17:23:26+08:00">2019-06-28</time>
+                <time title="Modified: 2019-07-04 18:25:44" itemprop="dateModified" datetime="2019-07-04T18:25:44+08:00">2019-07-04</time>
               
             
           </span>
@@ -575,6 +575,7 @@
       
         <p>systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。</p>
 <a id="more"></a>
+
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
 <li>Cenots 7.4.1708 Core</li>
 <li>Kernel 3.10.0-693.11.1.el7.x86_64</li>
@@ -605,6 +606,7 @@
 <li>timer.jiffies(1000)；每隔1000个内核<a href="http://man7.org/linux/man-pages/man7/time.7.html" target="_blank" rel="noopener">jiffy</a>触发一次</li>
 </ul>
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env stap</span><br><span class="line">global syscalllist</span><br><span class="line">probe begin &#123;</span><br><span class="line">    printf(&quot;start ... \n&quot;)</span><br><span class="line">&#125;</span><br><span class="line">probe syscall.* &#123;</span><br><span class="line">    syscalllist[pid(), execname()]++</span><br><span class="line">&#125;</span><br><span class="line">probe timer.s(5) &#123;</span><br><span class="line">    printf(&quot;-----------------------------\n&quot;)</span><br><span class="line">    foreach ( [pid, cname] in syscalllist ) &#123;</span><br><span class="line">        printf(&quot;%s[%d] = %d\n&quot;, cname, pid, syscalllist[pid, cname])</span><br><span class="line">    &#125;</span><br><span class="line">    delete syscalllist</span><br><span class="line">    exit()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>begin 开始的时候会打印出”start … “<br>syscall.* 这里会统计所有的系统调用，并按照pid和name进程名称的方式存到syscalllist数组中<br>timer.s(5) 每隔5秒就会调用一次，这里遍历syscalllist数组，打印相关信息<br>这里只打印了当前5秒之内的系统调用，之后就exit()退出了<br>通过<code>stap call.stp</code>来执行call.stp这个脚本，下面是我这里运行的时候截取的一部分输出</p>
 <blockquote>
 <p>stapio[24669] = 93<br>EMT-1[8464] = 11181<br>EMT-0[8464] = 7126<br>Chrome_IOThread[3595] = 4852<br>Timer[8464] = 670<br>chrome[3595] = 11339<br>Chrome_ChildIOT[3818] = 2418<br>Compositor[3818] = 1500<br>chrome[4276] = 1624<br>nginx[21997] = 3<br>avahi-daemon[854] = 9888<br>VirtualBox[8464] = 423<br>X[1785] = 966<br>gnome-shell[2557] = 1373<br>VUsbPeriodFrm[8464] = 512<br>INTNET-RECV[8464] = 611</p>
@@ -616,7 +618,7 @@
 <p><a href="https://www.ibm.com/developerworks/cn/linux/l-systemtap/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-systemtap/index.html</a><br><a href="https://sourceware.org/systemtap/" target="_blank" rel="noopener">https://sourceware.org/systemtap/</a><br><a href="https://en.wikipedia.org/wiki/DTrace" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/DTrace</a><br><a href="https://en.wikipedia.org/wiki/SystemTap" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/SystemTap</a></p>
 </blockquote>
 <hr>
-<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+<p><strong>* 如有疑问欢迎批评指正，谢谢！ *</strong></p>
 
       
     </div>
@@ -1562,5 +1564,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":true,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>

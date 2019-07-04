@@ -154,7 +154,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="总结一下关于声明和定义的区别，以及static和extern的异同">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-28T09:23:26.479Z">
+<meta property="og:updated_time" content="2019-07-04T10:25:44.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="static和extern，定义和声明">
 <meta name="twitter:description" content="总结一下关于声明和定义的区别，以及static和extern的异同">
@@ -497,7 +497,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-28 17:23:26" itemprop="dateModified" datetime="2019-06-28T17:23:26+08:00">2019-06-28</time>
+                <time title="Modified: 2019-07-04 18:25:44" itemprop="dateModified" datetime="2019-07-04T18:25:44+08:00">2019-07-04</time>
               
             
           </span>
@@ -573,7 +573,9 @@
       
 
       
-        <p>总结一下关于声明和定义的区别，以及static和extern的异同<br><a id="more"></a></p>
+        <p>总结一下关于声明和定义的区别，以及static和extern的异同</p>
+<a id="more"></a>
+
 <p><strong><em>声明和定义</em></strong></p>
 <blockquote>
 <p>1,广义角度声明包含定义，定义是声明的一个特例。<br>2,定义是会简历存储空间的，而声明则不会，int a;声明a的同时，也定义了a，建立了存储空间；extern b;只是声明了b，并不是定义b，表示b是在其它文件中定义的。</p>
@@ -583,53 +585,51 @@
 <thead>
 <tr>
 <th>名称</th>
-<th style="text-align:center">存储位置</th>
-<th style="text-align:right">作用范围</th>
-<th style="text-align:right">赋值</th>
+<th align="center">存储位置</th>
+<th align="right">作用范围</th>
+<th align="right">赋值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>全局变量</td>
-<td style="text-align:center">静态存储区</td>
-<td style="text-align:right">从定义位置到文件结束，<br>且能够被其它文件引用。</td>
-<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空</td>
+<td align="center">静态存储区</td>
+<td align="right">从定义位置到文件结束，<br>且能够被其它文件引用。</td>
+<td align="right">若被赋值则为赋值<br>若没有则为0或空</td>
 </tr>
 <tr>
 <td>静态全局变量</td>
-<td style="text-align:center">静态存储区</td>
-<td style="text-align:right">从定义位置到文件结束，<br>且不能够被其它文件引用，<br>限定于定义的文件内。</td>
-<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空</td>
+<td align="center">静态存储区</td>
+<td align="right">从定义位置到文件结束，<br>且不能够被其它文件引用，<br>限定于定义的文件内。</td>
+<td align="right">若被赋值则为赋值<br>若没有则为0或空</td>
 </tr>
 <tr>
 <td>局部变量</td>
-<td style="text-align:center">非静态存储区</td>
-<td style="text-align:right">从定义位置到函数执行结束。</td>
-<td style="text-align:right">若被赋值则为赋值<br>若没有则为随机数</td>
+<td align="center">非静态存储区</td>
+<td align="right">从定义位置到函数执行结束。</td>
+<td align="right">若被赋值则为赋值<br>若没有则为随机数</td>
 </tr>
 <tr>
 <td>静态局部变量</td>
-<td style="text-align:center">静态存储区</td>
-<td style="text-align:right">从定义位置到文件结束。</td>
-<td style="text-align:right">若被赋值则为赋值<br>若没有则为0或空<br>且只被赋值一次，以后再用到还是上次的值</td>
+<td align="center">静态存储区</td>
+<td align="right">从定义位置到文件结束。</td>
+<td align="right">若被赋值则为赋值<br>若没有则为0或空<br>且只被赋值一次，以后再用到还是上次的值</td>
 </tr>
 <tr>
 <td>静态函数</td>
-<td style="text-align:center">栈区</td>
-<td style="text-align:right">定义所在文件内。</td>
-<td style="text-align:right">-</td>
+<td align="center">栈区</td>
+<td align="right">定义所在文件内。</td>
+<td align="right">-</td>
 </tr>
 <tr>
 <td>非静态函数</td>
-<td style="text-align:center">栈区</td>
-<td style="text-align:right">可以被出定义所在文件外的<br>其它文件调用。</td>
-<td style="text-align:right">-</td>
+<td align="center">栈区</td>
+<td align="right">可以被出定义所在文件外的<br>其它文件调用。</td>
+<td align="right">-</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong><em>extern</em></strong><br>extern 只在头文件中声明<br>static 只在源文件中定义</p>
 <hr>
-<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+<p><strong>* 如有疑问欢迎批评指正，谢谢！ *</strong></p>
 
       
     </div>
@@ -1549,5 +1549,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":true,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>

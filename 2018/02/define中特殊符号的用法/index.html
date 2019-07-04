@@ -154,7 +154,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="在C语言中宏定义#define 是一个很有用处的一个特性，在看其它一些源码的时候宏定义#define中会出现一些特殊的符号，主要有# ## do{}while(0)，这里记录以下这几种特殊符号的含义和用法">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-28T09:23:26.479Z">
+<meta property="og:updated_time" content="2019-07-04T10:25:44.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="define中特殊符号的用法">
 <meta name="twitter:description" content="在C语言中宏定义#define 是一个很有用处的一个特性，在看其它一些源码的时候宏定义#define中会出现一些特殊的符号，主要有# ## do{}while(0)，这里记录以下这几种特殊符号的含义和用法">
@@ -497,7 +497,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-28 17:23:26" itemprop="dateModified" datetime="2019-06-28T17:23:26+08:00">2019-06-28</time>
+                <time title="Modified: 2019-07-04 18:25:44" itemprop="dateModified" datetime="2019-07-04T18:25:44+08:00">2019-07-04</time>
               
             
           </span>
@@ -575,16 +575,19 @@
       
         <p>在C语言中宏定义#define 是一个很有用处的一个特性，在看其它一些源码的时候宏定义#define中会出现一些特殊的符号，主要有<code>#</code> <code>##</code> <code>do{}while(0)</code>，这里记录以下这几种特殊符号的含义和用法</p>
 <a id="more"></a>
+
 <p>1，<code>#</code> 字符串化操作符</p>
 <blockquote>
 <p>可以将宏定义中传入的参数转换成用一对双引号括起来的字符串</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STRING(str) #str</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argv, <span class="keyword">char</span>* argc[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* str1 = STRING(test1);</span><br><span class="line">    <span class="keyword">char</span>* str2 = STRING( a bc    e);    <span class="comment">// 参数中间出现空格，会将连续的空格替换成一个</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"str1 : %s\n"</span>, str1);        <span class="comment">//结果 str1 : test1</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"str2 : %s\n"</span>, str2);        <span class="comment">//结果 str2 : a bc e</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>2，<code>##</code>符号连接符</p>
 <blockquote>
 <p>将宏定义中的多个参数连结成一个参数</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONCAT(n) t##n</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PRINT(n) printf(<span class="meta-string">"t"</span> #n <span class="meta-string">" = %d\n"</span>, t ## n)  <span class="comment">// `##` 前后空格可有可无</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argv, <span class="keyword">char</span>* argc[])</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">CONCAT</span><span class="params">(<span class="number">1</span>)</span> </span>= <span class="number">10</span>;         <span class="comment">// int t1 = 10;</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">CONCAT</span><span class="params">(<span class="number">2</span>)</span> </span>= <span class="number">20</span>;         <span class="comment">// int t2 = 20;</span></span><br><span class="line">    PRINT(<span class="number">1</span>);                   <span class="comment">// printf("t1 = %d\n", t1);</span></span><br><span class="line">    PRINT(<span class="number">2</span>);                   <span class="comment">// printf("t2 = %d\n", t2);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>3，<code>do{}while(0)</code></p>
 <ul>
 <li><p>不需要do{}while(0)的情况</p>
@@ -592,10 +595,11 @@
 </li>
 <li><p>仅仅使用{}的情况</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SWAP(x, y) &#123;int tmp; tmp = x; x = y; y = tmp;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(x &gt; y)</span><br><span class="line">    SWAP(x y);</span><br><span class="line"><span class="comment">//这种情况下编译直接报错了，因为多了一个`;`</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <hr>
-<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+<p><strong>* 如有疑问欢迎批评指正，谢谢！ *</strong></p>
 
       
     </div>
@@ -1517,5 +1521,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":true,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>

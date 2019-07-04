@@ -154,7 +154,7 @@
 <meta property="og:site_name" content="ytlm">
 <meta property="og:description" content="nginx简介众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档nginx，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-28T09:23:26.479Z">
+<meta property="og:updated_time" content="2019-07-04T10:25:44.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于nginx缓存配置指令用法详解">
 <meta name="twitter:description" content="nginx简介众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档nginx，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。">
@@ -497,7 +497,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-28 17:23:26" itemprop="dateModified" datetime="2019-06-28T17:23:26+08:00">2019-06-28</time>
+                <time title="Modified: 2019-07-04 18:25:44" itemprop="dateModified" datetime="2019-07-04T18:25:44+08:00">2019-07-04</time>
               
             
           </span>
@@ -575,8 +575,9 @@
       
         <h2 id="nginx简介"><a href="#nginx简介" class="headerlink" title="nginx简介"></a>nginx简介</h2><p>众所周知nginx近些年在服务器领域占据着很重要的作用，目前我主要接触的关于nginx是作为代理服务器来用的，至于再详细的，有兴趣的可以查阅相关文档<a href="http://nginx.org/" target="_blank" rel="noopener">nginx</a>，就不在这里赘述。本文主要讲述的是把nginx配置成一个缓存服务器组件来用，尽可能详细的把nginx关于缓存的指令解释清楚。</p>
 <a id="more"></a>
+
 <h2 id="配置指令详解"><a href="#配置指令详解" class="headerlink" title="配置指令详解"></a>配置指令详解</h2><ul>
-<li><p><strong><em> proxy_buffering </em></strong> on | off</p>
+<li><p><strong>* proxy_buffering *</strong> on | off</p>
 <blockquote>
 <ul>
 <li>控制着缓存的总开关，如果设置off缓存就不会生效；设置on缓存相关的配置才会生效；</li>
@@ -585,16 +586,16 @@
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache </em></strong>  <em>zone</em> | off</p>
+<li><p><strong>* proxy_cache *</strong>  <em>zone</em> | off</p>
 <blockquote>
 <ul>
 <li>定义一个共享内存用于缓存，其中主要存一些缓存文件的主要信息，用于检索；</li>
-<li>同一个共享内存可以被用于不同的地方，<em> zone </em>可以支持配置变量；</li>
+<li>同一个共享内存可以被用于不同的地方，* zone *可以支持配置变量；</li>
 <li>off 的意思是禁用从上层继承的缓存配置；</li>
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_background_update </em></strong>  on | off</p>
+<li><p><strong>* proxy_cache_background_update *</strong>  on | off</p>
 <blockquote>
 <ul>
 <li>允许在后台发送子请求来更新过期的缓存文件；</li>
@@ -602,21 +603,21 @@
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_bypass </em></strong>  string …</p>
+<li><p><strong>* proxy_cache_bypass *</strong>  string …</p>
 <blockquote>
 <ul>
 <li>如果配置的字符串传中有一个不为空并且不等于”0”，这时候这个请求的相应就不会从缓存中取，应该到后端去取数据；</li>
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_no_cache </em></strong> string …</p>
+<li><p><strong>* proxy_no_cache *</strong> string …</p>
 <blockquote>
 <ul>
 <li>如果响应的数据中有任何一个满足让字符串中的值至少有一个不为空并且不等于”0”，那么这个响应就不会被缓存下来；</li>
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_key </em></strong> string</p>
+<li><p><strong>* proxy_cache_key *</strong> string</p>
 <blockquote>
 <ul>
 <li>配置缓存的key，缓存相关的内容都是根据这个key来进行查找的；</li>
@@ -624,14 +625,14 @@
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_lock </em></strong> on | off</p>
+<li><p><strong>* proxy_cache_lock *</strong> on | off</p>
 <blockquote>
 <ul>
 <li>设置为on的时候，表示在同一时间如果请求同一个cache key的多个请求在没有缓存的情况下只有一个请求会通过后端取数据，其它的请求直接取上个请求的缓存，或者等到超时，直接也去后端去取数据；</li>
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_lock_timeout </em></strong> time</p>
+<li><p><strong>* proxy_cache_lock_timeout *</strong> time</p>
 <blockquote>
 <ul>
 <li>这个超时时间就是上面的超时时间，如果proxy_cache_lock打开的时候，同一时间同一资源只有一个请求会到后端取数据，其它的请求如果达到这个超时时间之后也会直接到后端取数据；</li>
@@ -639,7 +640,7 @@
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_lock_age </em></strong> time</p>
+<li><p><strong>* proxy_cache_lock_age *</strong> time</p>
 <blockquote>
 <ul>
 <li>这个的意思是在time时间内一个请求还没有将数据完全从后端取下来并且缓存，那么下一个请求就会被发送到后端，并且这时候也要把数据缓存下来；</li>
@@ -647,21 +648,21 @@
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_methods </em></strong> GET | HEAD | POST …</p>
+<li><p><strong>* proxy_cache_methods *</strong> GET | HEAD | POST …</p>
 <blockquote>
 <ul>
 <li>如果客户端请求的方法在这个配置的方法列表中，这个请求才有可能被缓存，缓存还受其它的条件制约；</li>
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_path </em></strong> path [一堆的可选参数]</p>
+<li><p><strong>* proxy_cache_path *</strong> path [一堆的可选参数]</p>
 <blockquote>
 <ul>
 <li>proxy_cache_path /data/nginx/cachet levels=1:2 use_temp_path=off keys_zone=data:60m inactive=365d max_size=10m；</li>
 <li>上面是一个典型的配置，下面来解释一下每个的含义 ：<blockquote>
 <ul>
 <li>/data/nginx/cachet : 这个表示缓存文件实际的存储路径；</li>
-<li>levels=1:2 : 这个表示缓存文件的分级存储，如果不这样设置的话所有的文件都在同一个文件夹下面，看着比较乱，如果配成这样，缓存文件在实际上大概像这样 <strong><em> /data/nginx/cache/c/29/b7f54b2df7773722d382f4809d65029c </em></strong>；</li>
+<li>levels=1:2 : 这个表示缓存文件的分级存储，如果不这样设置的话所有的文件都在同一个文件夹下面，看着比较乱，如果配成这样，缓存文件在实际上大概像这样 <strong>* /data/nginx/cache/c/29/b7f54b2df7773722d382f4809d65029c *</strong>；</li>
 <li>ues_temp_path=off : 禁用缓存响应到临时目录，直接缓存到缓存目录；</li>
 <li>keys_zone=data:60m : 设置一个共享内存和大小，里面存储的是缓存文件的一些key信息，在测试的时候发现1m的共享内存大概能够存8k左右个key；</li>
 <li>inactive=365d : 设置缓存时间，这个也受其它的条件限制，比如说响应头有Cache-Control: max-age=10，这样只能缓存10s；</li>
@@ -672,7 +673,7 @@
 </ul>
 </blockquote>
 </li>
-<li><p><strong><em> proxy_cache_valid </em></strong> [code … ] time</p>
+<li><p><strong>* proxy_cache_valid *</strong> [code … ] time</p>
 <blockquote>
 <ul>
 <li>设置特定的响应状态码缓存特定的时间；</li>
@@ -689,7 +690,7 @@
 <p><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html" target="_blank" rel="noopener">http://nginx.org/en/docs/http/ngx_http_proxy_module.html</a></p>
 </blockquote>
 <hr>
-<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+<p><strong>* 如有疑问欢迎批评指正，谢谢！ *</strong></p>
 
       
     </div>
@@ -1637,5 +1638,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":true,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>

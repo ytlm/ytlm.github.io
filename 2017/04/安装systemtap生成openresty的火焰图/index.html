@@ -155,7 +155,7 @@
 <meta property="og:description" content="SystemTap简单介绍 systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。 基本思想是name events(命名事件)，并给它们处理程序。每当事件发生的时候，linux内核运行处理程序，就像一个子程序一样，之后恢复。处理程序是一系列的脚本语言，">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://drive.google.com/uc?export=view&id=1WxAEn4a10UGygSMhyc8sSQHgt4nwWg6c">
-<meta property="og:updated_time" content="2019-06-28T09:23:26.479Z">
+<meta property="og:updated_time" content="2019-07-04T10:25:44.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装systemmap生成openresty的火焰图">
 <meta name="twitter:description" content="SystemTap简单介绍 systemtap是一个诊断linux系统性能和功能问题的开源软件，并且允许开发人员编写和重用简单的脚本深入探查linux系统的活动，可以快速安全的提取过滤总结数据，以便能够诊断复杂的性能或功能问题。 基本思想是name events(命名事件)，并给它们处理程序。每当事件发生的时候，linux内核运行处理程序，就像一个子程序一样，之后恢复。处理程序是一系列的脚本语言，">
@@ -499,7 +499,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-28 17:23:26" itemprop="dateModified" datetime="2019-06-28T17:23:26+08:00">2019-06-28</time>
+                <time title="Modified: 2019-07-04 18:25:44" itemprop="dateModified" datetime="2019-07-04T18:25:44+08:00">2019-07-04</time>
               
             
           </span>
@@ -581,12 +581,13 @@
 <li>systemtap通过将脚本装换成C，运行系统的时候创建一个内核模块，当模块加在的时候，它通过挂载到内核的钩子来激活所有的探测事件。最后，这次事件结束的时候，挂载的钩子断开连接，移除模块。</li>
 </ul>
 <a id="more"></a>
+
 <blockquote>
 <p>systemtap工具功能很强大，目前刚接触，在此仅仅通过<a href="https://sourceware.org/systemtap/tutorial/Introduction.html" target="_blank" rel="noopener">官网</a>做一些简单的介绍。</p>
 </blockquote>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
 <li>环境 centos 7，直接用<code>yum install systemtap systemtap-runtime</code>安装，如果遇到依赖包的问题，安装所需要的依赖就好了；</li>
-<li>另外需要注意一个重要的问题是需要安装kernel-debuginfo和kernel-debuginfo-common；可以直接用yum安装也可以<a href="http://debuginfo.centos.org/" target="_blank" rel="noopener">下载rpm</a>包安装；但是 <strong> 必须要和kernel版本一样 </strong></li>
+<li>另外需要注意一个重要的问题是需要安装kernel-debuginfo和kernel-debuginfo-common；可以直接用yum安装也可以<a href="http://debuginfo.centos.org/" target="_blank" rel="noopener">下载rpm</a>包安装；但是 ** 必须要和kernel版本一样 **</li>
 <li>安装完成后可以用<code>stap -v -e &#39;probe vfs.read {printf(&quot;read performed\n&quot;); exit()}&#39;</code>测试，如果不出意外的话会正常输出的</li>
 </ul>
 <blockquote>
@@ -635,7 +636,7 @@
 <li>用浏览器打开/tmp/nginx.svg</li>
 </ol>
 </blockquote>
-<p><img src="https://drive.google.com/uc?export=view&amp;id=1WxAEn4a10UGygSMhyc8sSQHgt4nwWg6c" alt="openresty C层面的火焰图"></p>
+<p><img src="https://drive.google.com/uc?export=view&id=1WxAEn4a10UGygSMhyc8sSQHgt4nwWg6c" alt="openresty C层面的火焰图"></p>
 <blockquote>
 <p>我用wrk给nginx的压力还不是很大大概CPU才20%左右，所以这个不是很准确的；但是也可以看出一些问题，比如看出在发送数据的时候还是有问题的，都在body_filter阶段，可能因为我用了很多的buffer的原因</p>
 </blockquote>
@@ -660,7 +661,7 @@
 <li>另外一个就是在安装遇到过很多的坑，也相当无语，但是都通过google慢慢的一个一个解决了，要有一颗永不放弃的心不是吗；</li>
 </ul>
 <hr>
-<p><strong><em> 如有疑问欢迎批评指正，谢谢！ </em></strong></p>
+<p><strong>* 如有疑问欢迎批评指正，谢谢！ *</strong></p>
 
       
     </div>
@@ -1612,5 +1613,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":true,"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>
